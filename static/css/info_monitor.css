@@ -1,0 +1,90 @@
+#box{
+    margin-top: 20px;
+}
+
+#left__colum{
+    display: inline-block;
+    float: left;
+    background-color: #EAEAEA;
+    width: 50%;
+    padding: 0 1vw 0 4vw;
+    height: 700px;
+}
+
+#rigt__colum{
+    display: inline-block;
+    float: right;
+    background-color: #EAEAEA;
+    width: 50%;
+    padding: 0 4vw 0 1vw;
+    height: 700px;
+}
+
+#left__colum__1{
+    height: 30%;
+}
+
+#left__colum__2{
+    background-color: white;
+    height: 70%;
+    font-size: 20px;
+    padding: 5% 5%;
+    overflow: auto;
+}
+
+.block__info{
+    margin-bottom: 2%;
+}
+
+#rigt__colum__1{
+    height: 50%;
+}
+
+#rigt__colum__2{
+    height: 50%;
+}
+
+#left__colum__1__1{
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+#left__colum__1__2{
+    font-size: 20px;
+    background-color: white;
+    width: 60%;
+    height: 100%;
+    float: right;
+}
+
+#left__colum__1__2 p{
+    margin: 4% 0 4% 4%;
+}
+
+#monitor__name p{
+    margin-top: 8%;
+}
+
+#modalidades p{
+    display: inline-block;
+    width: 40%;
+    margin: 0 4% 0 4%;
+}
+
+#foto{
+    background-color: white;
+    object-fit: contain;
+    object-position: 50% 50%;
+    position: relative;
+    display:block;
+    margin:auto;
+    width: 72%;
+    height: 95%;
+    border-radius: 50%;
+}
+
+#box{
+    width: auto;
+    height: 720px;
+}
