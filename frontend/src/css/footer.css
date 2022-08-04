@@ -1,0 +1,24 @@
+  :root {
+    --color1: #270949;
+    --color2: #4654A3;
+    --color3: #F95B3D;
+    --color4: #FEB7C7;
+    --color5: #FFFFFF;
+    --color6: #FFFF00;
+  }  
+
+  footer{
+    background-color: var(--color1);
+    margin-top: 0.75rem;
+    padding: 0 2%;
+  }
+
+  footer .colum{
+    background-color: var(--color1);
+    padding-left: 2%;
+  }
+
+  #box_column_one{
+    background-color: var(--color1);
+    color: var(--color5);
+  }

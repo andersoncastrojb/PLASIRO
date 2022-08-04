@@ -1,0 +1,71 @@
+:root {
+    --color1: #270949;
+    --color2: #4654A3;
+    --color3: #F95B3D;
+    --color4: #FEB7C7;
+    --color5: #FFFFFF;
+    --color6: #FFFF00;
+}  
+
+* {box-sizing:border-box}
+
+.mySlides img{
+  width: 100%;
+  border-radius: 15px;
+}
+
+.notification.is-primary {
+    background-color: var(--color5);
+    color: var(--color1);
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  position: relative;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  background-color: grey;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: var(--color4);
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 2s;
+}
+
+@keyframes fade {
+  from {opacity: .5}
+  to {opacity: 1}
+}
+
+@media screen and (max-width: 400px) {
+  .dot {
+    display: none;
+  }
+}
