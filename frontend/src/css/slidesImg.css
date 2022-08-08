@@ -17,6 +17,7 @@
 .notification.is-primary {
     background-color: var(--color5);
     color: var(--color1);
+    padding: 1rem 1rem 1rem 1rem;
 }
 
 /* Slideshow container */
@@ -27,7 +28,7 @@
 
 /* Caption text */
 .text {
-  color: #f2f2f2;
+  color: var(--color5);
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
@@ -56,7 +57,7 @@
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
 }
 
 @keyframes fade {
