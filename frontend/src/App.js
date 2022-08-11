@@ -1,8 +1,8 @@
-import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Home from "./components/home";
+import InfoTutor from "./components/infoTutor";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
-          <Route path='/documen' element={<h1>Hello</h1>} />
+          <Route path='/tutorplantilla' element={<InfoTutor />} />
         </Route>
       </Routes>
       <Footer />

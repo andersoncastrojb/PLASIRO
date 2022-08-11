@@ -65,7 +65,7 @@
   to {opacity: 1}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .dot {
     display: none;
   }

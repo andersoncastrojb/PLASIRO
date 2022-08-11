@@ -1,0 +1,41 @@
+:root {
+  --color1: #270949;
+  --color2: #4654A3;
+  --color3: #F95B3D;
+  --color4: #FEB7C7;
+  --color5: #FFFFFF;
+  --color6: #FFFF00;
+  --color7: #dddfe9;
+}  
+
+#reservar {
+    margin-top: 0.5rem;
+    background-color: var(--color7); /* Black background color */
+    position: fixed; /* Make it stick/fixed */
+    width: 70%; /* Full width */
+    height: 5rem;
+    transition: top 0.6s;
+  }
+
+#infoTutorBox{
+  padding: 0 15%;
+}
+
+#button__reservar__posi__menu{
+  width: 15%;
+  left: 42.5%;
+  background-color: var(--color6);
+  color: var(--color1);
+}
+
+#infoBox{
+  position: relative; /* Make it stick/fixed */
+  transition: top 0.6s;
+}
+
+@media screen and (max-width: 1000px) {
+  #button__reservar__posi__menu{
+    width: 40%;
+    left: 30%;
+  }
+}
