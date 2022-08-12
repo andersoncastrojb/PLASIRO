@@ -9,23 +9,33 @@
 }  
 
 #reservar {
-    margin-top: 0.5rem;
-    background-color: var(--color7); /* Black background color */
+    margin-top: 1rem;
+    background-color: var(--color5); /* Black background color */
     position: fixed; /* Make it stick/fixed */
-    width: 70%; /* Full width */
+    width: 80%; /* Full width */
     height: 5rem;
     transition: top 0.6s;
-  }
+    z-index: 5;
+}
 
 #infoTutorBox{
-  padding: 0 15%;
+  padding: 0 10%;
+  background-color: var(--color7);
+  height: 100rem;
+  padding-top: 2rem;
 }
 
 #button__reservar__posi__menu{
   width: 15%;
   left: 42.5%;
+  background-color: var(--color1);
+  color: var(--color5);
+  transition: all 0.6s ease;
+}
+
+#button__reservar__posi__menu:hover{
   background-color: var(--color6);
-  color: var(--color1);
+  color: var(--color1) !important;
 }
 
 #infoBox{
@@ -37,5 +47,41 @@
   #button__reservar__posi__menu{
     width: 40%;
     left: 30%;
+  }
+}
+
+.image.is-128x128{
+  width: 25%;
+  height: 240px;
+  display: inline-block;
+}
+
+.image.is-128x128 img{
+  width: 180px;
+  height: 240px;
+  margin: 0 15px 0 15px;
+}
+
+.info__basic.block{
+  display: inline-block;
+  width: 75%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.subtitle strong, p{
+  display: inline-block;
+}
+
+
+@media screen and (max-width: 1150px) {
+  .image.is-128x128{
+    display: block;
+    width: 80%;
+    margin: 0 0 0 10%;
+  }
+  .info__basic.block{
+    display: block;
+    width: 100%;
   }
 }

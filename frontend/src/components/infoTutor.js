@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react';
 // Importar los estilos del componente InfoTutor
 import "../css/infoTutor.css"
+import tutorPicture from "../components/img/yo.png"
 
 
 /* Component: InfoTutor
@@ -38,13 +39,76 @@ const InfoTutor = () => {
     }, [flag]);
   
     return (
-      <div id="infoTutorBox"
-        style={{height: '1000rem'}}>
+      <div id="infoTutorBox">
             <div id="reservar" style={flag} className="box">
-                <button id="button__reservar__posi__menu" className="button is-primary">Reservar</button>
+                <button id="button__reservar__posi__menu" className="button is-primary">RESERVAR</button>
             </div>
             <div id="infoBox" style={flagTwo}>
-              <h1 className="title">Title</h1>
+
+              <section className="section box">
+                <figure className="image is-128x128">
+                  <img className="is-rounded" alt="" src={tutorPicture} />
+                </figure>
+                <div className="info__basic block">
+                  <h1 className="title is-3">Nombre</h1>
+                  <h2 className="subtitle is-6">
+                    <strong>Estrellas: </strong>
+                  </h2>
+                  <h2 className="subtitle is-6">
+                    <strong>Modalidad: </strong> <p>virtual y presencial</p>
+                  </h2>
+                  <h2 className="subtitle is-6">
+                    <strong>Valor hora: </strong> <p>virtual y presencial</p>
+                  </h2>
+                  <h2 className="subtitle is-6">
+                    <strong>Temas: </strong> <p>virtual y presencial</p>
+                  </h2>
+                  <h2 className="subtitle is-6">
+                    <strong>Temas: </strong> <p>virtual y presencial</p>
+                  </h2>
+                </div>
+              </section>
+              
+              <div class="box">
+
+                <section class="section">
+                  <h2 className="subtitle is-4">
+                    <strong>Presentación</strong>
+                  </h2>
+                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                  </p>
+                </section>
+
+                <section class="section">
+                  <h2 className="subtitle is-4">
+                    <strong>Dominio de los temas</strong>
+                  </h2>
+                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                  </p>
+                </section>
+
+                <section class="section">
+                  <h2 className="subtitle is-4">
+                    <strong>Estudios</strong>
+                  </h2>
+                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                  </p>
+                </section>
+                
+              </div>
+
+              <div class="box">
+
+                <section class="section">
+                  <h2 className="subtitle is-5">
+                    <strong>Comentarios</strong>
+                  </h2>
+                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                  </p>
+                </section>
+
+              </div>
+
             </div>
       </div>
     );
