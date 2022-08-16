@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 // Importar los estilos del componente InfoTutor
 import "../css/infoTutor.css"
 import tutorPicture from "../components/img/yo.png"
+import Modal from "../components/modal"
+import Calendar from "../components/calendar"
 
 
 /* Component: InfoTutor
@@ -41,7 +43,7 @@ const InfoTutor = () => {
     return (
       <div id="infoTutorBox">
             <div id="reservar" style={flag} className="box">
-                <button id="button__reservar__posi__menu" className="button is-primary">RESERVAR</button>
+              <Modal BtnName="RESERVAR" Content={<Calendar />} />
             </div>
             <div id="infoBox" style={flagTwo}>
 
@@ -69,9 +71,9 @@ const InfoTutor = () => {
                 </div>
               </section>
               
-              <div class="box">
+              <div className="box">
 
-                <section class="section">
+                <section className="section">
                   <h2 className="subtitle is-4">
                     <strong>Presentación</strong>
                   </h2>
@@ -79,7 +81,7 @@ const InfoTutor = () => {
                   </p>
                 </section>
 
-                <section class="section">
+                <section className="section">
                   <h2 className="subtitle is-4">
                     <strong>Dominio de los temas</strong>
                   </h2>
@@ -87,7 +89,7 @@ const InfoTutor = () => {
                   </p>
                 </section>
 
-                <section class="section">
+                <section className="section">
                   <h2 className="subtitle is-4">
                     <strong>Estudios</strong>
                   </h2>
@@ -97,9 +99,9 @@ const InfoTutor = () => {
                 
               </div>
 
-              <div class="box">
+              <div className="box">
 
-                <section class="section">
+                <section className="section">
                   <h2 className="subtitle is-5">
                     <strong>Comentarios</strong>
                   </h2>
@@ -112,6 +114,6 @@ const InfoTutor = () => {
             </div>
       </div>
     );
-  };
+};
   
-  export default InfoTutor;
+export default InfoTutor;
