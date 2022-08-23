@@ -12,7 +12,7 @@
     box-sizing: border-box; 
 }
 
-.title {
+.calendar__title {
 text-align: center;
 color: var(--color1); 
 }

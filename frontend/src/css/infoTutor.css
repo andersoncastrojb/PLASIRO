@@ -21,7 +21,7 @@
 #infoTutorBox{
   padding: 0 10%;
   background-color: var(--color7);
-  height: 100rem;
+  height: auto;
   padding-top: 2rem;
 }
 

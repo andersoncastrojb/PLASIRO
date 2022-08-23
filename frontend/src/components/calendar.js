@@ -81,7 +81,7 @@ const Calendar = () => {
 
     return(
         <>
-            <h1 className="title">Elija la fecha del encuentro</h1>
+            <h1 className="calendar__title title">Elija la fecha del encuentro</h1>
 
             <div className="calendar">
                 <div className="calendar__info">
