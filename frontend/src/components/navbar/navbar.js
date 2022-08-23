@@ -2,9 +2,9 @@
    Además se utiliza “Outlet” para anidar rutas secundarias. */ 
 import { Outlet, Link } from "react-router-dom";
 // Importar estilos del componente Navbar
-import "../css/navbar.css"
+import "../../css/navbar/navbar.css"
 // Logo de PLASIRO
-import logo from "./img/PLASIRO.png"
+import logo from "../img/PLASIRO.png"
 
 /* Component: Navbar
    Menú principal del aplicativo web */

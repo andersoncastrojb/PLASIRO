@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
-import Home from "./components/home";
-import InfoTutor from "./components/infoTutor";
+import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
+import Home from "./components/home/home";
+import InfoTutor from "./components/infoTutor/infoTutor";
 
 function App() {
   return (

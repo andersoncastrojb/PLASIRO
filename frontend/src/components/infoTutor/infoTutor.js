@@ -1,10 +1,10 @@
 // Importar “useState” el cual es un hook para poder manejar estados dentro de una función en React, además “useEffect” para hacer funciones repetitivas.
 import React, {useEffect, useState} from 'react';
 // Importar los estilos del componente InfoTutor
-import "../css/infoTutor.css"
-import tutorPicture from "../components/img/yo.png"
-import Modal from "../components/modal"
-import Calendar from "../components/calendar"
+import "../../css/infoTutor/infoTutor.css"
+import tutorPicture from "../img/yo.png"
+import Modal from "./modal"
+import Calendar from "./calendar"
 
 
 /* Component: InfoTutor

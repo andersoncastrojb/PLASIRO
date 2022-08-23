@@ -1,6 +1,6 @@
 // Importar estilos del componente Footer
-import "../css/footer.css"
-import pencil_img from "./img/pencil.svg"
+import "../../css/footer/footer.css"
+import pencil_img from "../img/pencil.svg"
 
 /* Component: Footer
    Es el pie de página de la aplicación */

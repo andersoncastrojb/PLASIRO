@@ -1,11 +1,11 @@
 import React from 'react';
 // Importar las imágenes del slider
-import slides1 from "./img/slides1.jpg";
-import slides2 from "./img/slides2.jpg";
-import slides3 from "./img/slides3.png";
-import slides4 from "./img/slides4.jpg";
+import slides1 from "../img/slides1.jpg";
+import slides2 from "../img/slides2.jpg";
+import slides3 from "../img/slides3.png";
+import slides4 from "../img/slides4.jpg";
 // Importar los estilos del componente SlidesImg
-import "../css/slidesImg.css"
+import "../../css/home/slidesImg.css"
 
 
 

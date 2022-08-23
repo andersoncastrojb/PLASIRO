@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "../css/calendar.css"
+import "../../css/infoTutor/calendar.css"
 
 
 const Calendar = () => {
@@ -74,6 +74,8 @@ const Calendar = () => {
 
     const setNewDate = () => {
         currentDate.setFullYear(currentYear,monthNumber,currentDay);
+        // Temporal para evitar warning "setcurrentDay declarated but never used"
+        setcurrentDay(currentDay);
     }
 
     // ***************************************************************************************************** //
