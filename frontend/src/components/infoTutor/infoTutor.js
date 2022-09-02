@@ -5,6 +5,7 @@ import "../../css/infoTutor/infoTutor.css"
 import tutorPicture from "../img/yo.png"
 import Modal from "./modal"
 import Calendar from "./calendar"
+import {DMYHContext} from "./fechaHoraContext"
 
 
 /* Component: InfoTutor
@@ -15,11 +16,40 @@ import Calendar from "./calendar"
    Esto se hace, leyendo el estado de scrollY, si este es superior a 20 entonces cambia la propiedad “display” al valor “block”, de manera que se logre ver en la pantalla. De lo contrario tomará el valor “none”. A sí mismo el bloque de información principal, se baja una distancia prudente al mismo tiempo que se despliega el botón, para no perder continuidad en la interfaz al leer la información.
 
 */
+
 const InfoTutor = () => {
 
     const [flag, setFlag] = useState({display: "none"});
     const [flagTwo, setFlagTwo] = useState({top: "0"});
-    
+
+    const Liz = (props) => {
+      setStateContextDMYH({
+        DayC: props.day,
+        MonthC: props.month,
+        YearC: props.year, 
+        DMYHChanger: () => Liz(
+          {
+            day: props.day,
+            month: props.month,
+            year: props.year
+          })
+      });
+    };
+
+    const [stateContextDMYH, setStateContextDMYH] = useState(
+      {DayC: "NaN",
+       MonthC: "NaN",
+       YearC: "NaN",
+       HoraC: "NaN",
+       DMYHChanger: (props) => Liz(
+        {
+          day: props.day,
+          month: props.month,
+          year: props.year
+        })
+      }
+    );
+
     useEffect(() => {
       const handleScroll = () => {
         //console.log('window.scrollY', window.scrollY);
@@ -39,81 +69,92 @@ const InfoTutor = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }, [flag]);
+
+
   
     return (
-      <div id="infoTutorBox">
-            <div id="reservar" style={flag} className="box">
-              <Modal BtnName="RESERVAR" Content={<Calendar />} />
-            </div>
-            <div id="infoBox" style={flagTwo}>
+      <DMYHContext.Provider value={stateContextDMYH}>
+        <div id="infoTutorBox">
+              <div id="reservar" style={flag} className="box">
+                <Modal
+                  BtnName="RESERVAR"
+                  Calendar={<Calendar />}    
+                />
+              </div>
 
-              <section className="section box">
-                <figure className="image is-128x128">
-                  <img className="is-rounded" alt="" src={tutorPicture} />
-                </figure>
-                <div className="info__basic block">
-                  <h1 className="title is-3">Nombre</h1>
-                  <h2 className="subtitle is-6">
-                    <strong>Estrellas: </strong>
-                  </h2>
-                  <h2 className="subtitle is-6">
-                    <strong>Modalidad: </strong> <p>virtual y presencial</p>
-                  </h2>
-                  <h2 className="subtitle is-6">
-                    <strong>Valor hora: </strong> <p>virtual y presencial</p>
-                  </h2>
-                  <h2 className="subtitle is-6">
-                    <strong>Temas: </strong> <p>virtual y presencial</p>
-                  </h2>
-                  <h2 className="subtitle is-6">
-                    <strong>Temas: </strong> <p>virtual y presencial</p>
-                  </h2>
-                </div>
-              </section>
-              
-              <div className="box">
+              <div id="infoBox" style={flagTwo}>
 
-                <section className="section">
-                  <h2 className="subtitle is-4">
-                    <strong>Presentación</strong>
-                  </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
-                </section>
-
-                <section className="section">
-                  <h2 className="subtitle is-4">
-                    <strong>Dominio de los temas</strong>
-                  </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
-                </section>
-
-                <section className="section">
-                  <h2 className="subtitle is-4">
-                    <strong>Estudios</strong>
-                  </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
+                <section className="section box">
+                  <figure className="image is-128x128">
+                    <img className="is-rounded" alt="" src={tutorPicture} />
+                  </figure>
+                  <div className="info__basic block">
+                    <h1 className="title is-3">Nombre</h1>
+                    <h2 className="subtitle is-6">
+                      <strong>Estrellas: </strong>
+                    </h2>
+                    <h2 className="subtitle is-6">
+                      <strong>Modalidad: </strong> <p>virtual y presencial</p>
+                    </h2>
+                    <h2 className="subtitle is-6">
+                      <strong>Valor hora: </strong> <p>virtual y presencial</p>
+                    </h2>
+                    <h2 className="subtitle is-6">
+                      <strong>Temas: </strong> <p>virtual y presencial</p>
+                    </h2>
+                    <h2 className="subtitle is-6">
+                      <strong>Temas: </strong> <p>virtual y presencial</p>
+                    </h2>
+                  </div>
                 </section>
                 
+                <div className="box">
+
+                  <section className="section">
+                    <h2 className="subtitle is-4">
+                      <strong>Presentación</strong>
+                    </h2>
+                    <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                    </p>
+                  </section>
+
+                  <section className="section">
+                    <h2 className="subtitle is-4">
+                      <strong>Dominio de los temas</strong>
+                    </h2>
+                    <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                    </p>
+                  </section>
+
+                  <section className="section">
+                    <h2 className="subtitle is-4">
+                      <strong>Estudios</strong>
+                    </h2>
+                    <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                    </p>
+                  </section>
+                  
+                </div>
+
+                <div className="box">
+
+                  <section className="section">
+                    <h2 className="subtitle is-5">
+                      <strong>Comentarios</strong>
+                    </h2>
+                    <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
+                    </p>
+                  </section>
+
+                </div>
+
               </div>
-
-              <div className="box">
-
-                <section className="section">
-                  <h2 className="subtitle is-5">
-                    <strong>Comentarios</strong>
-                  </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
-                </section>
-
-              </div>
-
-            </div>
-      </div>
+              <h3 className="subtitle is-3 fecha__hora">
+                {stateContextDMYH.DayC}/{stateContextDMYH.MonthC}/{stateContextDMYH.YearC}
+              </h3>
+        </div>
+      </DMYHContext.Provider>
     );
 };
-  
+
 export default InfoTutor;

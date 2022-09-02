@@ -19,8 +19,7 @@ color: var(--color1);
 .calendar {
 background: var(--color4);
 color: black;
-width: 90%;
-max-width: 900px;
+width: 80%;
 margin: 1em auto;
 padding: .5em 0; 
 }
@@ -55,6 +54,16 @@ padding: .5em 0;
 .calendar__item {
     text-align: center;
     line-height: 2;     
+}
+.calendar__item__botton:hover {
+    box-shadow: inset 0 0 20px var(--color2), 0 0 20px var(--color2);
+    outline-color: var(--color1);
+    outline-offset: 80px;
+    background-color: var(--color2);
+    color: var(--color7) !important;
+    border-color: var(--color1);
+    border-radius: 10px;
+    cursor: pointer;
 }
 .calendar__today {
     background: lightcoral;

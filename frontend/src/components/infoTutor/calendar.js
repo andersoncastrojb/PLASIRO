@@ -1,11 +1,37 @@
 import React, {useState} from 'react';
 import "../../css/infoTutor/calendar.css"
+import HorarioSelect from "./horarioSelect"
 
+
+let horarioDisponible = [
+    ["7:00 am","8:00 am","9:00 am","10:00 am","11:00 am"],
+    ["12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm"],
+    ["6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm"]
+];
+  
+// Convertir datos del horario para representar en HTML
+const horarioDiv = (props) => {
+
+    const mornings = props[0].map(
+        (hora) => <div className='horario__box' key={hora}>{hora}</div>
+    );
+    const afternooms = props[1].map(
+        (hora) => <div className='horario__box' key={hora}>{hora}</div>
+    );
+    const nights = props[2].map(
+        (hora) => <div className='horario__box' key={hora}>{hora}</div>
+    );
+
+    let listHoras = [mornings, afternooms, nights];
+
+    return(
+        {listHoras}
+    );
+};
 
 const Calendar = () => {
 
     // ***************************************************************************************************** //
-    
     let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'];
 
     let currentDate = new Date();
@@ -22,7 +48,7 @@ const Calendar = () => {
         }
 
         const listItems = days.map(
-            (days) => <div key={days.toString()} className="calendar__item">{days}</div>
+            (days) => <div key={days.toString()} className="calendar__item calendar__item__botton">{days}</div>
         );
 
         return(
@@ -66,7 +92,7 @@ const Calendar = () => {
             setmonthNumber(monthNumber+1);
         }else{
             setmonthNumber(0);
-            setcurrentYear(currentYear + 1);
+            setcurrentYear(currentYear+1);
         }
 
         setNewDate();
@@ -104,6 +130,12 @@ const Calendar = () => {
                 </div>
 
                 <div className="calendar__dates" id="dates">{writeMonth(monthNumber)}</div>
+                
+                <HorarioSelect 
+                    horarioDisponible={horarioDiv(horarioDisponible)}
+                    fecha={{day: currentDay, month: monthNumber, year: currentYear}}
+                />
+
             </div>
         </>
 

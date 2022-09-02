@@ -1,0 +1,19 @@
+.horario__segment {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: auto; 
+    text-align: center;
+    line-height: 2; 
+}
+
+.segment{
+    font-size: 20px;
+}
+
+.horario__three {
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 0.5rem; 
+    text-align: center;
+    line-height: 2; 
+}

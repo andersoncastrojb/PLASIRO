@@ -35,7 +35,7 @@ const Modal = (props) => {
             <div id="myModal" className="modal" style={myModalFlag}>
                 <div className="modal-content">
                     <button className="delete is-medium close" onClick={clickSpan} ></button>
-                    {props.Content}
+                    {props.Calendar}
                 </div>
             </div>
         </>
