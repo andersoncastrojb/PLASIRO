@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "../../css/infoTutor/modal.css"
+import "../../css/infoTutor/modal.css";
 
 const Modal = (props) => {
     
@@ -26,7 +26,6 @@ const Modal = (props) => {
     const clickSpan = () => {
         setmyModalFlag({display: "none"});
     };
-
 
     return(
         <>

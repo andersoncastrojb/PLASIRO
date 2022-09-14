@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "../../css/infoTutor/horarioSelect.css"
 import Horario from './horario';
+import SetContextDMYH from './setContextDMYH';
 
 const HorarioSelect = (props) => {
     const [horaInicio, setHoraInicio] = useState("NaN");
@@ -52,6 +53,11 @@ const HorarioSelect = (props) => {
             </h3>
             <h3 className="subtitle is-3 fecha__hora">
                 {props.fecha.day}/{props.fecha.month}/{props.fecha.year}
+                <SetContextDMYH 
+                    day={props.fecha.day}
+                    month={props.fecha.month}
+                    year ={props.fecha.year}
+                />
             </h3>
         </>
     );

@@ -27,7 +27,7 @@ const InfoTutor = () => {
         DayC: props.day,
         MonthC: props.month,
         YearC: props.year, 
-        DMYHChanger: () => Liz(
+        DMYHChanger: (props) => Liz(
           {
             day: props.day,
             month: props.month,
@@ -68,7 +68,7 @@ const InfoTutor = () => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [flag]);
+    }, [flag,flagTwo]);
 
 
   
@@ -149,9 +149,9 @@ const InfoTutor = () => {
                 </div>
 
               </div>
-              <h3 className="subtitle is-3 fecha__hora">
+              <h4 className="subtitle is-4" style={{"textAlign": "center"}}>
                 {stateContextDMYH.DayC}/{stateContextDMYH.MonthC}/{stateContextDMYH.YearC}
-              </h3>
+              </h4>
         </div>
       </DMYHContext.Provider>
     );

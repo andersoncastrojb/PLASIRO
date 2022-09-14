@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import {DMYHContext} from "./fechaHoraContext"
 
-const SetContextDMYH = () => {
+const SetContextDMYH = (props) => {
     let context = useContext(DMYHContext);
     return(
       <button className="button is-dark" onClick={() => 
-        context.DMYHChanger({day: "28", month:"8", year:"2022"})}
+        context.DMYHChanger({day: props.day, month: props.month, year: props.year})}
       >Next</button>      
     );
 }
