@@ -1,0 +1,9 @@
+.button__set__context{
+    width: 40%;
+    display: block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

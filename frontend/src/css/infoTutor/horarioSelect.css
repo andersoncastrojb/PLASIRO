@@ -2,18 +2,12 @@
     width: 80%;
     margin: 0 10%;
     display: inline-block;
-    border-style: solid;
-    border-color: blueviolet;
-    border-radius: 10px;
     padding: 0.4rem 0.5rem;
 }
 .block__final__horario__select{
     width: 80%;
     display: inline-block;
     margin: 0 10%;
-    border-style: solid;
-    border-color: blueviolet;
-    border-radius: 10px;
     padding: 0.4rem 0.5rem;
 }
 
@@ -32,4 +26,9 @@
 
 .fecha__hora{
     text-align: center;
+}
+
+.set__fecha__hora{
+    height: 2rem;
+    width: 100%;
 }

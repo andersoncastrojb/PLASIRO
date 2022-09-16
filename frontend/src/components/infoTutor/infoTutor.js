@@ -56,7 +56,7 @@ const InfoTutor = () => {
 
         if (window.scrollY > 20){
             setFlag({display: "block", top: "0"});
-            setFlagTwo({top: "12rem", padding: "0 0 14rem 0"});
+            setFlagTwo({top: "8rem", padding: "0 0 14rem 0"});
         }else{
             setFlag({display: "none"});
             setFlagTwo({top: "0", padding: "0 0 0 0"});

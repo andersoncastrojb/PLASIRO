@@ -17,3 +17,37 @@
     text-align: center;
     line-height: 2; 
 }
+
+.horario__content{
+    margin: 1.3em auto;
+    padding: 1rem 0;
+    background: #f7d547;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+}
+
+.segment{
+    color: black;
+}
+
+.horario__box{
+    margin: 0 0.5rem;
+    border-radius: 10px;
+    color: black !important;
+    font-size: auto;
+    padding: 0.2em 0;
+    background: none;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+  }
+  
+  .horario__box:hover {
+    box-shadow: inset 0 0 20px var(--color2), 0 0 20px var(--color2);
+    outline-color: var(--color1);
+    outline-offset: 80px;
+    background-color: var(--color2);
+    color: var(--color7) !important;
+    border-color: var(--color1);
+  }

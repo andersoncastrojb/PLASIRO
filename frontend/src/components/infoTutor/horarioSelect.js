@@ -49,16 +49,16 @@ const HorarioSelect = (props) => {
                 </div>
             </div>
             <h3 className="subtitle is-3 fecha__hora">
-                Hora de inicio: {horaInicio}; Finalización: {horaFinal}
+                Fecha: {props.fecha.day}/{props.fecha.month}/{props.fecha.year}
+                &nbsp; Inicio: {horaInicio}; Finalización: {horaFinal}
             </h3>
-            <h3 className="subtitle is-3 fecha__hora">
-                {props.fecha.day}/{props.fecha.month}/{props.fecha.year}
+            <div className='block set__fecha__hora'>
                 <SetContextDMYH 
                     day={props.fecha.day}
                     month={props.fecha.month}
                     year ={props.fecha.year}
                 />
-            </h3>
+            </div>
         </>
     );
 };

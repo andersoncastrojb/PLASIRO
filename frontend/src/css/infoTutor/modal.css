@@ -3,6 +3,10 @@
   background-color: var(--color1);
   color: var(--color5);
   transition: all 0.6s ease;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 #myBtn:hover{
@@ -32,11 +36,15 @@
 
 /* Modal Content/Box */
 .modal-content {
+    border-radius: 15px;
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 6% auto; /* 6% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    overflow: hidden;
+    max-height: none;
+    height: auto;
 }
 
 /* The Close Button */

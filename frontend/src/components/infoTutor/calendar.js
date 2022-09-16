@@ -109,34 +109,34 @@ const Calendar = () => {
 
     return(
         <>
-            <h1 className="calendar__title title">Elija la fecha del encuentro</h1>
+            <h1 className="calendar__title title">Elija fecha y hora de encuentro</h1>
 
             <div className="calendar">
+
                 <div className="calendar__info">
                     <button id="prev-month" className="button calendar__prev" onClick={() => lastMonth()}>&#9664;</button>
-                    <div className="calendar__month" id="month">{monthNames[monthNumber]}</div>
-                    <div className="calendar__year" id="year">{currentYear}</div>
+                    <div className="calendar__month" id="month"><strong>{monthNames[monthNumber]}</strong></div>
+                    <div className="calendar__year" id="year"><strong>{currentYear}</strong></div>
                     <button id="next-month" className="button calendar__next" onClick={() => nextMonth()}>&#9654;</button>
                 </div>
 
                 <div className="calendar__week">
-                    <div className="calendar__day calendar__item">Mon</div>
-                    <div className="calendar__day calendar__item">Tue</div>
-                    <div className="calendar__day calendar__item">Wed</div>
-                    <div className="calendar__day calendar__item">Thu</div>
-                    <div className="calendar__day calendar__item">Fri</div>
-                    <div className="calendar__day calendar__item">Sat</div>
-                    <div className="calendar__day calendar__item">Sun</div>
+                    <div className="calendar__day calendar__item"><strong>Mon</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Tue</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Wed</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Thu</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Fri</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Sat</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Sun</strong></div>
                 </div>
 
                 <div className="calendar__dates" id="dates">{writeMonth(monthNumber)}</div>
-                
-                <HorarioSelect 
-                    horarioDisponible={horarioDiv(horarioDisponible)}
-                    fecha={{day: currentDay, month: monthNumber, year: currentYear}}
-                />
 
             </div>
+            <HorarioSelect 
+                horarioDisponible={horarioDiv(horarioDisponible)}
+                fecha={{day: currentDay, month: monthNumber, year: currentYear}}
+            />
         </>
 
     );

@@ -17,11 +17,14 @@ text-align: center;
 color: var(--color1); 
 }
 .calendar {
-background: var(--color4);
+background: #f7d547;
 color: black;
 width: 80%;
 margin: 1em auto;
-padding: .5em 0; 
+padding: .5em .5em; 
+border-radius: 15px;
+border-style: solid;
+border-color: black;
 }
 .calendar__info {
     display: flex;
@@ -74,16 +77,25 @@ padding: .5em 0;
 }
 
 @media screen and (max-width: 768px) {
+    .calendar__prev, .calendar__next {
+        font-size: small;
+    }
     .calendar__month, .calendar__year {
         padding: .5em 0.4em; 
     }
     .calendar__info{
         padding: 0 0.5em;
     }
-    .calendar__day, .calendar__item{
-        margin: auto;
-    }
     .calendar{
         overflow: auto;
+    }
+}
+
+@media screen and (orientation: portrait){
+    .calendar__week{
+        width: max-content;
+    }
+    .calendar__dates{
+        grid-gap: 1rem;
     }
 }
