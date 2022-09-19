@@ -6,7 +6,14 @@ const SetContextDMYH = (props) => {
     let context = useContext(DMYHContext);
     return(
       <button className="button is-dark button__set__context" onClick={() => 
-        context.DMYHChanger({day: props.day, month: props.month, year: props.year})}
+        context.DMYHChanger({
+          day: props.day,
+          month: props.month,
+          year: props.year,
+          horaInicio: props.horaInicio,
+          horaFinal: props.horaFinal,
+          modalFlag: props.modalFlag
+        })}
       >Siguiente</button>      
     );
 }

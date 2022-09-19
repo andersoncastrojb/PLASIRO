@@ -26,12 +26,18 @@ const InfoTutor = () => {
       setStateContextDMYH({
         DayC: props.day,
         MonthC: props.month,
-        YearC: props.year, 
+        YearC: props.year,
+        horaInicio: props.horaInicio,
+        horaFinal: props.horaFinal,
+        modalFlag: props.modalFlag,
         DMYHChanger: (props) => Liz(
           {
             day: props.day,
             month: props.month,
-            year: props.year
+            year: props.year,
+            horaInicio: props.horaInicio,
+            horaFinal: props.horaFinal, 
+            modalFlag: props.modalFlag
           })
       });
     };
@@ -40,12 +46,17 @@ const InfoTutor = () => {
       {DayC: "NaN",
        MonthC: "NaN",
        YearC: "NaN",
-       HoraC: "NaN",
+       horaInicio: "NaN",
+       horaFinal: "NaN",
+       modalFlag: 0,
        DMYHChanger: (props) => Liz(
         {
           day: props.day,
           month: props.month,
-          year: props.year
+          year: props.year,
+          horaInicio: props.horaInicio,
+          horaFinal: props.horaFinal, 
+          modalFlag: props.modalFlag
         })
       }
     );
@@ -151,6 +162,8 @@ const InfoTutor = () => {
               </div>
               <h4 className="subtitle is-4" style={{"textAlign": "center"}}>
                 {stateContextDMYH.DayC}/{stateContextDMYH.MonthC}/{stateContextDMYH.YearC}
+                / Inicio: {stateContextDMYH.horaInicio} / Final: {stateContextDMYH.horaFinal}
+                / ModalFlag: {stateContextDMYH.modalFlag}
               </h4>
         </div>
       </DMYHContext.Provider>

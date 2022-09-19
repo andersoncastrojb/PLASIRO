@@ -31,6 +31,9 @@ const HorarioSelect = (props) => {
             window.removeEventListener('mousedown', horarioClick);
         };
     }, [horaInicio, horaFinal, blockInicial, blockFinal]);
+    
+    // TEMPLORAL WARNING
+    const modalFlag = 2;
 
     return(
         <>
@@ -57,6 +60,9 @@ const HorarioSelect = (props) => {
                     day={props.fecha.day}
                     month={props.fecha.month}
                     year ={props.fecha.year}
+                    horaInicio={horaInicio}
+                    horaFinal={horaFinal}
+                    modalFlag={modalFlag}
                 />
             </div>
         </>
