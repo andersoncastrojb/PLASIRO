@@ -1,11 +1,12 @@
 // Importar “useState” el cual es un hook para poder manejar estados dentro de una función en React, además “useEffect” para hacer funciones repetitivas.
 import React, {useEffect, useState} from 'react';
 // Importar los estilos del componente InfoTutor
-import "../../css/infoTutor/infoTutor.css"
-import tutorPicture from "../img/yo.png"
-import Modal from "./modal"
-import Calendar from "./calendar"
-import {DMYHContext} from "./fechaHoraContext"
+import "../../css/infoTutor/infoTutor.css";
+import tutorPicture from "../img/yo.png";
+import Modal from "./modal";
+import Calendar from "./calendar";
+import FormCalendar from "./formCalendar"
+import {DMYHContext} from "./fechaHoraContext";
 
 
 /* Component: InfoTutor
@@ -90,6 +91,7 @@ const InfoTutor = () => {
                 <Modal
                   BtnName="RESERVAR"
                   Calendar={<Calendar />}    
+                  FormCalendar={<FormCalendar />}
                 />
               </div>
 
@@ -160,11 +162,6 @@ const InfoTutor = () => {
                 </div>
 
               </div>
-              <h4 className="subtitle is-4" style={{"textAlign": "center"}}>
-                {stateContextDMYH.DayC}/{stateContextDMYH.MonthC}/{stateContextDMYH.YearC}
-                / Inicio: {stateContextDMYH.horaInicio} / Final: {stateContextDMYH.horaFinal}
-                / ModalFlag: {stateContextDMYH.modalFlag}
-              </h4>
         </div>
       </DMYHContext.Provider>
     );
