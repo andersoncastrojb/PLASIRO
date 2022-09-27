@@ -1,13 +1,3 @@
-:root {
-  --color1: #270949;
-  --color2: #4654A3;
-  --color3: #F95B3D;
-  --color4: #FEB7C7;
-  --color5: #FFFFFF;
-  --color6: #FFFF00;
-  --color7: #dddfe9;
-}  
-
 #reservar {
     margin-top: 1rem;
     background-color: var(--color5); /* Black background color */

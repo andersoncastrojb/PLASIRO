@@ -1,4 +1,15 @@
-  
+  :root {
+    --color1: #270949;
+    --color2: #4654A3;
+    --color3: #F95B3D;
+    --color4: #FEB7C7;
+    --color5: #FFFFFF;
+    --color6: #FFFF00;
+    --color7: #dddfe9;
+    --color8: #363636;
+  }   
+
+
   .navbar-item{
     height: 40%;
     margin-top: 18%;

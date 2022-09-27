@@ -1,12 +1,3 @@
-:root {
-    --color1: #270949;
-    --color2: #4654A3;
-    --color3: #F95B3D;
-    --color4: #FEB7C7;
-    --color5: #FFFFFF;
-    --color6: #FFFF00;
-}  
-
 * {box-sizing:border-box}
 
 .mySlides img{

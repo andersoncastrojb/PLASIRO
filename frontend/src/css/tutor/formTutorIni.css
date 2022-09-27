@@ -1,0 +1,18 @@
+.box__formTutorIni{
+    padding: 0 10%;
+    margin: 2rem 0 4rem 0;
+}
+
+.TitleFormTutorIni{
+    text-align: center;
+}
+
+.checkbox.mode{
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    label{
+        text-align: center;
+    }
+  }

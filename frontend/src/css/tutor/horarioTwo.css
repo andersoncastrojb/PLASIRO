@@ -1,0 +1,92 @@
+.calendarTwo__title {
+    text-align: center;
+    color: #363636; 
+}
+
+.horarioTwo__segment {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: auto; 
+    text-align: center;
+    line-height: 2; 
+    border-style: solid;
+    border-color: var(--color5);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    background-color: #363636;
+}
+
+.horasTwo{
+    border-style: none;
+    background-color: var(--color3);
+    
+}
+
+.segmentTwo{
+    font-size: 20px;
+    background-color: #363636; 
+}
+
+.segmentTwo strong{
+    color: var(--color5);  
+}
+
+.horarioTwo__three {
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 0.7rem; 
+    text-align: center;
+    line-height: 2; 
+}
+
+.mañana, .tarde{
+    border-right-style: solid;
+    border-color: var(--color5);
+}
+
+.mañana{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.noche{
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.horarioTwo__content{
+    margin: 1.3em 15%;
+    padding: 1rem 0.5rem;
+    background: var(--color3);
+    border-style: solid;
+    border-radius: 15px;
+}
+
+.horarioTwo__box{
+    margin: 0 0.5rem;
+    border-radius: 15px;
+    font-size: auto;
+    padding: 0.2em 0;
+    background: var(--color5);
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+    border-bottom-style: solid;
+    border-right-style: solid;
+  }
+  
+  .horarioTwo__box:hover {
+    background-color: #363636;
+    color: var(--color7) !important;
+    border-color: var(--color5);
+  }
+
+  .horarioTwo__box:hover strong{
+    color: var(--color5);
+  }
+
+  @media screen and (max-width: 768px) {
+    .horarioTwo__content{
+        margin: 1.3em auto;
+    }
+  }

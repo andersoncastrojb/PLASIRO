@@ -37,7 +37,7 @@ export default function Navbar() {
                         <div className="navbar-item has-dropdown is-hoverable">
                         <Link className="navbar-link" to="/">More</Link>
                         <div className="navbar-dropdown">
-                            <Link className="navbar-item" to="/">About</Link>
+                            <Link className="navbar-item" to="/tutorform">About</Link>
                             <Link className="navbar-item" to="/">Jobs</Link>
                             <Link className="navbar-item" to="/">Contact</Link>
                             <hr className="navbar-divider" />
