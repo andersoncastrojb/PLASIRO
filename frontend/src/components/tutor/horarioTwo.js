@@ -7,7 +7,7 @@ const HorarioTwo = (props) => {
     return(
         <>
             <div className="horarioTwo__info">
-                <h1 className="calendarTwo__title title">{props.titulo}</h1>
+                <h1 className="calendar__title title">{props.titulo}</h1>
             </div>
             <div className='horarioTwo__content'>
                 <div className="horarioTwo__segment">

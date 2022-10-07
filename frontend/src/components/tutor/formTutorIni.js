@@ -1,6 +1,8 @@
 import React from 'react';
-import "../../css/tutor/formTutorIni.css"
-import HorasDia from "./horasDia"
+import "../../css/tutor/formTutorIni.css";
+import HorasDia from "./horasDia";
+import SelectSubjets from './selectSubjects';
+import SelectThemes from './selectThemes';
 
 
 const FormTutorIni = () =>{
@@ -37,6 +39,14 @@ const FormTutorIni = () =>{
                     <input className="input" type="text" placeholder="Text input" />
                 </div>
                 <p className="help">Ej: 15000</p>
+            </div>
+            <div className="field">
+                <label className="label">Áreas de conocimiento</label>
+                <SelectSubjets />
+            </div>
+            <div className="field">
+                <label className="label">Temas específicos</label>
+                <SelectThemes />
             </div>
             <div className="field">
                 <label className="label">Descripcíon</label>

@@ -4,7 +4,9 @@ import CalendarDias from "./calendarDias";
 import {HorasContext} from "./horasContext"
 
 const HorasDia = () =>{
-    let show = [
+
+    // Lógica para cambiar entre horarios
+    const [show,setShow] = useState([
         {estilo: {display: "block"}, title: "Lunes"},
         {estilo: {display: "none"}, title: "Martes"},
         {estilo: {display: "none"}, title: "Miércoles"},
@@ -12,8 +14,71 @@ const HorasDia = () =>{
         {estilo: {display: "none"}, title: "Viernes"},
         {estilo: {display: "none"}, title: "Sábado"},
         {estilo: {display: "none"}, title: "Domingo"}
-    ];
+    ]);
 
+    const lastDay = () => {
+        let h = {};
+        let flag = 0;
+        for(const i in [0,1,2,3,4,5,6]){
+            // console.log(i);
+            h = show;
+            const aux = h[i].estilo.display;
+            if (aux === "block"){
+                if(i === '0' && flag === 0){
+                    h[i].estilo = {display: "none"};
+                    h[6].estilo = {display: "block"};
+                    flag = 1;
+                }
+                if(i !== '0' && flag === 0){
+                    h[i].estilo = {display: "none"};
+                    h[parseInt(i)-1].estilo = {display: "block"};
+                    flag = 1;
+                }
+            }
+        }
+        setShow([
+            {estilo: h[0].estilo, title: "Lunes"},
+            {estilo: h[1].estilo, title: "Martes"},
+            {estilo: h[2].estilo, title: "Miércoles"},
+            {estilo: h[3].estilo, title: "Jueves"},
+            {estilo: h[4].estilo, title: "Viernes"},
+            {estilo: h[5].estilo, title: "Sábado"},
+            {estilo: h[6].estilo, title: "Domingo"}
+        ]);
+    }
+
+    const nextDay = () => {
+        let h = {};
+        let flag = 0;
+        for(const i in [0,1,2,3,4,5,6]){
+            // console.log(i);
+            h = show;
+            const aux = h[i].estilo.display;
+            if (aux === "block"){
+                if(i === '6' && flag === 0){
+                    h[i].estilo = {display: "none"};
+                    h[0].estilo = {display: "block"};
+                    flag = 1;
+                }
+                if(i !== '6' && flag === 0){
+                    h[i].estilo = {display: "none"};
+                    h[parseInt(i)+1].estilo = {display: "block"};
+                    flag = 1;
+                }
+            }
+        }
+        setShow([
+            {estilo: h[0].estilo, title: "Lunes"},
+            {estilo: h[1].estilo, title: "Martes"},
+            {estilo: h[2].estilo, title: "Miércoles"},
+            {estilo: h[3].estilo, title: "Jueves"},
+            {estilo: h[4].estilo, title: "Viernes"},
+            {estilo: h[5].estilo, title: "Sábado"},
+            {estilo: h[6].estilo, title: "Domingo"}
+        ]);
+    }
+
+    // Funcionalidad de selección de horario en el calendario por día
     const [stateHorasContext, setStateHorasContext] = useState(
         {H7: {}, H8: {}, H9: {}, H10: {}, H11: {}, H12: {},
         H13: {}, H14: {}, H15: {}, H16: {}, H17: {}, H18: {},
@@ -90,10 +155,13 @@ const HorasDia = () =>{
             window.removeEventListener('mousedown', horarioClick);
         };
     });
+    // Funcionalidad de selección de horario en el calendario por día, termina aquí!!
 
     return(
         <>
             <HorasContext.Provider value={stateHorasContext}>
+                <button id="prev-month" className="button calendar__prev" onClick={lastDay}>&#9664;</button>
+                <button id="next-month" className="button calendar__next" onClick={nextDay}>&#9654;</button>
                 <CalendarDias show={show}/>
             </HorasContext.Provider>
         </>

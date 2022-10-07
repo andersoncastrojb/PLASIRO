@@ -16,9 +16,9 @@ const Horario = (props) => {
                     <div className="segment"><strong>Noche</strong></div>
                 </div>
                 <div className="horario__segment">
-                    <div className="mañana horario__three">{lista[0]}</div>
-                    <div className="tarde horario__three">{lista[1]}</div>
-                    <div className="noche horario__three">{lista[2]}</div>
+                    <div className="horario__three">{lista[0]}</div>
+                    <div className="horario__three">{lista[1]}</div>
+                    <div className="horario__three">{lista[2]}</div>
                 </div>
             </div>
         </>
