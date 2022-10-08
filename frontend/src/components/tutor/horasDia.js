@@ -2,10 +2,84 @@ import React, { useState, useEffect} from 'react';
 import "../../css/tutor/horasDia.css";
 import CalendarDias from "./calendarDias";
 import {HorasContext} from "./horasContext"
+import {useDispatch} from 'react-redux';
+import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 const HorasDia = () =>{
 
-    // Lógica para cambiar entre horarios
+
+
+    /////////// Almacenar datos en redux ///////////
+
+    // día de la semana de 0:6
+    const [dayW, setDayW] = useState(0);
+
+    // Cambiar Vector por día de la semana
+    const rightDayW = () =>{
+        // Almacenar información por días en el estado redux
+        almacenarData();
+        if (dayW === 6){
+            setDayW(0);
+        }
+        else{
+            setDayW(dayW+1)
+        }
+    }
+
+    const leftDayW = () =>{
+        // Almacenar información por días en el estado redux
+        almacenarData();
+        if (dayW === 0){
+            setDayW(6);
+        }
+        else{
+            setDayW(dayW-1)
+        }
+    }
+    // Cambiar Vector por día de la semana, Termina
+    
+
+    // Almacenar información por días en el estado redux
+    // Instanciar dispatch
+    const dispatch = useDispatch();
+    const almacenarData = () => {
+        if (dayW === 0){
+            // Modificar estado en redux
+            dispatch(modifier(['monday', stateVector]));
+        }
+        if (dayW === 1){
+            // Modificar estado en redux
+            dispatch(modifier(['tuesday', stateVector]));
+        }
+        if (dayW === 2){
+            // Modificar estado en redux
+            dispatch(modifier(['wednesday', stateVector]));
+        }
+        if (dayW === 3){
+            // Modificar estado en redux
+            dispatch(modifier(['thursday', stateVector]));
+        }
+        if (dayW === 4){
+            // Modificar estado en redux
+            dispatch(modifier(['friday', stateVector]));
+        }
+        if (dayW === 5){
+            // Modificar estado en redux
+            dispatch(modifier(['saturday', stateVector]));
+        }
+        if (dayW === 6){
+            // Modificar estado en redux
+            dispatch(modifier(['sunday', stateVector]));
+        }
+    }
+    // Almacenar información por días en el estado redux, Termina
+
+    /////////// Almacenar datos en redux ///////////
+
+
+
+    /////////// Lógica para cambiar entre horarios ///////////
+
     const [show,setShow] = useState([
         {estilo: {display: "block"}, title: "Lunes"},
         {estilo: {display: "none"}, title: "Martes"},
@@ -16,7 +90,14 @@ const HorasDia = () =>{
         {estilo: {display: "none"}, title: "Domingo"}
     ]);
 
+    // Vector para almacenar horas seleccionadas
+    const [stateVector, setStateVector]= useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
     const lastDay = () => {
+        // Reiniciar vector
+        setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
+
         let h = {};
         let flag = 0;
         for(const i in [0,1,2,3,4,5,6]){
@@ -45,9 +126,15 @@ const HorasDia = () =>{
             {estilo: h[5].estilo, title: "Sábado"},
             {estilo: h[6].estilo, title: "Domingo"}
         ]);
+        // Cambiar Vector por día de la semana
+        leftDayW();
     }
 
     const nextDay = () => {
+        // Reiniciar vector
+        setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
+
         let h = {};
         let flag = 0;
         for(const i in [0,1,2,3,4,5,6]){
@@ -76,6 +163,8 @@ const HorasDia = () =>{
             {estilo: h[5].estilo, title: "Sábado"},
             {estilo: h[6].estilo, title: "Domingo"}
         ]);
+        // Cambiar Vector por día de la semana
+        rightDayW();
     }
 
     // Funcionalidad de selección de horario en el calendario por día
@@ -86,8 +175,6 @@ const HorasDia = () =>{
         HorasChanger: (props) => Car({vect: props.vect})
         }
     );
-
-    const [stateVector, setStateVector]= useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     const press = (props) => {
         if(props === 1){
@@ -148,7 +235,8 @@ const HorasDia = () =>{
                 setStateVector(vector);
             }
             Car({vect: stateVector});
-            };
+        };
+
 
         window.addEventListener('mousedown', horarioClick);
         return () => {
@@ -156,6 +244,10 @@ const HorasDia = () =>{
         };
     });
     // Funcionalidad de selección de horario en el calendario por día, termina aquí!!
+
+    /////////// Lógica para cambiar entre horarios ///////////
+
+
 
     return(
         <>

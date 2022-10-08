@@ -3,9 +3,39 @@ import "../../css/tutor/formTutorIni.css";
 import HorasDia from "./horasDia";
 import SelectSubjets from './selectSubjects';
 import SelectThemes from './selectThemes';
+import {useDispatch, useSelector} from 'react-redux';
+import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 
 const FormTutorIni = () =>{
+    
+    // Estado redux
+    const InfoTutorState = useSelector(state => state.InfoTutor);
+    
+    // Instanciar dispatch
+    const dispatch = useDispatch();
+
+    const handleChange = e => {
+
+       const setName = e.target.name;
+       const set = e.target.value;
+       
+       if(setName === 'modeV' || setName === 'modeP'){
+            
+            if(InfoTutorState[setName] === 'off'){
+                // Modificar estado en redux
+                dispatch(modifier([setName, set]));
+            }
+            else{
+                // Modificar estado en redux
+                dispatch(modifier([setName, 'off']));
+            }
+        }
+        else{
+            // Modificar estado en redux
+            dispatch(modifier([setName, set]));
+        }
+    }
 
     return(
         <>
@@ -16,19 +46,37 @@ const FormTutorIni = () =>{
             <div className="field">
                 <label className="label">Nombre y Apellidos</label>
                 <div className="control">
-                    <input className="input" type="text" placeholder="Text input" />
+                    <input
+                    name='name' 
+                    className="input"
+                    type="text"
+                    placeholder="Text input"
+                    onChange={handleChange}/>
                 </div>
                 <p className="help">Ej: Juan Pablo González</p>
             </div>
 
             <div className="field">
+                <label className="label">Correo electrónico</label>
+                <div className="control">
+                    <input
+                    name='mail' 
+                    className="input"
+                    type="text"
+                    placeholder="Text input"
+                    onChange={handleChange}/>
+                </div>
+                <p className="help">Ej: juanito@gmail.com</p>
+            </div>
+
+            <div className="field">
                 <label className="label">Modalidad</label>
                 <label className="checkbox mode">
-                <input type="checkbox" />
+                <input name='modeV' type="checkbox" onChange={handleChange}/>
                     {" Virtual"}
                 </label>
                 <label className="checkbox mode">
-                <input type="checkbox" />
+                <input name='modeP' type="checkbox" onChange={handleChange}/>
                     {" Presencial"}
                 </label>
             </div>
@@ -36,7 +84,13 @@ const FormTutorIni = () =>{
             <div className="field">
                 <label className="label">Valor / Hora (Solo números todo pegado, unidades COP)</label>
                 <div className="control">
-                    <input className="input" type="text" placeholder="Text input" />
+                    <input
+                    name='price'
+                    className="input"
+                    type="text"
+                    placeholder="Text input"
+                    onChange={handleChange}
+                    />
                 </div>
                 <p className="help">Ej: 15000</p>
             </div>
@@ -50,7 +104,13 @@ const FormTutorIni = () =>{
             </div>
             <div className="field">
                 <label className="label">Descripcíon</label>
-                <textarea className="textarea" placeholder="textarea" rows="10"></textarea>
+                <textarea
+                name='description'
+                className="textarea"
+                placeholder="textarea"
+                rows="10"
+                onChange={handleChange}
+                ></textarea>
             </div>
             <div className="field">
                 <HorasDia />

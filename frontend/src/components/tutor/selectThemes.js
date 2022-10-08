@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import {useDispatch} from 'react-redux';
+import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 const animatedComponents = makeAnimated();
 
@@ -12,8 +14,12 @@ const options = [
 
   const SelectThemes = () => {
 
+    // Instanciar dispatch
+    const dispatch = useDispatch();
+
     const handledata = (selectedOption) => {
-      console.log(selectedOption);
+      // Modificar estado en redux
+      dispatch(modifier(['masteryOfTopics', selectedOption]));
     }
 
     return(
