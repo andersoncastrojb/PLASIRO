@@ -80,6 +80,7 @@ const HorasDia = () =>{
 
     /////////// Lógica para cambiar entre horarios ///////////
 
+    // // Para controlar el titulo y que día se va a mostrar, mientras los otros 6 se mantienen ocultos
     const [show,setShow] = useState([
         {estilo: {display: "block"}, title: "Lunes"},
         {estilo: {display: "none"}, title: "Martes"},
@@ -92,13 +93,18 @@ const HorasDia = () =>{
 
     // Vector para almacenar horas seleccionadas
     const [stateVector, setStateVector]= useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
+    
+    // habilitas el día a la izquierda, además oculta el día posicionado a la derecha.
+    // Para cambiar de días hacia la izquierda
     const lastDay = () => {
         // Reiniciar vector
         setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        // Colocar en blanco todas las casillas hora
         Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
-
+        
+        // contenedor del estado actual de “show”
         let h = {};
+        // Bandera de habilitación para modificar el estado “show” una solo vez, entonces su valor cambia a “1”
         let flag = 0;
         for(const i in [0,1,2,3,4,5,6]){
             // console.log(i);
@@ -117,6 +123,7 @@ const HorasDia = () =>{
                 }
             }
         }
+        // Cambiar el estado de “show”
         setShow([
             {estilo: h[0].estilo, title: "Lunes"},
             {estilo: h[1].estilo, title: "Martes"},
@@ -129,13 +136,18 @@ const HorasDia = () =>{
         // Cambiar Vector por día de la semana
         leftDayW();
     }
-
+    
+    // habilitas el día a la derecha, además oculta el día posicionado a la izquierda.
+    // Para cambiar de días hacia la derecha
     const nextDay = () => {
         // Reiniciar vector
         setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        // Colocar en blanco todas las casillas hora
         Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
-
+        
+        // contenedor del estado actual de “show”
         let h = {};
+        // Bandera de habilitación para modificar el estado “show” una solo vez, entonces su valor cambia a “1”
         let flag = 0;
         for(const i in [0,1,2,3,4,5,6]){
             // console.log(i);
@@ -154,6 +166,7 @@ const HorasDia = () =>{
                 }
             }
         }
+        // Cambiar el estado de “show”
         setShow([
             {estilo: h[0].estilo, title: "Lunes"},
             {estilo: h[1].estilo, title: "Martes"},
@@ -168,6 +181,7 @@ const HorasDia = () =>{
     }
 
     // Funcionalidad de selección de horario en el calendario por día
+    // Almacena el estado o color que va tener cada hora en el calendario
     const [stateHorasContext, setStateHorasContext] = useState(
         {H7: {}, H8: {}, H9: {}, H10: {}, H11: {}, H12: {},
         H13: {}, H14: {}, H15: {}, H16: {}, H17: {}, H18: {},
@@ -175,7 +189,8 @@ const HorasDia = () =>{
         HorasChanger: (props) => Car({vect: props.vect})
         }
     );
-
+    
+    // Si el argumento es 1, significa que ese bloque se presionó. Por lo tanto setea un color diferente
     const press = (props) => {
         if(props === 1){
             return({backgroundColor: "#363636", color:"#FFFFFF"});
@@ -185,6 +200,7 @@ const HorasDia = () =>{
         }
     }
     
+    // Se encarga de modificar el estado del contexto “horasContext” el cual almacena el color por cada bloque hora, esto depende del estado que contenga cada hora en el estado “vector”, si se presiono, el valor para su respectiva posición será “1” 
     const Car = (props) => {
         setStateHorasContext({
             H7: press(props.vect[0]),
@@ -208,7 +224,8 @@ const HorasDia = () =>{
     };
 
     useEffect(() => {
-
+        
+        // Si el evento es un click, y esto sucedió sobre un bloque hora, modifica su estado en esa posición por “1”. Luego, llama a la función “car()” pasándole como argumento el estado del vector, una vez modificado
         const horarioClick = (event) => {
             if(event.target.className === "horarioTwo__box" ||
                event.target.className === "strong__horario"){
@@ -232,8 +249,10 @@ const HorasDia = () =>{
                 if("21:00" === aux){vector[14] = 1;}
                 if("22:00" === aux){vector[15] = 1;}
                 
+                // Cambiar el estado del vector
                 setStateVector(vector);
             }
+            // Llamada a la función car()
             Car({vect: stateVector});
         };
 

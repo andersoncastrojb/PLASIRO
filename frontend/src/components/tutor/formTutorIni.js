@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 
+// Formulario para que los monitores registren su información personal, académica, experiencia y además su disponibilidad semanal.
 const FormTutorIni = () =>{
     
     // Estado redux
@@ -14,7 +15,8 @@ const FormTutorIni = () =>{
     
     // Instanciar dispatch
     const dispatch = useDispatch();
-
+    
+    // Se encarga de modificar el estado en redux del objeto InfoTutorSlice
     const handleChange = e => {
 
        const setName = e.target.name;
@@ -39,9 +41,9 @@ const FormTutorIni = () =>{
 
     return(
         <>
-        <div className="box__formTutorIni">
+        <div className="box__formTutorIni panel is-info">
 
-            <h4 className="title is-4 TitleFormTutorIni">Registre sus datos como monitor académico</h4>
+            <h4 className="panel-heading title is-4 TitleFormTutorIni"> Registre sus datos como monitor académico </h4>
 
             <div className="field">
                 <label className="label">Nombre y Apellidos</label>

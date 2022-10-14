@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Contexto para almacenar los estilos, específicamente el color de los bloques hora. Dentro del componente “horasDia”
 export const HorasContext = React.createContext(
     {H7: {},
     H8: {},

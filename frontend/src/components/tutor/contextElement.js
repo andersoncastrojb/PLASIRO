@@ -2,6 +2,8 @@ import {useContext} from 'react';
 import {HorasContext} from "./horasContext"
 
 // Return Context element from HorasContext
+// Retorna el estado de una hora específica dentro del contexto “horasContext” para que modifique su argumento “style”. Esta función se utiliza en el componente “CalendarDia”.
+// Recibe como parámetro un string que representa la hora específica
 const ContextElement = (props) => {
     const contextH = useContext(HorasContext);
     let salida = {};

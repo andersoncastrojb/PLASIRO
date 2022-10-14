@@ -1,6 +1,10 @@
 import React from 'react';
 import "../../css/tutor/horarioTwo.css"
 
+/*
+Contiene el molde para representar el horario por días de la semana,
+recibe como parámetro. el título y las horas para las tres franjas horarios durante el día s
+*/
 const HorarioTwo = (props) => {
     let lista = props.horarioDisponible.listHoras;
 
