@@ -7,17 +7,126 @@ import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 const HorasDia = () =>{
 
-
-
     /////////// Almacenar datos en redux ///////////
+
+    // Estado día 
+    // Para almacenar las horas seleccionadas para cada uno de los 7 días de la semana
+    const [monday, setMonday] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [tuesday, setTuesDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [wednesday, setWednesDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [thursday, setThursDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [friday, setFriDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [saturday, setSaturDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [sunday, setSunDay] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    
+    // Para almacenar las horas seleccionadas en su día correspondiente, cambiando su estado
+    const dayChanger = () => {
+        if(dayW === 0){
+            setMonday(stateVector);
+        }
+        if(dayW === 1){
+            setTuesDay(stateVector);
+        }
+        if(dayW === 2){
+            setWednesDay(stateVector);
+        }
+        if(dayW === 3){
+            setThursDay(stateVector);
+        }
+        if(dayW === 4){
+            setFriDay(stateVector);
+        }
+        if(dayW === 5){
+            setSaturDay(stateVector);
+        }
+        if(dayW === 6){
+            setSunDay(stateVector);
+        }
+    }
+    
+    // Para un movimiento entre los días de la semana hacia la izquierda, actualiza el estado del vector auxiliar, al estado de ese día correspondiente, cuando este haya sido modificado o no.
+    const LchangerV = () => {
+        if(dayW === 0){
+            setStateVector(sunday);
+            // Actualizar todas las casillas hora
+            Car({vect: sunday});
+        }
+        if(dayW === 1){
+            setStateVector(monday);
+            // Actualizar todas las casillas hora
+            Car({vect: monday});
+        }
+        if(dayW === 2){
+            setStateVector(tuesday);
+            // Actualizar todas las casillas hora
+            Car({vect: tuesday});
+        }
+        if(dayW === 3){
+            setStateVector(wednesday);
+            // Actualizar todas las casillas hora
+            Car({vect: wednesday});
+        }
+        if(dayW === 4){
+            setStateVector(thursday);
+            // Actualizar todas las casillas hora
+            Car({vect: thursday});
+        }
+        if(dayW === 5){
+            setStateVector(friday);
+            // Actualizar todas las casillas hora
+            Car({vect: friday});
+        }
+        if(dayW === 6){
+            setStateVector(saturday);
+            // Actualizar todas las casillas hora
+            Car({vect: saturday});
+        }
+    }
+    
+    // Para un movimiento entre los días de la semana hacia la derecha, actualiza el estado del vector auxiliar, al estado de ese día correspondiente, cuando este haya sido modificado o no.
+    const RchangerV = () => {
+        if(dayW === 0){
+            setStateVector(tuesday);
+            // Actualizar todas las casillas hora
+            Car({vect: tuesday});
+        }
+        if(dayW === 1){
+            setStateVector(wednesday);
+            // Actualizar todas las casillas hora
+            Car({vect: wednesday});
+        }
+        if(dayW === 2){
+            setStateVector(thursday);
+            // Actualizar todas las casillas hora
+            Car({vect: thursday});
+        }
+        if(dayW === 3){
+            setStateVector(friday);
+            // Actualizar todas las casillas hora
+            Car({vect: friday});
+        }
+        if(dayW === 4){
+            setStateVector(saturday);
+            // Actualizar todas las casillas hora
+            Car({vect: saturday});
+        }
+        if(dayW === 5){
+            setStateVector(sunday);
+            // Actualizar todas las casillas hora
+            Car({vect: sunday});
+        }
+        if(dayW === 6){
+            setStateVector(monday);
+            // Actualizar todas las casillas hora
+            Car({vect: monday});
+        }
+    }
 
     // día de la semana de 0:6
     const [dayW, setDayW] = useState(0);
 
     // Cambiar Vector por día de la semana
     const rightDayW = () =>{
-        // Almacenar información por días en el estado redux
-        almacenarData();
         if (dayW === 6){
             setDayW(0);
         }
@@ -27,8 +136,6 @@ const HorasDia = () =>{
     }
 
     const leftDayW = () =>{
-        // Almacenar información por días en el estado redux
-        almacenarData();
         if (dayW === 0){
             setDayW(6);
         }
@@ -43,34 +150,33 @@ const HorasDia = () =>{
     // Instanciar dispatch
     const dispatch = useDispatch();
     const almacenarData = () => {
-        if (dayW === 0){
             // Modificar estado en redux
-            dispatch(modifier(['monday', stateVector]));
-        }
-        if (dayW === 1){
+            dispatch(modifier(['monday', monday]));
             // Modificar estado en redux
-            dispatch(modifier(['tuesday', stateVector]));
-        }
-        if (dayW === 2){
+            dispatch(modifier(['tuesday', tuesday]));
             // Modificar estado en redux
-            dispatch(modifier(['wednesday', stateVector]));
-        }
-        if (dayW === 3){
+            dispatch(modifier(['wednesday', wednesday]));
             // Modificar estado en redux
-            dispatch(modifier(['thursday', stateVector]));
-        }
-        if (dayW === 4){
+            dispatch(modifier(['thursday', thursday]));
             // Modificar estado en redux
-            dispatch(modifier(['friday', stateVector]));
-        }
-        if (dayW === 5){
+            dispatch(modifier(['friday', friday]));
             // Modificar estado en redux
-            dispatch(modifier(['saturday', stateVector]));
-        }
-        if (dayW === 6){
+            dispatch(modifier(['saturday', saturday]));
             // Modificar estado en redux
-            dispatch(modifier(['sunday', stateVector]));
-        }
+            dispatch(modifier(['sunday', sunday]));
+            // reiniciar los estados de todos los días
+            setMonday([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setTuesDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setWednesDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setThursDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setFriDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setSaturDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setSunDay([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            // Actualizar todas las casillas hora
+            Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
+            // Actualizar vector auxiliar
+            setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            
     }
     // Almacenar información por días en el estado redux, Termina
 
@@ -97,10 +203,11 @@ const HorasDia = () =>{
     // habilitas el día a la izquierda, además oculta el día posicionado a la derecha.
     // Para cambiar de días hacia la izquierda
     const lastDay = () => {
-        // Reiniciar vector
-        setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        // Colocar en blanco todas las casillas hora
-        Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
+        
+        // Para almacenar las horas seleccionadas en su día correspondiente, cambiando su estado
+        dayChanger();
+        // Para un movimiento entre los días de la semana hacia la izquierda
+        LchangerV();
         
         // contenedor del estado actual de “show”
         let h = {};
@@ -140,10 +247,11 @@ const HorasDia = () =>{
     // habilitas el día a la derecha, además oculta el día posicionado a la izquierda.
     // Para cambiar de días hacia la derecha
     const nextDay = () => {
-        // Reiniciar vector
-        setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        // Colocar en blanco todas las casillas hora
-        Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
+
+        // Para almacenar las horas seleccionadas en su día correspondiente, cambiando su estado
+        dayChanger();
+        // Para un movimiento entre los días de la semana hacia la derecha
+        RchangerV();
         
         // contenedor del estado actual de “show”
         let h = {};
@@ -232,22 +340,38 @@ const HorasDia = () =>{
                 let vector = stateVector;
                 //console.log(event.target.outerText);
                 let aux = event.target.outerText;
-                if("7:00" === aux){vector[0] = 1;}
-                if("8:00" === aux){vector[1] = 1;}
-                if("9:00" === aux){vector[2] = 1;}
-                if("10:00" === aux){vector[3] = 1;}
-                if("11:00" === aux){vector[4] = 1;}
-                if("12:00" === aux){vector[5] = 1;}
-                if("13:00" === aux){vector[6] = 1;}
-                if("14:00" === aux){vector[7] = 1;}
-                if("15:00" === aux){vector[8] = 1;}
-                if("16:00" === aux){vector[9] = 1;}
-                if("17:00" === aux){vector[10] = 1;}
-                if("18:00" === aux){vector[11] = 1;}
-                if("19:00" === aux){vector[12] = 1;}
-                if("20:00" === aux){vector[13] = 1;}
-                if("21:00" === aux){vector[14] = 1;}
-                if("22:00" === aux){vector[15] = 1;}
+                if("7:00" === aux && vector[0] === 0){vector[0] = 1;}
+                else{ if("7:00" === aux && vector[0] === 1){vector[0] = 0;} }
+                if("8:00" === aux && vector[1] === 0){vector[1] = 1;}
+                else{ if("8:00" === aux && vector[1] === 1){vector[1] = 0;} }
+                if("9:00" === aux && vector[2] === 0){vector[2] = 1;}
+                else{ if("9:00" === aux && vector[2] === 1){vector[2] = 0;} }
+                if("10:00" === aux && vector[3] === 0){vector[3] = 1;}
+                else{ if("10:00" === aux && vector[3] === 1){vector[3] = 0;} }
+                if("11:00" === aux && vector[4] === 0){vector[4] = 1;}
+                else{ if("11:00" === aux && vector[4] === 1){vector[4] = 0;} }
+                if("12:00" === aux && vector[5] === 0){vector[5] = 1;}
+                else{ if("12:00" === aux && vector[5] === 1){vector[5] = 0;} }
+                if("13:00" === aux && vector[6] === 0){vector[6] = 1;}
+                else{ if("13:00" === aux && vector[6] === 1){vector[6] = 0;} }
+                if("14:00" === aux && vector[7] === 0){vector[7] = 1;}
+                else{ if("14:00" === aux && vector[7] === 1){vector[7] = 0;} }
+                if("15:00" === aux && vector[8] === 0){vector[8] = 1;}
+                else{ if("15:00" === aux && vector[8] === 1){vector[8] = 0;} }
+                if("16:00" === aux && vector[9] === 0){vector[9] = 1;}
+                else{ if("16:00" === aux && vector[9] === 1){vector[9] = 0;} }
+                if("17:00" === aux && vector[10] === 0){vector[10] = 1;}
+                else{ if("17:00" === aux && vector[10] === 1){vector[10] = 0;} }
+                if("18:00" === aux && vector[11] === 0){vector[11] = 1;}
+                else{ if("18:00" === aux && vector[11] === 1){vector[11] = 0;} }
+                if("19:00" === aux && vector[12] === 0){vector[12] = 1;}
+                else{ if("19:00" === aux && vector[12] === 1){vector[12] = 0;} }
+                if("20:00" === aux && vector[13] === 0){vector[13] = 1;}
+                else{ if("20:00" === aux && vector[13] === 1){vector[13] = 0;} }
+                if("21:00" === aux && vector[14] === 0){vector[14] = 1;}
+                else{ if("21:00" === aux && vector[14] === 1){vector[14] = 0;} }
+                if("22:00" === aux && vector[15] === 0){vector[15] = 1;}
+                else{ if("22:00" === aux && vector[15] === 1){vector[15] = 0;} }
                 
                 // Cambiar el estado del vector
                 setStateVector(vector);
@@ -272,6 +396,7 @@ const HorasDia = () =>{
         <>
             <HorasContext.Provider value={stateHorasContext}>
                 <button id="prev-month" className="button calendar__prev" onClick={lastDay}>&#9664;</button>
+                <button className="button is-dark" onClick={almacenarData}>Guardar cambios</button>
                 <button id="next-month" className="button calendar__next" onClick={nextDay}>&#9654;</button>
                 <CalendarDias show={show}/>
             </HorasContext.Provider>
