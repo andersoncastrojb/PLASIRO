@@ -11,6 +11,18 @@
     margin-right: 1rem;
 }
 
+.btn__tutor__form{
+    margin-top: 2rem;
+    width: 30%;
+    background-color: var(--color1);
+    color: var(--color5);
+    transition: all 0.6s ease;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 @media screen and (max-width: 768px) {
     label{
         text-align: center;

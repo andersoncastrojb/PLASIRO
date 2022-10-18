@@ -5,6 +5,7 @@ import SelectSubjets from './selectSubjects';
 import SelectThemes from './selectThemes';
 import {useDispatch, useSelector} from 'react-redux';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
+import TutorDataToServer from './tutorDataToServer';
 
 
 // Formulario para que los monitores registren su información personal, académica, experiencia y además su disponibilidad semanal.
@@ -117,6 +118,7 @@ const FormTutorIni = () =>{
             <div className="field">
                 <HorasDia />
             </div>
+            <TutorDataToServer />
         </div>
         </>
     );
