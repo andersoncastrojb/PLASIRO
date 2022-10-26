@@ -7,15 +7,20 @@ const TutorDataToServer = () => {
     const InfoTutorState = useSelector(state => state.InfoTutor);
 
     const  handleClick = async () => {
+
+        let res = {};
     
-        const res = await fetch('http://localhost:5000/users',
+        await fetch('http://localhost:5000/users',
         {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(InfoTutorState)
-        });
-        const data = await res.json();
-        console.log(data);
+        })
+        .then(response => {res = response})
+        .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+        console.log(res.name);
+        //const data = await res.json();
+        //console.log(data);
         
     }
 

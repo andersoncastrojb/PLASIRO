@@ -395,9 +395,11 @@ const HorasDia = () =>{
     return(
         <>
             <HorasContext.Provider value={stateHorasContext}>
+                <center className="center__tag">
                 <button id="prev-month" className="button calendar__prev" onClick={lastDay}>&#9664;</button>
                 <button className="button is-dark" onClick={almacenarData}>Guardar cambios</button>
                 <button id="next-month" className="button calendar__next" onClick={nextDay}>&#9654;</button>
+                </center> 
                 <CalendarDias show={show}/>
             </HorasContext.Provider>
         </>

@@ -10,7 +10,7 @@ mongo = PyMongo(app)
 
 
 # Settings
-# CORS(app)
+CORS(app)
 
 # Database
 db = mongo.db.tutors
