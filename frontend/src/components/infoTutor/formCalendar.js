@@ -1,25 +1,13 @@
-import React, { useContext } from 'react';
-import {DMYHContext} from "./fechaHoraContext";
+import React from 'react';
 import { Link } from "react-router-dom";
 import "../../css/infoTutor/FormCalendar.css"
 
 
 const FormCalendar = () =>{
 
-    let context = useContext(DMYHContext);
-
     return(
         <>
             <div id="title__form__calendar" className="box">
-               
-                <h4 className="subtitle">
-                    <strong>
-                        {context.DayC}/
-                        {context.MonthC}/
-                        {context.YearC}{" "}
-                        De: {context.horaInicio} hasta: {context.horaFinal}
-                    </strong>
-                </h4>
                 <h1 className="title is-4">Ingrese los siguientes datos</h1>
             </div>
             <div className="field">
@@ -89,18 +77,6 @@ const FormCalendar = () =>{
             <div className="field is-grouped">
                 <div className="control">
                     <button className="button is-link">Enviar</button>
-                </div>
-                <div className="control">
-                    <button className="button is-link is-light" onClick={() =>
-                        context.DMYHChanger({
-                        day: context.DayC,
-                        month: context.MonthC,
-                        year: context.YearC,
-                        horaInicio: context.horaInicio,
-                        horaFinal: context.horaFinal,
-                        modalFlag: 0
-                        })}
-                    >Atrás</button>
                 </div>
             </div>
         </>

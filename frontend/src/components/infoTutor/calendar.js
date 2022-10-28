@@ -1,43 +1,67 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "../../css/infoTutor/calendar.css"
 import HorarioSelect from "./horarioSelect"
+import { modifierDay} from '../../features/daysTutor/daysTutorSlice';
+import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
+import { useDispatch} from 'react-redux'
 
-
-let horarioDisponible = [
-    ["7:00 am","8:00 am","9:00 am","10:00 am","11:00 am"],
-    ["12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm"],
-    ["6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm"]
-];
-  
-// Convertir datos del horario para representar en HTML
-const horarioDiv = (props) => {
-
-    const mornings = props[0].map(
-        (hora) => <div className='horario__box' key={hora}>{hora}</div>
-    );
-    const afternooms = props[1].map(
-        (hora) => <div className='horario__box' key={hora}>{hora}</div>
-    );
-    const nights = props[2].map(
-        (hora) => <div className='horario__box' key={hora}>{hora}</div>
-    );
-
-    let listHoras = [mornings, afternooms, nights];
-
-    return(
-        {listHoras}
-    );
-};
 
 const Calendar = () => {
+
+    const dispatch = useDispatch();
 
     // ***************************************************************************************************** //
     let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'];
 
     let currentDate = new Date();
+    let todayDate = new Date();
     const [currentDay, setcurrentDay] = useState(currentDate.getDate());
     const [monthNumber, setmonthNumber] = useState(currentDate.getMonth());
     const [currentYear, setcurrentYear] = useState(currentDate.getFullYear());
+
+    const whatDaySelect = (props) => {
+        const deltaMonth = monthNumber - todayDate.getMonth();
+        let countDays = 0;
+        if(deltaMonth === 0){
+            countDays = parseInt(props, 10) - todayDate.getDate();
+        }
+        if(deltaMonth === 1){
+            countDays = getTotalDays(todayDate.getMonth()) - todayDate.getDate() + parseInt(props, 10) + 1;
+        }
+        if(deltaMonth === 2){
+            countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10) - 1;
+        }
+        if(countDays > 39){
+            alert("¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!");
+        }
+        if(countDays < 0){
+            alert("¡No puede agendar en días pasados!");
+        }
+        if(countDays >= 0 && countDays <= 39){
+            setcurrentDay(props);
+            dispatch(modifierDay(countDays));
+            dispatch(modifier(['day', props.toString()]));
+            dispatch(modifier(['month', monthNumber.toString()]));
+            dispatch(modifier(['year', currentYear.toString()]));
+            dispatch(modifier(['hours', []]));
+        }
+    }
+
+    
+    useEffect(() => {
+
+        const dayClick = (event) => {
+            if (event.target.className === "calendar__item calendar__item__botton"){
+                // console.log(event.target.outerText);
+                whatDaySelect(event.target.outerText);
+            }
+        };
+
+        window.addEventListener('mousedown', dayClick);
+        return () => {
+            window.removeEventListener('mousedown', dayClick);
+        };
+    });
 
     const writeMonth = () => {
 
@@ -77,31 +101,37 @@ const Calendar = () => {
     }
 
     const lastMonth = () => {
-        if(monthNumber !== 0){
-            setmonthNumber(monthNumber-1);
+        if(monthNumber > todayDate.getMonth() || currentYear > todayDate.getFullYear()){
+            if(monthNumber !== 0){
+                setmonthNumber(monthNumber-1);
+            }else{
+                setmonthNumber(11);
+                setcurrentYear(currentYear - 1);
+            }
+    
+            setNewDate();
         }else{
-            setmonthNumber(11);
-            setcurrentYear(currentYear - 1);
+            alert("¡No se puede agendar en meses pasados!");
         }
-
-        setNewDate();
     }
 
     const nextMonth = () => {
-        if(monthNumber !== 11){
-            setmonthNumber(monthNumber+1);
+        if(monthNumber < todayDate.getMonth()+2){
+            if(monthNumber !== 11){
+                setmonthNumber(monthNumber+1);
+            }else{
+                setmonthNumber(0);
+                setcurrentYear(currentYear+1);
+            }
+    
+            setNewDate();
         }else{
-            setmonthNumber(0);
-            setcurrentYear(currentYear+1);
+            alert("¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!");
         }
-
-        setNewDate();
     }
 
     const setNewDate = () => {
         currentDate.setFullYear(currentYear,monthNumber,currentDay);
-        // Temporal para evitar warning "setcurrentDay declarated but never used"
-        setcurrentDay(currentDay);
     }
 
     // ***************************************************************************************************** //
@@ -134,7 +164,6 @@ const Calendar = () => {
 
             </div>
             <HorarioSelect 
-                horarioDisponible={horarioDiv(horarioDisponible)}
                 fecha={{day: currentDay, month: monthNumber, year: currentYear}}
             />
         </>

@@ -32,3 +32,9 @@
     height: 2rem;
     width: 100%;
 }
+
+.info__date__agendar{
+    height: 20rem; 
+    width: 100%;
+    overflow: scroll;
+}   

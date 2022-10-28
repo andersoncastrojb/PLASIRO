@@ -75,7 +75,7 @@ export default function TutorDataToServerTwo(props) {
   return (
     <>  
         <center>
-            <button className="button is-success" onClick={handleSubmit}>
+            <button style={{marginRight: "1rem"}} className="button is-success" onClick={handleSubmit}>
                 {props.buttomName}
             </button>
             <button className="button" type='button' onClick={handleClickOpen3}>Cancelar</button>

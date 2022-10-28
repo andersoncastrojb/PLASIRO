@@ -1,28 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import "../../css/infoTutor/horarioSelect.css"
 import Horario from './horario';
-import SetContextDMYH from './setContextDMYH';
+import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const HorarioSelect = (props) => {
-    const [horaInicio, setHoraInicio] = useState("NaN");
-    const [horaFinal, setHoraFinal] = useState("NaN");
-    const [blockInicial, setBlockInicial] = useState({display: "block"});
-    const [blockFinal, setBlockFinal] = useState({display: "none"});
+
+    const dispatch = useDispatch();
+
+    const horas = useSelector((state) => state.InfoAgendar.hours);
 
     useEffect(() => {
 
         const horarioClick = (event) => {
-            if(event.target.className === "horario__box" && blockFinal.display==="none"){
-                // console.log(event.target.outerText);
-                setHoraInicio(event.target.outerText);
-                setBlockInicial({display: "none"});
-                setBlockFinal({display: "block"});
-            }
-            if(event.target.className === "horario__box" && blockInicial.display==="none"){
-                // console.log(event.target.outerText);
-                setHoraFinal(event.target.outerText);
-                setBlockInicial({display: "block"});
-                setBlockFinal({display: "none"});
+            if(event.target.className === "horario__box"){
+                if (horas.find(element => element === event.target.outerText)){
+                    const indice = horas.indexOf(event.target.outerText);
+                    let aux = [];
+                    aux = [...horas]
+                    aux.splice(indice, 1); // 1 es la cantidad de elementos a eliminar
+                    // console.log(aux);
+                    dispatch(modifier(['hours', aux]));
+                }else{
+                    let aux = [];
+                    aux = [...horas]
+                    aux.push(event.target.outerText);  
+                    // console.log(aux);
+                    dispatch(modifier(['hours', aux]));
+                }
             }
         };   
 
@@ -30,37 +36,46 @@ const HorarioSelect = (props) => {
         return () => {
             window.removeEventListener('mousedown', horarioClick);
         };
-    }, [horaInicio, horaFinal, blockInicial, blockFinal]);
+    }, [horas, dispatch]);
 
     return(
         <>
             <div className="block">
-                <div className="block__inicio__horario__select" style={blockInicial}>
+                <div className="block__inicio__horario__select">
                     {<Horario
-                        horarioDisponible={props.horarioDisponible}
                         titulo="Inicio"
                     />}
                 </div>
-                <div className="block__final__horario__select" style={blockFinal}>
-                    {<Horario
-                        horarioDisponible={props.horarioDisponible}
-                        titulo="Finalización"
-                    />}
-                </div>
             </div>
-            <h3 className="subtitle is-3 fecha__hora">
-                {props.fecha.day}/{props.fecha.month}/{props.fecha.year}
-                 {" De:"} {horaInicio} Hasta: {horaFinal}
-            </h3>
-            <div className='block set__fecha__hora'>
-                <SetContextDMYH 
-                    day={props.fecha.day}
-                    month={props.fecha.month}
-                    year ={props.fecha.year}
-                    horaInicio={horaInicio}
-                    horaFinal={horaFinal}
-                    modalFlag={1}
-                />
+            <div className="columns">
+                <div className="column is-half">
+                    <h3 className="subtitle is-3 fecha__hora">
+                        {props.fecha.day}/{props.fecha.month}/{props.fecha.year}
+                    </h3>
+                    <center>
+                        <div className="box info__date__agendar">
+                            <h3 className="subtitle is-3 fecha__hora">
+                                Horas seleccionadas
+                            </h3>
+                            {horas.map((hora,index) => 
+                                <div key={index.toString()} className="columns">
+                                    <div className="column">
+                                        <center>
+                                            <h4 className="subtitle is-4">{hora}</h4>
+                                        </center>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </center>
+                </div>
+                <div className="column is-half">
+                <div className='block set__fecha__hora'>
+                    <center>
+                        <button className="button is-success">Continuar</button>
+                    </center>
+                </div>
+                </div>
             </div>
         </>
     );
