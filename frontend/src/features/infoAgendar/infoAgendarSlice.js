@@ -1,11 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const dataIni = new Date();
+
 const initialState = {
-    day: "",
-    month: "",
-    year: "",
+    day: dataIni.getDate().toString(),
+    month: dataIni.getMonth().toString(),
+    year: dataIni.getFullYear().toString(),
     hours: [],
-    modalFlag: 0
+    modalFlagDate: {display: "block"},
+    modalFlagForm: {display: "none"},
+    hourSelect: [],
+    name: "",
+    phone: "",
+    email: "",
+    mode: "",
+    description: "",
+    conditions: "off"
 }
   
 

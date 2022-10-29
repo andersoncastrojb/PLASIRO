@@ -3,6 +3,7 @@ import "../../css/infoTutor/horarioSelect.css"
 import Horario from './horario';
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { useDispatch, useSelector } from 'react-redux'
+import hourChange from "./hourChange"
 
 
 const HorarioSelect = (props) => {
@@ -10,6 +11,8 @@ const HorarioSelect = (props) => {
     const dispatch = useDispatch();
 
     const horas = useSelector((state) => state.InfoAgendar.hours);
+    const availability = useSelector( (state) => state.DaysTutor.availability );
+    const day = useSelector( (state) => state.DaysTutor.day );
 
     useEffect(() => {
 
@@ -37,6 +40,14 @@ const HorarioSelect = (props) => {
             window.removeEventListener('mousedown', horarioClick);
         };
     }, [horas, dispatch]);
+
+    const clickNext = () => {
+        let aux = availability[day];
+        aux = hourChange({data: horas, vector: availability[day]});
+        dispatch(modifier(['hourSelect', aux]));
+        dispatch(modifier(['modalFlagDate', {display: "none"}]));
+        dispatch(modifier(['modalFlagForm', {display: "block"}]));
+    }
 
     return(
         <>
@@ -72,7 +83,7 @@ const HorarioSelect = (props) => {
                 <div className="column is-half">
                 <div className='block set__fecha__hora'>
                     <center>
-                        <button className="button is-success">Continuar</button>
+                        <button onClick={clickNext} className="button is-success">Continuar</button>
                     </center>
                 </div>
                 </div>
