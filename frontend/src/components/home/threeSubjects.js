@@ -58,27 +58,15 @@ const ThreeSubjects = () => {
             <div className="container is-max-desktop">
                 <center>
                     <div className="columns">
-                        <div className="column is-one-third">
-                            <Subjects
-                            img={baseObj[0].img}
-                            title={baseObj[0].title}
-                            description={baseObj[0].description}
-                            />
-                        </div>
-                        <div className="column is-one-third">
-                            <Subjects
-                            img={baseObj[1].img}
-                            title={baseObj[1].title}
-                            description={baseObj[1].description}
-                            />
-                        </div>
-                        <div className="column is-one-third">
-                            <Subjects
-                            img={baseObj[2].img}
-                            title={baseObj[2].title}
-                            description={baseObj[2].description}
-                            />
-                        </div>
+                        { [0,1,2].map( (position) =>
+                            <div key={position.toString()} className="column is-one-third">
+                                <Subjects
+                                img={baseObj[position].img}
+                                title={baseObj[position].title}
+                                description={baseObj[position].description}
+                                />
+                            </div>
+                        )}
                     </div>
                 </center>
                 <center className="center__tag">

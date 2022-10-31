@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from bson import ObjectId
+from storeDaysTutor import storeDaysTutor
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost:27017/pythonreactdb"
@@ -20,7 +21,15 @@ def createTutor():
 
     data = request.json
     try:
-        db.insert_one({
+        stateDays = storeDaysTutor([data['monday'],
+                        data['tuesday'],
+                        data['wednesday'],
+                        data['thursday'],
+                        data['friday'],
+                        data['saturday'],
+                        data['sunday']])
+        
+        id = db.insert_one({
             'name': data['name'],
             'mail': data['mail'],
             'punctuation': data['punctuation'],
@@ -31,16 +40,10 @@ def createTutor():
             'description': data['description'],
             'masteryOfTopics': data['masteryOfTopics'],
             'titles': data['titles'],
-            'monday': data['monday'],
-            'tuesday': data['tuesday'],
-            'wednesday': data['wednesday'],
-            'thursday': data['thursday'],
-            'friday': data['friday'],
-            'saturday': data['saturday'],
-            'sunday': data['sunday'],
+            'stateDays': stateDays,
             'comments': data['comments']
         })
-        return jsonify({'message': 'Received'})
+        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
     except:
         return jsonify({'message': 'Error'})
 
@@ -63,13 +66,7 @@ def getTutors():
                 'description': doc['description'],
                 'masteryOfTopics': doc['masteryOfTopics'],
                 'titles': doc['titles'],
-                'monday': doc['monday'],
-                'tuesday': doc['tuesday'],
-                'wednesday': doc['wednesday'],
-                'thursday': doc['thursday'],
-                'friday': doc['friday'],
-                'saturday': doc['saturday'],
-                'sunday': doc['sunday'],
+                'stateDays': doc['stateDays'],
                 'comments': doc['comments']
             })
         return jsonify(tutors)
@@ -107,13 +104,7 @@ def index(id):
             'description': tutor['description'],
             'masteryOfTopics': tutor['masteryOfTopics'],
             'titles': tutor['titles'],
-            'monday': tutor['monday'],
-            'tuesday': tutor['tuesday'],
-            'wednesday': tutor['wednesday'],
-            'thursday': tutor['thursday'],
-            'friday': tutor['friday'],
-            'saturday': tutor['saturday'],
-            'sunday': tutor['sunday'],
+            'stateDays': tutor['stateDays'],
             'comments': tutor['comments']
         })
     except:

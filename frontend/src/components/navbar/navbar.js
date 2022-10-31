@@ -1,6 +1,7 @@
 /* Para manipular las rutas se importa “Link”, el cual modifica las etiquetas “a”. 
    Además se utiliza “Outlet” para anidar rutas secundarias. */ 
 import { Outlet, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // Importar estilos del componente Navbar
 import "../../css/navbar/navbar.css"
 // Logo de PLASIRO
@@ -38,7 +39,7 @@ export default function Navbar() {
                         <Link className="navbar-link" to="/">More</Link>
                         <div className="navbar-dropdown">
                             <Link className="navbar-item" to="/tutorform">About</Link>
-                            <Link className="navbar-item" to="/">Jobs</Link>
+                            <NavLink className="navbar-item" to="/tutorLista">Jobs</NavLink>
                             <Link className="navbar-item" to="/">Contact</Link>
                             <hr className="navbar-divider" />
                             <Link className="navbar-item" to="/">Report an issue</Link>

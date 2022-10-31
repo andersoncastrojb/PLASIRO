@@ -1,5 +1,10 @@
+import { modifierTutors} from '../../features/daysTutor/daysTutorSlice'
+import { useDispatch } from 'react-redux'
 
 const GetTutors = async () =>{
+
+    const dispatch = useDispatch();
+
     let res = {};
     
     await fetch('http://localhost:5000/tutors',
@@ -14,7 +19,8 @@ const GetTutors = async () =>{
         alert("No se obtuvieron los datos de los monitores, el servidor no respondió. Error: "+res.message);
     }else{
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
+        dispatch(modifierTutors(data));
     }
 }
 

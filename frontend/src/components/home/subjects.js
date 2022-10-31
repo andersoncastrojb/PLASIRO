@@ -5,8 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
 
 export default function  Subjects(props) {
+
+    const navigate = useNavigate();
+
+    const toMainList = () =>{
+        navigate("/tutorLista");
+    }
+
     return(
         <>
             <Card sx={{ maxWidth: 345 }}>
@@ -26,7 +34,7 @@ export default function  Subjects(props) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Agendar</Button>
+                    <Button size="small" onClick={toMainList}>Monitores</Button>
                     <Button size="small">Más Información</Button>
                 </CardActions>
             </Card>

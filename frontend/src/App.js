@@ -4,6 +4,7 @@ import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 import InfoTutor from "./components/infoTutor/infoTutor";
 import FormTutorIni from "./components/tutor/formTutorIni"
+import MainList from "./components/tutorList/mainList";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/tutorplantilla' element={<InfoTutor />} />
           <Route path='/tutorform' element={<FormTutorIni />} />
+          <Route path='/tutorLista' element={<MainList />} />
         </Route>
       </Routes>
       <Footer />

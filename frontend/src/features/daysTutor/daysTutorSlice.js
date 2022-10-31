@@ -48,6 +48,8 @@ const initialState = {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ],
+    tutors: [],
+    tutorShow: {}
 }
 
 export const DaysTutorSlice = createSlice({
@@ -56,9 +58,15 @@ export const DaysTutorSlice = createSlice({
     reducers:{
         modifierDay: (state,action) =>{
             state.day = action.payload;
+        },
+        modifierTutors: (state,action) =>{
+            state.tutors = action.payload;
+        },
+        modifierTutorShow: (state,action) =>{
+            state.tutorShow = action.payload;
         }
     },
 });
 
-export const {modifierDay, modifierHorarioD} = DaysTutorSlice.actions;
+export const {modifierDay, modifierTutors, modifierTutorShow} = DaysTutorSlice.actions;
 export default DaysTutorSlice.reducer;
