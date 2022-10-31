@@ -13,9 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
-          <Route path='/tutorplantilla' element={<InfoTutor />} />
+          <Route path='/info-tutor' element={<InfoTutor />} />
           <Route path='/tutorform' element={<FormTutorIni />} />
-          <Route path='/tutorLista' element={<MainList />} />
+          <Route path='/list-tutor' element={<MainList />} />
         </Route>
       </Routes>
       <Footer />

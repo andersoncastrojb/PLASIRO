@@ -12,7 +12,7 @@ export default function  Subjects(props) {
     const navigate = useNavigate();
 
     const toMainList = () =>{
-        navigate("/tutorLista");
+        navigate("/list-tutor");
     }
 
     return(

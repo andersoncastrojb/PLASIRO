@@ -6,6 +6,10 @@ import tutorPicture from "../img/yo.png";
 import Modal from "./modal";
 import Calendar from "./calendar";
 import FormCalendar from "./formCalendar"
+import { useSelector } from 'react-redux'
+import Rating from '@mui/material/Rating';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 
 /* Component: InfoTutor
@@ -21,6 +25,8 @@ const InfoTutor = () => {
 
     const [flag, setFlag] = useState({display: "none"});
     const [flagTwo, setFlagTwo] = useState({top: "0"});
+
+    const tutorShow = useSelector((state) => state.DaysTutor.tutorShow[0]);
 
     useEffect(() => {
       const handleScroll = () => {
@@ -61,21 +67,23 @@ const InfoTutor = () => {
                   <img className="is-rounded" alt="" src={tutorPicture} />
                 </figure>
                 <div className="info__basic block">
-                  <h1 className="title is-3">Nombre</h1>
+                  <h1 className="title is-3">{tutorShow.name}</h1>
                   <h2 className="subtitle is-6">
-                    <strong>Estrellas: </strong>
+                    <Rating name="half-rating-read" value={parseFloat(tutorShow.punctuation,10)} precision={0.5} readOnly />
                   </h2>
                   <h2 className="subtitle is-6">
                     <strong>Modalidad: </strong> <p>virtual y presencial</p>
                   </h2>
                   <h2 className="subtitle is-6">
-                    <strong>Valor hora: </strong> <p>virtual y presencial</p>
+                    <strong>Valor hora: </strong> <p>{tutorShow.price} COP</p>
                   </h2>
                   <h2 className="subtitle is-6">
-                    <strong>Temas: </strong> <p>virtual y presencial</p>
-                  </h2>
-                  <h2 className="subtitle is-6">
-                    <strong>Temas: </strong> <p>virtual y presencial</p>
+                    <Stack direction="row" spacing={1}>
+                        <strong>Áreas: </strong> 
+                        {tutorShow.subjects.map( (topic, index) =>
+                            <Chip key={index.toString()} label={topic} size="small" />
+                        )}
+                    </Stack>
                   </h2>
                 </div>
               </section>
@@ -83,19 +91,18 @@ const InfoTutor = () => {
               <div className="box">
 
                 <section className="section">
-                  <h2 className="subtitle is-4">
-                    <strong>Presentación</strong>
-                  </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
+                  <h2 className="subtitle is-4"><strong>Presentación</strong></h2><p>{tutorShow.description}</p>
                 </section>
 
                 <section className="section">
                   <h2 className="subtitle is-4">
                     <strong>Dominio de los temas</strong>
                   </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
+                  <Stack direction="row" spacing={1}>
+                      {tutorShow.masteryOfTopics.map( (topic, index) =>
+                          <Chip key={index.toString()} label={topic} size="small" />
+                      )}
+                  </Stack>
                 </section>
 
                 <section className="section">

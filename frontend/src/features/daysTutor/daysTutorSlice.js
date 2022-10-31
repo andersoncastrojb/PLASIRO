@@ -64,9 +64,12 @@ export const DaysTutorSlice = createSlice({
         },
         modifierTutorShow: (state,action) =>{
             state.tutorShow = action.payload;
+        },
+        modifierAvailability: (state,action) =>{
+            state.availability = action.payload;
         }
     },
 });
 
-export const {modifierDay, modifierTutors, modifierTutorShow} = DaysTutorSlice.actions;
+export const {modifierDay, modifierTutors, modifierTutorShow, modifierAvailability} = DaysTutorSlice.actions;
 export default DaysTutorSlice.reducer;

@@ -5,10 +5,13 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { useSelector } from 'react-redux'
 import GetTutors from "../getData/getTutors";
-import { modifierTutorShow} from '../../features/daysTutor/daysTutorSlice'
+import { modifierTutorShow, modifierAvailability } from '../../features/daysTutor/daysTutorSlice'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 const MainList = () => {
+
+    const navigate = useNavigate();
 
     const tutors = useSelector( (state) => state.DaysTutor.tutors );
     const dispatch = useDispatch();
@@ -24,6 +27,8 @@ const MainList = () => {
         if(tutorShow.length > 0){
             // console.log(tutorShow);
             dispatch(modifierTutorShow(tutorShow));
+            dispatch(modifierAvailability(tutorShow[0].stateDays));
+            navigate("/info-tutor");
         }
     }
 
