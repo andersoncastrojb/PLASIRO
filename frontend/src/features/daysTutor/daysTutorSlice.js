@@ -49,7 +49,7 @@ const initialState = {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ],
     tutors: [],
-    tutorShow: {}
+    tutorShow: [[]]
 }
 
 // Almacena información referente a un tutor específico del cual se quiere obtener información

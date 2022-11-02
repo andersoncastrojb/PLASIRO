@@ -8,6 +8,7 @@ import Good from "../../Icons/Good.png"
 import Alert from "../../Icons/Alert.png"
 import Bad from "../../Icons/Bad.png"
 import {useSelector} from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +16,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 //Este componente retorna un botón, el cual al ser presionado envía los datos de la información del formulario del tutor al servidor, mediante el método POST
 export default function TutorDataToServerTwo(props) {
+
+    const navigate = useNavigate();
 
     // Estado redux
     const InfoTutorState = useSelector(state => state.InfoTutor);
@@ -30,7 +33,7 @@ export default function TutorDataToServerTwo(props) {
 
     const handleClose = () => {
         setOpen(false);
-        window.location.reload();
+        navigate("../");
     };
 
     const handleClickOpen2 = () => {
@@ -103,7 +106,7 @@ export default function TutorDataToServerTwo(props) {
             </div>
             </DialogContent>
             <DialogActions>
-                <button style={{width:"100%"}} className="button is-success" onClick={() => window.location.reload()}>
+                <button style={{width:"100%"}} className="button is-success" onClick={() => {navigate("../")}}>
                     Continuar
                 </button>
             </DialogActions>
@@ -161,7 +164,7 @@ export default function TutorDataToServerTwo(props) {
             </div>
             </DialogContent>
             <DialogActions>
-                <button style={{width:"100%"}} className="button is-success" onClick={() => window.location.reload()}>
+                <button style={{width:"100%"}} className="button is-success" onClick={() => {navigate("../")}}>
                     Continuar
                 </button>
                 <button style={{width:"100%"}} className="button" onClick={handleClose3}>

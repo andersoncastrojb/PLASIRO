@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import Rating from '@mui/material/Rating';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { useNavigate } from "react-router-dom";
 
 
 /* Component: InfoTutor
@@ -28,7 +29,14 @@ const InfoTutor = () => {
 
     const tutorShow = useSelector((state) => state.DaysTutor.tutorShow[0]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
+
+      if(tutorShow.name === undefined){
+        navigate("../list-tutor");
+      }
+
       const handleScroll = () => {
         //console.log('window.scrollY', window.scrollY);
 
@@ -46,7 +54,7 @@ const InfoTutor = () => {
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [flag,flagTwo]);
+    }, [flag,flagTwo, tutorShow.name, navigate]);
 
 
   
@@ -78,12 +86,16 @@ const InfoTutor = () => {
                     <strong>Valor hora: </strong> <p>{tutorShow.price} COP</p>
                   </h2>
                   <h2 className="subtitle is-6">
+                  {
+                    tutorShow.subjects !== undefined
+                    &&
                     <Stack direction="row" spacing={1}>
                         <strong>Áreas: </strong> 
                         {tutorShow.subjects.map( (topic, index) =>
                             <Chip key={index.toString()} label={topic} size="small" />
                         )}
                     </Stack>
+                  }
                   </h2>
                 </div>
               </section>
@@ -98,11 +110,15 @@ const InfoTutor = () => {
                   <h2 className="subtitle is-4">
                     <strong>Dominio de los temas</strong>
                   </h2>
-                  <Stack direction="row" spacing={1}>
-                      {tutorShow.masteryOfTopics.map( (topic, index) =>
-                          <Chip key={index.toString()} label={topic} size="small" />
-                      )}
-                  </Stack>
+                  {
+                    tutorShow.masteryOfTopics !== undefined
+                    &&
+                    <Stack direction="row" spacing={1}>
+                        {tutorShow.masteryOfTopics.map( (topic, index) =>
+                            <Chip key={index.toString()} label={topic} size="small" />
+                        )}
+                    </Stack>
+                  }
                 </section>
 
                 <section className="section">
