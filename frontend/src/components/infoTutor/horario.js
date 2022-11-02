@@ -25,6 +25,7 @@ const horarioDiv = (props) => {
     );
 };
 
+// Se encarga de renderizar los horarios disponibles para un día específico
 const Horario = (props) => {
 
     const availability = useSelector( (state) => state.DaysTutor.availability );

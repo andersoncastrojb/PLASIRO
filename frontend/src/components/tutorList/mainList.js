@@ -9,25 +9,38 @@ import { modifierTutorShow, modifierAvailability } from '../../features/daysTuto
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 
+// Muestra una lista de los tutores disponibles después del filtro por área
 const MainList = () => {
-
+    
+    // Para navegar a otra pestaña
     const navigate = useNavigate();
-
-    const tutors = useSelector( (state) => state.DaysTutor.tutors );
+     
+    // Para leer los datos de los tutores cargados de la base de datos
+    let tutors = [];
+    tutors = useSelector( (state) => state.DaysTutor.tutors );
+    // Se inicializa el modificar del estado redux
     const dispatch = useDispatch();
-
+    
+    // Se verifica que el vector que contiene los datos de los monitores no este vacia
     if(tutors.length === 0){
+        // Para obtener los datos de todos los monitores almacenados en el servidor
         GetTutors();
     }
-
+    
+    // Se da click sobre un monitor específico, para mirar su información
     const agendarCLick = e => {
         // console.log(e.target.id)
+        // Se filtra por el Id específico la información del tutor sobre el cual se dio click
         let tutorShow = [];
         tutorShow = tutors.filter( (tutor) => tutor._id === e.target.id);
+        // Si este se encuentra, entonces se procede a almacenar estos datos en estado Redux
         if(tutorShow.length > 0){
             // console.log(tutorShow);
+            // Almacenar los datos del tutor específico
             dispatch(modifierTutorShow(tutorShow));
+            // Almacenar su disponibilidad diaria los 40 días 
             dispatch(modifierAvailability(tutorShow[0].stateDays));
+            // Navegar a la pestaña info-tutor
             navigate("/info-tutor");
         }
     }

@@ -1,3 +1,5 @@
+
+// Se encarga de comparar el estado en Redux para cada uno de los cuarenta días, y modificar el día que fue cambiado. y retorna finalmente un vector de 40 elementos con las modificaciones
 const hourChange = (props) => {
     let vect = [0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0];
     let data = props.data;

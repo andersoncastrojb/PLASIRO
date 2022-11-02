@@ -18,7 +18,7 @@ const initialState = {
     conditions: "off"
 }
   
-
+// Contiene los datos suministrados para agendar un monitor específico
 export const InfoAgendarSlice = createSlice({
     name: 'infoAgendar',
     initialState,

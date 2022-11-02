@@ -15,7 +15,8 @@ const HorarioSelect = (props) => {
     const day = useSelector( (state) => state.DaysTutor.day );
 
     useEffect(() => {
-
+        
+        // Se encarga de agregar o eliminar horas seleccionadas dentro de las disponibles para el día específico
         const horarioClick = (event) => {
             if(event.target.className === "horario__box"){
                 if (horas.find(element => element === event.target.outerText)){
@@ -40,9 +41,11 @@ const HorarioSelect = (props) => {
             window.removeEventListener('mousedown', horarioClick);
         };
     }, [horas, dispatch]);
-
+    
+    // Dentro de la disponibilidad de los 40 días por monitor, es necesario modificar un día específico colocando a cero las horas que fueron seleccionadas, de manera que esto se pueda modificar en la base de datos.
     const clickNext = () => {
         let aux = availability[day];
+        // Se encarga de comparar el estado en Redux para cada uno de los cuarenta días, y modificar el día que fue cambiado. y retorna finalmente un vector de 40 elementos con las modificaciones
         aux = hourChange({data: horas, vector: availability[day]});
         dispatch(modifier(['hourSelect', aux]));
         dispatch(modifier(['modalFlagDate', {display: "none"}]));

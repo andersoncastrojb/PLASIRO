@@ -1,4 +1,5 @@
 
+// Convierte los unos en horas disponibles
 const HorarioDisponible = (props) => {
 
     const vector = props;

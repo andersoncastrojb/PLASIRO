@@ -5,6 +5,7 @@ import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { useDispatch, useSelector } from 'react-redux'
 
 
+// Formulario de datos en el proceso de agenda
 const FormCalendar = () =>{
 
     const dispatch = useDispatch();

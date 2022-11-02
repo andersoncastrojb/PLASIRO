@@ -11,16 +11,19 @@ mongo = PyMongo(app)
 
 
 # Settings
+# Para poder hacer peticiones entre los servidores Front End(React Js) y Backend (Flask), se utiliza la configuración CORS, para el caso de producción se quita esta configuración
 CORS(app)
 
 # Database
 db = mongo.db.tutors
 
+# Para almacenar los datos de un tutor, mediantes un POST en el aplicativo web
 @app.route('/tutors', methods=['POST'])
 def createTutor():
 
     data = request.json
     try:
+        # Para crear un vector con los 40 días a partir del actual, con sus respectivas disponibilidades. 
         stateDays = storeDaysTutor([data['monday'],
                         data['tuesday'],
                         data['wednesday'],
@@ -28,7 +31,7 @@ def createTutor():
                         data['friday'],
                         data['saturday'],
                         data['sunday']])
-        
+        # Para almacenar los datos en la tabla “tutors” 
         id = db.insert_one({
             'name': data['name'],
             'mail': data['mail'],
@@ -48,6 +51,7 @@ def createTutor():
         return jsonify({'message': 'Error'})
 
 
+# Para obtener la información de todos los tutores registrados en el sistema 
 @app.route('/tutors', methods=['GET'])
 def getTutors():
     
@@ -73,6 +77,8 @@ def getTutors():
     except:
         return jsonify({'message': 'Error'})
 
+
+# Para obtener los Ids (identificadores) de los objetos que contienen la información de cada monitor en la base de datos
 @app.route('/tutorsIds', methods=['GET'])
 def getTutorsIds():
     
@@ -88,6 +94,7 @@ def getTutorsIds():
         return jsonify({'message': 'Error'})
 
 
+# Para obtener la información de un tutor específico, enviando su Id
 @app.route('/tutor/<id>', methods=['GET'])
 def index(id):
     try:
@@ -111,6 +118,7 @@ def index(id):
         return jsonify({'message': 'Error'})
 
 
+# Para eliminar la información de un tutor específico, enviando su Id
 @app.route('/tutors/<id>', methods=['DELETE'])
 def deleteUser(id):
     try:
@@ -119,9 +127,13 @@ def deleteUser(id):
     except:
         return jsonify({'message': 'Error'})
 
+
+# Para modificar la información de un tutor específico, aún falta realizar el código
 @app.route('/users/<id>', methods=['PUT'])
 def updateUser():
     return "received"
 
+
+# Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
     app.run(debug=True)

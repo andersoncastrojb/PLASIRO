@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "../../css/infoTutor/modal.css";
 import { useSelector } from 'react-redux'
 
+// Es el modar que se muestra en la plantilla de agendar con un tutor, cambia entre la selección de fecha y hora, y el formulario de datos.
 const Modal = (props) => {
     
     const [myModalFlag, setmyModalFlag] = useState({display: "none"});

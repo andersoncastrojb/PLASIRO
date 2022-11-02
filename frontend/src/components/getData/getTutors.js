@@ -1,6 +1,7 @@
 import { modifierTutors} from '../../features/daysTutor/daysTutorSlice'
 import { useDispatch } from 'react-redux'
 
+// Para obtener los datos de todos los monitores almacenados en el servidor
 const GetTutors = async () =>{
 
     const dispatch = useDispatch();

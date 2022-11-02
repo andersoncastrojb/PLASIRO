@@ -21,7 +21,7 @@ const initialState = {
         comments: [["Pablito","Es un buen compañero"]]
 }
   
-
+// Contiene los datos diligenciados en el formulario, con el cual registran su información los tutores
 export const InfoTutorSlice = createSlice({
     name: 'tutorIni',
     initialState,
