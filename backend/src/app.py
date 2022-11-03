@@ -6,7 +6,8 @@ from bson import ObjectId
 from storeDaysTutor import storeDaysTutor
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = "mongodb://localhost:27017/pythonreactdb"
+# app.config['MONGO_URI'] = "mongodb://localhost:27017/pythonreactdb"
+app.config['MONGO_URI'] = "mongodb+srv://andersoncastrojb:rjkwXWJ9z4ny0D7w@plasiro.mqkr4ji.mongodb.net/pythonreactdb"
 mongo = PyMongo(app)
 
 
