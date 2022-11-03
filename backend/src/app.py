@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 
 # Settings
 # Para poder hacer peticiones entre los servidores Front End(React Js) y Backend (Flask), se utiliza la configuración CORS, para el caso de producción se quita esta configuración
-CORS(app)
+# CORS(app)
 
 # Database tutors
 db = mongo.db.tutors
@@ -130,9 +130,19 @@ def deleteUser(id):
 
 
 # Para modificar la información de un tutor específico, aún falta realizar el código
-@app.route('/users/<id>', methods=['PUT'])
-def updateUser():
-    return "received"
+@app.route('/tutors/<id>', methods=['PUT'])
+def updateUser(id):
+    try:
+        data = request.json
+        tutor = db.find_one({'_id': ObjectId(id)})
+        
+        out = tutor['stateDays']
+        out[data['dayChange']] = data['hourChange']
+        
+        db.update_one( {'_id': ObjectId(id)} , { "$set": { 'stateDays': out } } )
+        return jsonify({'message': 'Updated User', 'id': str(ObjectId(tutor['_id'])), 'out': out })
+    except:
+        return jsonify({'message': 'Error'})
 
 
 # Database cites
