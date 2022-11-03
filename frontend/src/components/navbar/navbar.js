@@ -34,7 +34,7 @@ export default function Navbar() {
                     <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
                         <Link className="navbar-item" to="/">Home</Link>
-                        <Link className="navbar-item" to="/tutorplantilla">Documentation</Link>
+                        <Link className="navbar-item" to="/admin-cites">Documentation</Link>
                         <div className="navbar-item has-dropdown is-hoverable">
                         <Link className="navbar-link" to="/">More</Link>
                         <div className="navbar-dropdown">

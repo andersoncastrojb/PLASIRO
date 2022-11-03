@@ -5,6 +5,7 @@ import Home from "./components/home/home";
 import InfoTutor from "./components/infoTutor/infoTutor";
 import FormTutorIni from "./components/tutor/formTutorIni"
 import MainList from "./components/tutorList/mainList";
+import AdminCites from "./components/admin/adminCites";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
           <Route path='/info-tutor' element={<InfoTutor />} />
+          <Route path='/admin-cites' element={<AdminCites />} />
           <Route path='/tutorform' element={<FormTutorIni />} />
           <Route path='/list-tutor' element={<MainList />} />
         </Route>

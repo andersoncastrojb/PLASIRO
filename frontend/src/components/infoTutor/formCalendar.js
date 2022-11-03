@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../css/infoTutor/FormCalendar.css"
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { useDispatch, useSelector } from 'react-redux'
+import DataAgendarToServer from './dataAgendarToServer';
 
 
 // Formulario de datos en el proceso de agenda
@@ -10,11 +11,6 @@ const FormCalendar = () =>{
 
     const dispatch = useDispatch();
     const InfoAgendar = useSelector((state) => state.InfoAgendar);
-
-    const clickBack = () => {
-        dispatch(modifier(['modalFlagDate', {display: "block"}]));
-        dispatch(modifier(['modalFlagForm', {display: "none"}]));
-    }
 
     // Se encarga de modificar el estado en redux del objeto InfoAgendarSlice
     const handleChange = e => {
@@ -134,12 +130,7 @@ const FormCalendar = () =>{
                 </div>
             </div>
             <div className="field is-grouped">
-                <div className="control">
-                    <button className="button is-link">Enviar</button>
-                </div>
-                <div className="control">
-                    <button onClick={clickBack} className="button is-link">Atrás</button>
-                </div>
+                <DataAgendarToServer buttomName=" Agendar "/>
             </div>
         </>
     );

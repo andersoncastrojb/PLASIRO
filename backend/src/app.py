@@ -14,7 +14,7 @@ mongo = PyMongo(app)
 # Para poder hacer peticiones entre los servidores Front End(React Js) y Backend (Flask), se utiliza la configuración CORS, para el caso de producción se quita esta configuración
 CORS(app)
 
-# Database
+# Database tutors
 db = mongo.db.tutors
 
 # Para almacenar los datos de un tutor, mediantes un POST en el aplicativo web
@@ -133,6 +133,70 @@ def deleteUser(id):
 def updateUser():
     return "received"
 
+
+# Database cites
+db2 = mongo.db.cites
+
+
+# Para almacenar los datos de una cita, mediante un POST en el aplicativo web
+@app.route('/cites', methods=['POST'])
+def createCites():
+    data = request.json
+    try:
+        # Para almacenar los datos en la tabla “cites” 
+        id = db2.insert_one({
+            'date': data['date'],
+            'day': data['day'],
+            'month': data['month'],
+            'year': data['year'],
+            'hourSelect': data['hourSelect'],
+            'daySelect': data['daySelect'],
+            'name': data['name'],
+            'phone': data['phone'],
+            'email': data['email'],
+            'mode': data['mode'],
+            'description': data['description'],
+            'conditions': data['conditions'],
+            'idTutor': data['idTutor'],
+            'nameTutor': data['nameTutor'],
+            'emailTutor': data['emailTutor'],
+            'priceTutor': data['priceTutor']
+        })
+        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+    except:
+
+        return jsonify({'message': 'Error'})
+    
+    
+# Para obtener la información de todas las citas registradas en el sistema 
+@app.route('/cites', methods=['GET'])
+def getCites():
+    
+    try:
+        cites = []
+        for doc in db2.find():
+            cites.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'date': doc['date'],
+                'day': doc['day'],
+                'month': doc['month'],
+                'year': doc['year'],
+                'hourSelect': doc['hourSelect'],
+                'daySelect': doc['daySelect'],
+                'name': doc['name'],
+                'phone': doc['phone'],
+                'email': doc['email'],
+                'mode': doc['mode'],
+                'description': doc['description'],
+                'conditions': doc['conditions'],
+                'idTutor': doc['idTutor'],
+                'nameTutor': doc['nameTutor'],
+                'emailTutor': doc['emailTutor'],
+                'priceTutor': doc['priceTutor']
+            })
+        return jsonify(cites)
+    except:
+        return jsonify({'message': 'Error'})
 
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
