@@ -16,7 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/info-tutor' element={<InfoTutor />} />
           <Route path='/admin-cites' element={<AdminCites />} />
-          <Route path='/tutorform' element={<FormTutorIni />} />
+          <Route path='/form-tutor' element={<FormTutorIni />} />
           <Route path='/list-tutor' element={<MainList />} />
         </Route>
       </Routes>

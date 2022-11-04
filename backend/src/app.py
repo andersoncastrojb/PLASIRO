@@ -209,6 +209,17 @@ def getCites():
     except:
         return jsonify({'message': 'Error'})
 
+
+# Para eliminar la información de de una cita específica 
+@app.route('/cites/<id>', methods=['DELETE'])
+def deleteCite(id):
+    try:
+        db2.delete_one({'_id': ObjectId(id)})
+        return jsonify({'message': 'Cite Deleted'})
+    except:
+        return jsonify({'message': 'Error'})
+    
+
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
     app.run(debug=True)

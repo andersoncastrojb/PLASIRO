@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import Dots from "../../Icons/Dots.svg"
 import AprobarCite from './aprobarCite';
 import  {modifier} from '../../features/admin/adminSlice'
+import RechazarCite from './rechazarCite';
 
 export default function ActionMenu(props) {
 
@@ -54,7 +55,7 @@ export default function ActionMenu(props) {
         }}
       >
         <MenuItem> <AprobarCite btnName="Aprobar"/> </MenuItem>
-        <MenuItem>Rechazar</MenuItem>
+        <MenuItem><RechazarCite /></MenuItem>
       </Menu>
     </div>
   );

@@ -95,21 +95,23 @@ function Row(props) {
                 </Typography>
                 <Table size="small" aria-label="purchases">
                     <TableHead>
-                    <TableRow>
-                        <TableCell>Fecha Agendada</TableCell>
-                        <TableCell>Modalidad</TableCell>
-                        <TableCell align="right">Descripción</TableCell>
-                        <TableCell align="right">Nombre Tutor</TableCell>
-                        <TableCell align="right">Correo Tutor</TableCell>
-                    </TableRow>
-                        <TableCell>{row.day}/{row.month}/{row.year}</TableCell>
-                        <TableCell>{row.mode}</TableCell>
-                        <TableCell align="right">{row.description}</TableCell>
-                        <TableCell align="right">{row.nameTutor}</TableCell>
-                        <TableCell align="right">{row.emailTutor}</TableCell>
+                        <TableRow>
+                            <TableCell>Fecha Agendada</TableCell>
+                            <TableCell>Modalidad</TableCell>
+                            <TableCell align="right">Descripción</TableCell>
+                            <TableCell align="right">Nombre Tutor</TableCell>
+                            <TableCell align="right">Correo Tutor</TableCell>
+                        </TableRow>
                     </TableHead>
 
                     <TableBody>
+                        <TableRow>
+                            <TableCell>{row.day}/{row.month}/{row.year}</TableCell>
+                            <TableCell>{row.mode}</TableCell>
+                            <TableCell align="right">{row.description}</TableCell>
+                            <TableCell align="right">{row.nameTutor}</TableCell>
+                            <TableCell align="right">{row.emailTutor}</TableCell>
+                        </TableRow>
                     </TableBody>
 
                 </Table>
