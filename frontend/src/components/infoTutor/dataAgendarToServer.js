@@ -88,7 +88,11 @@ export default function DataAgendarToServer(props) {
         }else{
             const data = await res.json();
             console.log(data);
-            handleClickOpen();
+            if(data.message === 'Error'){
+                alert("No se envió la solicitud de agenda, error en el servidor");
+            }else{
+                handleClickOpen();
+            }
         }
     }
     
@@ -119,7 +123,7 @@ export default function DataAgendarToServer(props) {
             </div>
             <div style={{textAlign: "center"}} className="column is-full">
                 <h3 className="title is-3">MUY BIEN!</h3>
-                <h4 className="subtitle is-4">¡Su perfil como monitor a sido creado satisfactoriamente!</h4>
+                <h4 className="subtitle is-4">¡Su solicitud a sido registrada de forma correcta!</h4>
                 <h4 className="subtitle is-4">{props.email}</h4>
             </div>
             </DialogContent>
@@ -148,7 +152,7 @@ export default function DataAgendarToServer(props) {
             </div>
             <div style={{textAlign: "center"}} className="column is-full">
                 <h3 className="title is-3">UPS!</h3>
-                <h4 className="subtitle is-4">La información no se pudo registrar.</h4>
+                <h4 className="subtitle is-4">No se pudo hacer la solicitud de agenda.</h4>
                 <h4 className="subtitle is-4">Error: {error}</h4>
             </div>
             <center>

@@ -70,7 +70,11 @@ export default function TutorDataToServerTwo(props) {
         }else{
             const data = await res.json();
             console.log(data);
-            handleClickOpen();
+            if(data.message === 'Error'){
+                alert("No se guardaron los datos, error en el servidor");
+            }else{
+                handleClickOpen();
+            }
         }
     }
     

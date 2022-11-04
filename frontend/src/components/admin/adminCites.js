@@ -15,6 +15,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useDispatch, useSelector } from 'react-redux'
 import { modifier } from '../../features/admin/adminSlice';
 import ActionMenu from './actionMenu';
+import '../../css/Admin/adminCites.css'
 
 
 // Para obtener los datos de todas las citas almacenadas en el servidor
@@ -33,7 +34,7 @@ const GetCites = async () =>{
     .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
     // console.log(res.message);
     if (res.message === "Failed to fetch"){
-        alert("No se obtuvieron los datos de los monitores, el servidor no respondió. Error: "+res.message);
+        alert("No se obtuvieron los datos de las solicitudes de agenda. Error: "+res.message);
     }else{
         const data = await res.json();
         // console.log(data);
@@ -124,38 +125,62 @@ function Row(props) {
   );
 }
 
+
+let count = 0;
 export default function AdminCites() {
     
     let cites = [];
     cites = useSelector((state) => state.Admin.cites);
 
-    if(cites.length === 0){
+    if(cites.length === 0 && count < 1){
         GetCites();
+        count = 1;
     }
 
-    return (
-
-        <div className="box">
-            <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                <TableRow>
-                    <TableCell />
-                    <TableCell>Solicitante</TableCell>
-                    <TableCell align="right">Correo Solicitante</TableCell>
-                    <TableCell align="right">Número Celular</TableCell>
-                    <TableCell align="right">Valor Pago</TableCell>
-                    <TableCell align="right">Fecha Creación</TableCell>
-                    <TableCell align="right">Acciones</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                {cites.map((cite) => (
-                    <Row key={cite._id} row={cite} />
-                ))}
-                </TableBody>
-            </Table>
-            </TableContainer>
-        </div>
+return (
+        <>
+            <div className='title__and__buttom__cites'>
+                <div className="columns">
+                    <div className="column is-four-fifths">
+                        <center>
+                            <div className="box">
+                                <h4 className="subtitle is-4 head__admin__cites">Solicitudes pendientes</h4>
+                            </div>
+                        </center>
+                    </div>
+                    <div className="column">
+                        <center>
+                            <button
+                            onClick={() => window.location.reload(true)}
+                            className="button is-normal head__admin__cites btn__admin__cites">
+                                Actualizar tabla
+                            </button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div className="box">
+                <TableContainer component={Paper}>
+                <Table aria-label="collapsible table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell />
+                        <TableCell>Solicitante</TableCell>
+                        <TableCell align="right">Correo Solicitante</TableCell>
+                        <TableCell align="right">Número Celular</TableCell>
+                        <TableCell align="right">Valor Pago</TableCell>
+                        <TableCell align="right">Fecha Creación</TableCell>
+                        <TableCell align="right">Acciones</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {cites.map((cite) => (
+                        <Row key={cite._id} row={cite} />
+                    ))}
+                    </TableBody>
+                </Table>
+                </TableContainer>
+            </div>
+        </>
   );
 }
