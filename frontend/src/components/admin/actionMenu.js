@@ -2,12 +2,14 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Dots from "../../Icons/Dots.svg"
+import AprobarCite from './aprobarCite';
+import  {modifier} from '../../features/admin/adminSlice'
 
 export default function ActionMenu(props) {
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -19,21 +21,9 @@ export default function ActionMenu(props) {
   };
 
   const handleOut = (e) => {
-    console.log(e.target.id);
-
+    // console.log(e.target.id);
+    dispatch(modifier(['idCite', e.target.id])); 
   }
-
-  /*
-  const handleEdit = () => {
-    handleClose();
-    dispatch(modalChangeState(1));
-  }
-
-  const handleShow = () => {
-    handleClose();
-    dispatch(modalChangeState(2));
-  }
-  */
 
   return (
     <div>
@@ -44,8 +34,8 @@ export default function ActionMenu(props) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <figure className="dots image is-32x32" onClick={handleOut}>
-            <img id={props.id} alt="" src={Dots}/>
+        <figure className="dots image is-32x32">
+            <img id={props.id} alt="" src={Dots} onClick={ e => handleOut(e)}/>
         </figure>
       </Button>
       <Menu
@@ -63,8 +53,7 @@ export default function ActionMenu(props) {
           horizontal: 'left',
         }}
       >
-        <MenuItem>Aprobar</MenuItem>
-        <MenuItem>Editar</MenuItem>
+        <MenuItem> <AprobarCite btnName="Aprobar"/> </MenuItem>
         <MenuItem>Rechazar</MenuItem>
       </Menu>
     </div>

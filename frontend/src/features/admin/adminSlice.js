@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-        cites: []
+        cites: [],
+        idCite: 0
 }
 
 

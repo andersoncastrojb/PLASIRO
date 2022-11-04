@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 
 # Settings
 # Para poder hacer peticiones entre los servidores Front End(React Js) y Backend (Flask), se utiliza la configuración CORS, para el caso de producción se quita esta configuración
-# CORS(app)
+CORS(app)
 
 # Database tutors
 db = mongo.db.tutors
