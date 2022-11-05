@@ -6,6 +6,7 @@ import InfoTutor from "./components/infoTutor/infoTutor";
 import FormTutorIni from "./components/tutor/formTutorIni"
 import MainList from "./components/tutorList/mainList";
 import AdminCites from "./components/admin/adminCites";
+import Profile from "./components/profile/profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/admin-cites' element={<AdminCites />} />
           <Route path='/form-tutor' element={<FormTutorIni />} />
           <Route path='/list-tutor' element={<MainList />} />
+          <Route path='/user-profile' element={<Profile />} />
         </Route>
       </Routes>
       <Footer />

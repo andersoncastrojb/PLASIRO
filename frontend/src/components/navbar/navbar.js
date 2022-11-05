@@ -6,11 +6,18 @@ import { NavLink } from "react-router-dom";
 import "../../css/navbar/navbar.css"
 // Logo de PLASIRO
 import logo from "../img/PLASIRO.png"
+import { useAuth0 } from "@auth0/auth0-react";
+import Avatar from '@mui/material/Avatar';
+import avatar from "../../Icons/avatar.png";
+
 
 /* Component: Navbar
    Menú principal del aplicativo web */
 
 export default function Navbar() {
+
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
     return (
         <div>
             <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -39,7 +46,7 @@ export default function Navbar() {
                         <Link className="navbar-link" to="/">More</Link>
                         <div className="navbar-dropdown">
                             <Link className="navbar-item" to="/form-tutor">About</Link>
-                            <NavLink className="navbar-item" to="/">Jobs</NavLink>
+                            <NavLink className="navbar-item" to="/user-profile">Jobs</NavLink>
                             <Link className="navbar-item" to="/">Contact</Link>
                             <hr className="navbar-divider" />
                             <Link className="navbar-item" to="/">Report an issue</Link>
@@ -49,10 +56,17 @@ export default function Navbar() {
                     <div className="navbar-end">
                         <div className="navbar-item">
                         <div className="buttons">
-                            <Link className="button is-primary" to="/">
-                            <strong>Sign up</strong>
-                            </Link>
-                            <Link className="button is-light" to="/">Log in</Link>
+                            {
+                            isAuthenticated
+                            ? <Link to="/user-profile"><Avatar alt="" src={user.picture} /></Link>
+                            : <Avatar alt="" src={avatar} />
+                            }
+
+                            {
+                            isAuthenticated
+                                ? <Link className="button is-black" onClick={() => logout({ returnTo: window.location.origin })} to="/">Log out</Link>
+                                : <Link className="button is-primary" onClick={() => loginWithRedirect()} to="/">Log in</Link>
+                            }
                         </div>
                         </div>
                     </div>

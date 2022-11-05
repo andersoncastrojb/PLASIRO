@@ -30,6 +30,11 @@
     margin-right: 5%;
   }
 
+  .navbar-end .navbar-item .button{
+    margin-bottom: 0.5%;
+    margin-left: 2rem;
+  }
+
   .navbar-burger{
     padding:  5rem 0;
   }
