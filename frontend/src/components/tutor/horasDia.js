@@ -176,7 +176,7 @@ const HorasDia = () =>{
             Car({vect: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]});
             // Actualizar vector auxiliar
             setStateVector([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-            
+            alert("Se acaban de guardar las horas disponibles para cada día de la semana, ahora presione en el botón ¡Enviar!");
     }
     // Almacenar información por días en el estado redux, Termina
 

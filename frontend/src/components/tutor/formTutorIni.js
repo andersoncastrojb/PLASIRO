@@ -53,7 +53,7 @@ const FormTutorIni = () =>{
                     name='name' 
                     className="input"
                     type="text"
-                    placeholder="Text input"
+                    placeholder="Juan Pablo González"
                     onChange={handleChange}/>
                 </div>
                 <p className="help">Ej: Juan Pablo González</p>
@@ -66,10 +66,25 @@ const FormTutorIni = () =>{
                     name='mail' 
                     className="input"
                     type="text"
-                    placeholder="Text input"
+                    placeholder="juanito@gmail.com"
                     onChange={handleChange}/>
                 </div>
                 <p className="help">Ej: juanito@gmail.com</p>
+            </div>
+
+            <div className="field">
+                <label className="label">Número Telefónico</label>
+                <div className="control">
+                    <input
+                    name='price'
+                    className="input"
+                    type="text"
+                    placeholder="3406789545"
+                    onChange={handleChange}
+                    maxLength="10"
+                    />
+                </div>
+                <p className="help">Ej: 3406789545</p>
             </div>
 
             <div className="field">
@@ -91,8 +106,9 @@ const FormTutorIni = () =>{
                     name='price'
                     className="input"
                     type="text"
-                    placeholder="Text input"
+                    placeholder="15000"
                     onChange={handleChange}
+                    maxLength="6"
                     />
                 </div>
                 <p className="help">Ej: 15000</p>
@@ -110,7 +126,7 @@ const FormTutorIni = () =>{
                 <textarea
                 name='description'
                 className="textarea"
-                placeholder="textarea"
+                placeholder="Soy Juan Pablo, tengo experiencia… Mi metodología se caracteriza por…"
                 rows="10"
                 onChange={handleChange}
                 ></textarea>

@@ -49,7 +49,7 @@ const FormCalendar = () =>{
                     name='name'
                     className="input"
                     type="text"
-                    placeholder="Ej. Juan Pérez Mujica"
+                    placeholder="Juan Pérez Mujica"
                     onChange={handleChange}
                     />
                 </div>
@@ -61,9 +61,10 @@ const FormCalendar = () =>{
                     name='phone'
                     className="input is-success"
                     type="text"
-                    placeholder="Ej. 3055075754"
+                    placeholder="3055075754"
                     defaultValue=""
                     onChange={handleChange}
+                    maxLength="10"
                     />
                     <span className="icon is-small is-left">
                     <i className="fas fa-user" />
@@ -81,7 +82,7 @@ const FormCalendar = () =>{
                     name='email'
                     className="input is-danger"
                     type="email"
-                    placeholder="Ej. juanperez@gmail.com"
+                    placeholder="juanperez@gmail.com"
                     defaultValue=""
                     onChange={handleChange}
                     />
@@ -115,7 +116,7 @@ const FormCalendar = () =>{
                     <textarea
                     name='description'
                     className="textarea" 
-                    placeholder="Ej. La tutoría será sobre el tema …"
+                    placeholder="La tutoría será sobre el tema …"
                     defaultValue={""}
                     onChange={handleChange}
                     />
