@@ -7,8 +7,10 @@ import Slide from '@mui/material/Slide';
 import Good from "../../Icons/Good.png" 
 import Alert from "../../Icons/Alert.png"
 import Bad from "../../Icons/Bad.png"
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import ValidadorFormIni from '../validadorForm.js/validadorformIni';
+import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,6 +23,7 @@ export default function TutorDataToServerTwo(props) {
 
     // Estado redux
     const InfoTutorState = useSelector(state => state.InfoTutor);
+    const dispatch = useDispatch();
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
@@ -53,28 +56,33 @@ export default function TutorDataToServerTwo(props) {
     };
 
     const handleSubmit = async () => {
-        let res = {};
-    
-        await fetch('http://localhost:5000/tutors',
-        {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(InfoTutorState)
-        })
-        .then(response => {res = response})
-        .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-        // console.log(res.message);
-        if (res.message === "Failed to fetch"){
-            setError(res.message);
-            handleClickOpen2();
-        }else{
-            const data = await res.json();
-            console.log(data);
-            if(data.message === 'Error'){
-                alert("No se guardaron los datos, error en el servidor");
+
+        if(InfoTutorState.validadorFormIni.flag === true){
+            
+            let res = {};
+            await fetch('http://localhost:5000/tutors',
+            {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(InfoTutorState)
+            })
+            .then(response => {res = response})
+            .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+            // console.log(res.message);
+            if (res.message === "Failed to fetch"){
+                setError(res.message);
+                handleClickOpen2();
             }else{
-                handleClickOpen();
+                const data = await res.json();
+                console.log(data);
+                if(data.message === 'Error'){
+                    alert("No se guardaron los datos, error en el servidor");
+                }else{
+                    handleClickOpen();
+                }
             }
+        }else{
+            dispatch(modifier(['validadorFormIni', ValidadorFormIni(InfoTutorState)]));
         }
     }
     

@@ -4,6 +4,7 @@ const initialState = {
         name: "",
         mail: "",
         punctuation: "4.5",
+        phone: "",
         modeV: 'off',
         modeP: 'off',
         price: "",
@@ -18,7 +19,18 @@ const initialState = {
         friday: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         saturday: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         sunday: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        comments: [["Pablito","Es un buen compañero"]]
+        comments: [["Pablito","Es un buen compañero"]],
+        validadorFormIni: {
+            flag: false,
+            name: [false,""],
+            mail: [false,""],
+            phone: [false,""],
+            price: [false,""],
+            description: [false,""],
+            mode: [false, ""],
+            subjects: [false, ""],
+            masteryOfTopics: [false, ""]
+        }
 }
   
 // Contiene los datos diligenciados en el formulario, con el cual registran su información los tutores

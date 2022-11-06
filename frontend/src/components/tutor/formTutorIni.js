@@ -56,7 +56,11 @@ const FormTutorIni = () =>{
                     placeholder="Juan Pablo González"
                     onChange={handleChange}/>
                 </div>
-                <p className="help">Ej: Juan Pablo González</p>
+                {
+                    InfoTutorState.validadorFormIni.name[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.name[1]}</p>
+                }
             </div>
 
             <div className="field">
@@ -69,14 +73,18 @@ const FormTutorIni = () =>{
                     placeholder="juanito@gmail.com"
                     onChange={handleChange}/>
                 </div>
-                <p className="help">Ej: juanito@gmail.com</p>
+                {
+                    InfoTutorState.validadorFormIni.mail[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.mail[1]}</p>
+                }
             </div>
 
             <div className="field">
                 <label className="label">Número Telefónico</label>
                 <div className="control">
                     <input
-                    name='price'
+                    name='phone'
                     className="input"
                     type="text"
                     placeholder="3406789545"
@@ -84,7 +92,11 @@ const FormTutorIni = () =>{
                     maxLength="10"
                     />
                 </div>
-                <p className="help">Ej: 3406789545</p>
+                {
+                    InfoTutorState.validadorFormIni.phone[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.phone[1]}</p>
+                }
             </div>
 
             <div className="field">
@@ -97,6 +109,11 @@ const FormTutorIni = () =>{
                 <input name='modeP' type="checkbox" onChange={handleChange}/>
                     {" Presencial"}
                 </label>
+                {
+                    InfoTutorState.validadorFormIni.mode[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.mode[1]}</p>
+                }
             </div>
             
             <div className="field">
@@ -111,15 +128,29 @@ const FormTutorIni = () =>{
                     maxLength="6"
                     />
                 </div>
-                <p className="help">Ej: 15000</p>
+                {
+                    InfoTutorState.validadorFormIni.price[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.price[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Áreas de conocimiento</label>
                 <SelectSubjets />
+                {
+                    InfoTutorState.validadorFormIni.subjects[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.subjects[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Temas específicos</label>
                 <SelectThemes />
+                {
+                    InfoTutorState.validadorFormIni.masteryOfTopics[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.masteryOfTopics[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Descripcíon</label>
@@ -130,6 +161,11 @@ const FormTutorIni = () =>{
                 rows="10"
                 onChange={handleChange}
                 ></textarea>
+                {
+                    InfoTutorState.validadorFormIni.description[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoTutorState.validadorFormIni.description[1]}</p>
+                }
             </div>
             <div className="field">
                 <HorasDia />
