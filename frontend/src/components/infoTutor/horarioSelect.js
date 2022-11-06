@@ -13,6 +13,7 @@ const HorarioSelect = (props) => {
     const horas = useSelector((state) => state.InfoAgendar.hours);
     const availability = useSelector( (state) => state.DaysTutor.availability );
     const day = useSelector( (state) => state.DaysTutor.day );
+    const price = useSelector( (state) => state.DaysTutor.tutorShow[0].price );
 
     useEffect(() => {
         
@@ -26,12 +27,14 @@ const HorarioSelect = (props) => {
                     aux.splice(indice, 1); // 1 es la cantidad de elementos a eliminar
                     // console.log(aux);
                     dispatch(modifier(['hours', aux]));
+                    dispatch(modifier(['valorP', (parseFloat(price,10)*aux.length).toString()]));
                 }else{
                     let aux = [];
                     aux = [...horas]
                     aux.push(event.target.outerText);  
                     // console.log(aux);
                     dispatch(modifier(['hours', aux]));
+                    dispatch(modifier(['valorP', (parseFloat(price,10)*aux.length).toString()]));
                 }
             }
         };   
@@ -40,7 +43,7 @@ const HorarioSelect = (props) => {
         return () => {
             window.removeEventListener('mousedown', horarioClick);
         };
-    }, [horas, dispatch]);
+    }, [horas, dispatch, price]);
     
     // Dentro de la disponibilidad de los 40 días por monitor, es necesario modificar un día específico colocando a cero las horas que fueron seleccionadas, de manera que esto se pueda modificar en la base de datos.
     const clickNext = () => {

@@ -9,13 +9,24 @@ const initialState = {
     hours: [],
     modalFlagDate: {display: "block"},
     modalFlagForm: {display: "none"},
+    valorP: "",
     hourSelect: [],
     name: "",
     phone: "",
     email: "",
     mode: "",
     description: "",
-    conditions: "off"
+    conditions: "off",
+    validadorFormAgendar: {
+        flag: false,
+        name: [false,""],
+        email: [false,""],
+        phone: [false,""],
+        hours: [false,""],
+        description: [false,""],
+        mode: [false, ""],
+        conditions: [false, ""]
+    }
 }
   
 // Contiene los datos suministrados para agendar un monitor específico

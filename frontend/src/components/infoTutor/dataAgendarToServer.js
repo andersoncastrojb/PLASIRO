@@ -10,6 +10,7 @@ import {useSelector} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
+import ValidadorFormAgendar from '../validadorForm.js/validadorformAgendar';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -53,46 +54,53 @@ export default function DataAgendarToServer(props) {
     };
 
     const handleSubmit = async () => {
-        let res = {};
-        let date = new Date().toISOString();
         
-        await fetch('http://localhost:5000/cites',
-        {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                date: date,
-                day: InfoAgendar.day,
-                month: InfoAgendar.month,
-                year: InfoAgendar.year,
-                hourSelect: InfoAgendar.hourSelect,
-                daySelect: DaysTutor.day,
-                name: InfoAgendar.name,
-                phone: InfoAgendar.phone,
-                email: InfoAgendar.email,
-                mode: InfoAgendar.mode,
-                description: InfoAgendar.description,
-                conditions: InfoAgendar.conditions,
-                idTutor: TutorInfo._id,
-                nameTutor: TutorInfo.name,
-                emailTutor: TutorInfo.mail,
-                priceTutor: TutorInfo.price,
-                })
-        })
-        .then(response => {res = response})
-        .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-        // console.log(res.message);
-        if (res.message === "Failed to fetch"){
-            setError(res.message);
-            handleClickOpen2();
-        }else{
-            const data = await res.json();
-            console.log(data);
-            if(data.message === 'Error'){
-                alert("No se envió la solicitud de agenda, error en el servidor");
+        if(InfoAgendar.validadorFormAgendar.flag === true){
+
+            let res = {};
+            let date = new Date().toISOString();
+            
+            await fetch('http://localhost:5000/cites',
+            {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    date: date,
+                    day: InfoAgendar.day,
+                    month: InfoAgendar.month,
+                    year: InfoAgendar.year,
+                    hourSelect: InfoAgendar.hourSelect,
+                    daySelect: DaysTutor.day,
+                    name: InfoAgendar.name,
+                    phone: InfoAgendar.phone,
+                    email: InfoAgendar.email,
+                    mode: InfoAgendar.mode,
+                    description: InfoAgendar.description,
+                    conditions: InfoAgendar.conditions,
+                    idTutor: TutorInfo._id,
+                    nameTutor: TutorInfo.name,
+                    emailTutor: TutorInfo.mail,
+                    priceTutor: TutorInfo.price,
+                    })
+            })
+            .then(response => {res = response})
+            .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+            // console.log(res.message);
+            if (res.message === "Failed to fetch"){
+                setError(res.message);
+                handleClickOpen2();
             }else{
-                handleClickOpen();
+                const data = await res.json();
+                console.log(data);
+                if(data.message === 'Error'){
+                    alert("No se envió la solicitud de agenda, error en el servidor");
+                }else{
+                    handleClickOpen();
+                }
             }
+            
+        }else{
+            dispatch(modifier(['validadorFormAgendar', ValidadorFormAgendar(InfoAgendar)]));
         }
     }
     

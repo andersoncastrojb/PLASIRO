@@ -43,6 +43,14 @@ const FormCalendar = () =>{
                 <h1 className="title is-4">Ingrese los siguientes datos</h1>
             </div>
             <div className="field">
+                <label className="label">¡Seleccione al menos una hora!</label>
+                {
+                    InfoAgendar.validadorFormAgendar.hours[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.hours[1]}</p>
+            }
+            </div>
+            <div className="field">
                 <label className="label">Nombre y apellido</label>
                 <div className="control">
                     <input
@@ -53,13 +61,18 @@ const FormCalendar = () =>{
                     onChange={handleChange}
                     />
                 </div>
+                {
+                    InfoAgendar.validadorFormAgendar.name[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.name[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Número telefónico</label>
                 <div className="control has-icons-left has-icons-right">
                     <input
                     name='phone'
-                    className="input is-success"
+                    className="input"
                     type="text"
                     placeholder="3055075754"
                     defaultValue=""
@@ -73,14 +86,18 @@ const FormCalendar = () =>{
                     <i className="fas fa-check" />
                     </span>
                 </div>
-                <p className="help is-success">This username is available</p>
+                {
+                    InfoAgendar.validadorFormAgendar.phone[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.phone[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Email</label>
                 <div className="control has-icons-left has-icons-right">
                     <input
                     name='email'
-                    className="input is-danger"
+                    className="input"
                     type="email"
                     placeholder="juanperez@gmail.com"
                     defaultValue=""
@@ -93,7 +110,11 @@ const FormCalendar = () =>{
                     <i className="fas fa-exclamation-triangle" />
                     </span>
                 </div>
-                <p className="help is-danger">This email is invalid</p>
+                {
+                    InfoAgendar.validadorFormAgendar.email[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.email[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">Modalidad</label>
@@ -107,6 +128,11 @@ const FormCalendar = () =>{
                     {" Presencial"}
                     </label>
                 </div>
+                {
+                    InfoAgendar.validadorFormAgendar.mode[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.mode[1]}</p>
+                }
             </div>
             <div className="field">
                 <label className="label">
@@ -121,6 +147,11 @@ const FormCalendar = () =>{
                     onChange={handleChange}
                     />
                 </div>
+                {
+                    InfoAgendar.validadorFormAgendar.description[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.description[1]}</p>
+                }
             </div>
             <div className="field">
                 <div className="control">
@@ -129,6 +160,11 @@ const FormCalendar = () =>{
                     I agree to the <Link to="#">terms and conditions</Link>
                     </label>
                 </div>
+                {
+                    InfoAgendar.validadorFormAgendar.conditions[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.conditions[1]}</p>
+                }
             </div>
             <div className="field is-grouped">
                 <DataAgendarToServer buttomName=" Agendar "/>
