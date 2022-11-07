@@ -171,7 +171,8 @@ def createCites():
             'idTutor': data['idTutor'],
             'nameTutor': data['nameTutor'],
             'emailTutor': data['emailTutor'],
-            'priceTutor': data['priceTutor']
+            'priceTutor': data['priceTutor'],
+            'valorP': data['valorP']
         })
         return jsonify({'message': 'Received', "id": str(id.inserted_id)})
     except:
@@ -203,7 +204,8 @@ def getCites():
                 'idTutor': doc['idTutor'],
                 'nameTutor': doc['nameTutor'],
                 'emailTutor': doc['emailTutor'],
-                'priceTutor': doc['priceTutor']
+                'priceTutor': doc['priceTutor'],
+                'valorP': doc['valorP']
             })
         return jsonify(cites)
     except:

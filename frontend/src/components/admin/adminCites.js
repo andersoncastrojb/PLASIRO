@@ -82,7 +82,7 @@ function Row(props) {
             </TableCell>
             <TableCell align="right">{row.email}</TableCell>
             <TableCell align="right">{row.phone}</TableCell>
-            <TableCell align="right">{row.priceTutor}</TableCell>
+            <TableCell align="right">{row.valorP}</TableCell>
             <TableCell align="right">{IsoToDate(row.date)}</TableCell>
             <TableCell align="right"><ActionMenu id= {row._id}/></TableCell>
         </TableRow>
