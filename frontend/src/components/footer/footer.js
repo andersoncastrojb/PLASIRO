@@ -1,6 +1,8 @@
 // Importar estilos del componente Footer
 import "../../css/footer/footer.css"
 import pencil_img from "../img/pencil.svg"
+import MenuTwo from "./menuTwo";
+import Contac from "./contac";
 
 /* Component: Footer
    Es el pie de página de la aplicación */
@@ -19,22 +21,20 @@ export default function Footer() {
                             </div>
                             <div className="media-content">
                                 <div className="content">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+                                <p style={{textAlign: "justify"}}>
+                                PLASIRO tiene como objetivo enlazar monitores académicos con estudiantes garantizando calidad, seguridad, accesibilidad y agilidad del servicio.
                                 </p>
                                 </div>
                             </div>
                         </article>
                     </div>
                 </div>
+                <div className="column"><MenuTwo /></div>
                 <div className="column">
-                    Second column
+                    
                 </div>
                 <div className="column">
-                    Third column
-                </div>
-                <div className="column">
-                    Fourth column
+                    <Contac />
                 </div>
             </div>
         </footer>

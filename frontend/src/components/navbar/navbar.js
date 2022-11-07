@@ -1,7 +1,6 @@
 /* Para manipular las rutas se importa “Link”, el cual modifica las etiquetas “a”. 
    Además se utiliza “Outlet” para anidar rutas secundarias. */ 
 import { Outlet, Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 // Importar estilos del componente Navbar
 import "../../css/navbar/navbar.css"
 // Logo de PLASIRO
@@ -40,16 +39,16 @@ export default function Navbar() {
                     </div>
                     <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                        <Link className="navbar-item" to="/">Home</Link>
-                        <Link className="navbar-item" to="/admin-cites">Documentation</Link>
+                        <Link className="navbar-item" to="/">Inicio</Link>
+                        <Link className="navbar-item" to="/list-tutor">Todos los monitores</Link>
                         <div className="navbar-item has-dropdown is-hoverable">
-                        <Link className="navbar-link" to="/">More</Link>
+                            <Link className="navbar-link">Más</Link>
                         <div className="navbar-dropdown">
-                            <Link className="navbar-item" to="/form-tutor">About</Link>
-                            <NavLink className="navbar-item" to="/user-profile">Jobs</NavLink>
-                            <Link className="navbar-item" to="/">Contact</Link>
+                            <Link className="navbar-item" to="/admin-cites">Administrar citas</Link>
+                            <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
+                            <Link className="navbar-item" to="/basic-info">Quienes somos</Link>
                             <hr className="navbar-divider" />
-                            <Link className="navbar-item" to="/">Report an issue</Link>
+                            <Link className="navbar-item" to="/guide">Guía rápida</Link>
                         </div>
                         </div>
                     </div>
