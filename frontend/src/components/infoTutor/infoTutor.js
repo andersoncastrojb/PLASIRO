@@ -89,7 +89,9 @@ const InfoTutor = () => {
                   {
                     tutorShow.subjects !== undefined
                     &&
-                    <Stack direction="row" spacing={1}>
+                    <Stack 
+                      direction={{ xs: 'column', sm: 'row' }}
+                      spacing={{ xs: 1, sm: 2, md: 4 }}>
                         <strong>Áreas: </strong> 
                         {tutorShow.subjects.map( (topic, index) =>
                             <Chip key={index.toString()} label={topic} size="small" />
@@ -113,7 +115,10 @@ const InfoTutor = () => {
                   {
                     tutorShow.masteryOfTopics !== undefined
                     &&
-                    <Stack direction="row" spacing={1}>
+                    <Stack 
+                      direction={{ xs: 'column', sm: 'row' }}
+                      spacing={{ xs: 1, sm: 2, md: 4 }}
+                    >
                         {tutorShow.masteryOfTopics.map( (topic, index) =>
                             <Chip key={index.toString()} label={topic} size="small" />
                         )}
