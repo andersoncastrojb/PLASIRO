@@ -8,16 +8,45 @@ import MainList from "./components/tutorList/mainList";
 import AdminCites from "./components/admin/adminCites";
 import Profile from "./components/profile/profile";
 import { ProtectedRoute } from "./components/protectedRoute/protectedRoute";
+import { useDispatch, useSelector } from 'react-redux'
+import GetUsers from '../src/components/getData/getUsers'
+import { useAuth0 } from "@auth0/auth0-react";
+import { modifier} from './features/users/userSlice'
+import { useEffect } from 'react';
 
 function App() {
+
+  const { user } = useAuth0();
+
+  const dispatch = useDispatch();
+
+  // Para leer los datos de los tutores cargados de la base de datos
+  // let users = [];
+  const Users = useSelector( (state) => state.Users );
+  let users = Users.users;
+
+  useEffect(() => {
+    if(users.length > 0 && user !== undefined && Users.loginUser.id === ""){
+      const result = users.find((data) => data.email === user.email );
+      // console.log(result)
+      if (result !== undefined ){
+        console.log("¡Usuario registrado!", "Nombre: ", user.name, " Correo: ", user.email, " Permiso: ", result.permissions);
+        dispatch(modifier(["loginUser", {
+          id: result._id,
+          name: result.name,
+          email: result.email,
+          permissions: result.permissions
+        }]))
+      }
+    }
+  }, [Users.loginUser.id, dispatch, user, users]);
   
-  const user = {
-    id: 1,
-    name: "John",
-    permissions: ["analize"],
-    roles: ["admin"],
-    flag: true
-  };
+
+  // Se verifica que el vector que contiene los datos de los usuarios no este vacia
+  if(users.length === 0){
+    // Para obtener los datos de todos los usuarios almacenados en el servidor
+    GetUsers();
+  }
 
   return (
     <>
@@ -25,15 +54,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
-          
-            <Route element={<ProtectedRoute user={user} />}>
-              <Route path='/list-tutor' element={<MainList />} />
-              <Route path='/user-profile' element={<Profile />} />
+           
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions="admin" />}>
+              <Route path='/admin-cites' element={<AdminCites />} />
             </Route>
 
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions="tutor" />}>
+              <Route path='/form-tutor' element={<FormTutorIni />} />
+            </Route>
+            
+            <Route path='/list-tutor' element={<MainList />} />
+            <Route path='/user-profile' element={<Profile />} />
             <Route path='/info-tutor' element={<InfoTutor />} />
-            <Route path='/admin-cites' element={<AdminCites />} />
-            <Route path='/form-tutor' element={<FormTutorIni />} />
           </Route>
         </Routes>
       </div>

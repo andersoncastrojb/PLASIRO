@@ -220,6 +220,27 @@ def deleteCite(id):
         return jsonify({'message': 'Error'})
     
 
+# Database cites
+db3 = mongo.db.users
+
+# Para obtener la información de todos los usuarios registrados en el sistema 
+@app.route('/users', methods=['GET'])
+def getUsers():
+    
+    try:
+        users = []
+        for doc in db3.find():
+            users.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'name': doc['name'],
+                'email': doc['email'],
+                'permissions': doc['permissions']
+            })
+        return jsonify(users)
+    except:
+        return jsonify({'message': 'Error'})
+
+
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
     app.run(debug=True)
