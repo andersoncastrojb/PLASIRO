@@ -8,6 +8,7 @@ import logo from "../img/PLASIRO.png"
 import { useAuth0 } from "@auth0/auth0-react";
 import Avatar from '@mui/material/Avatar';
 import avatar from "../../Icons/avatar.png";
+import Burger from "./burger";
 
 
 /* Component: Navbar
@@ -24,18 +25,7 @@ export default function Navbar() {
                     <Link className="navbar-item" to="/">
                         <img src={logo} alt="" width={300} height={200} />
                     </Link>
-                    <Link
-                        role="button"
-                        className="navbar-burger"
-                        aria-label="menu"
-                        aria-expanded="false"
-                        data-target="navbarBasicExample"
-                        to=""
-                    >
-                        <span aria-hidden="true" />
-                        <span aria-hidden="true" />
-                        <span aria-hidden="true" />
-                    </Link>
+                    <Burger />
                     </div>
                     <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
