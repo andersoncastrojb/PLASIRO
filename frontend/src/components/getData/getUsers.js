@@ -1,5 +1,6 @@
 import { modifier } from '../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
+import AlertWarning from '../alerts/alertWarning'
 
 // Para obtener los datos de todos los usuarios almacenados en el servidor
 const GetUsers = async () =>{
@@ -17,8 +18,7 @@ const GetUsers = async () =>{
     .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
     // console.log(res.message);
     if (res.message === "Failed to fetch"){
-        // alert("No se obtuvieron los datos de los usuarios, el servidor no respondió. Error: "+res.message);
-        console.log("No se obtuvieron los datos de los usuarios, el servidor no respondió. Error: "+res.message);
+        AlertWarning({text:"No se obtuvieron los datos de los usuarios, el servidor no respondió. Error: "+res.message+"."});
     }else{
         const data = await res.json();
         // console.log(data);

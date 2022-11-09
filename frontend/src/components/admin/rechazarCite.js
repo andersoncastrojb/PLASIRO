@@ -4,8 +4,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Slide from '@mui/material/Slide';
 import Delete from "../../Icons/delete.png";
+import AlertFail from '../alerts/alertFail'
+import AlertSuccess from '../alerts/alertSuccess'
 
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +18,10 @@ export default function RechazarCite() {
 
     // Estado redux
     const Admin = useSelector(state => state.Admin);
+    
+    const [open, setOpen] = React.useState(false);
+
+    
 
     const handleDelete = async () => {
         let res = {};
@@ -31,22 +38,20 @@ export default function RechazarCite() {
             .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
-                alert("No se eliminó la solicitud, Error: " + res.message);
+                AlertFail({text:"No se eliminó la solicitud, Error: " + res.message+"."});
             }else{
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
-                    alert("No se eliminó la solicitud, error en el servidor");
+                    AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
-                    alert("¡Se eliminó la solicitud con éxito!");
+                    handleClose();
+                    AlertSuccess({text:"¡Se eliminó la solicitud con éxito!"});
                     window.location.reload(true);
                 }
             }
-
         }
     }
-
-    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);

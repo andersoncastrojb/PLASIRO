@@ -7,6 +7,7 @@ import Slide from '@mui/material/Slide';
 import Good from "../../Icons/Good.png"
 import Bad from "../../Icons/Bad.png"
 import {useSelector} from 'react-redux';
+import AlertFail from '../alerts/alertFail'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -64,7 +65,7 @@ export default function AprobarCite(props) {
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
-                    alert("No se pudo aprobar la solicitud, error en el servidor");
+                    AlertFail({text:"No se pudo aprobar la solicitud, error en el servidor."});
                 }else{
                     handleDelete();
                     handleClickOpen();

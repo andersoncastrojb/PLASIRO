@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { modifier } from '../../features/admin/adminSlice';
 import ActionMenu from './actionMenu';
 import '../../css/Admin/adminCites.css'
+import AlertFail from '../alerts/alertFail'
 
 
 // Para obtener los datos de todas las citas almacenadas en el servidor
@@ -34,7 +35,7 @@ const GetCites = async () =>{
     .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
     // console.log(res.message);
     if (res.message === "Failed to fetch"){
-        alert("No se obtuvieron los datos de las solicitudes de agenda. Error: "+res.message);
+        AlertFail({text:"No se obtuvieron los datos de las solicitudes de agenda. Error: "+res.message+"."});
     }else{
         const data = await res.json();
         // console.log(data);
@@ -126,15 +127,22 @@ function Row(props) {
 }
 
 
-let count = 0;
+
 export default function AdminCites() {
+
+    const [count, setCount] = React.useState(0);
     
     let cites = [];
-    cites = useSelector((state) => state.Admin.cites);
+    const Admin = useSelector((state) => state.Admin);
+    cites = Admin.cites;
 
-    if(cites.length === 0 && count < 1){
+    if( count < 1){
         GetCites();
-        count = 1;
+        setCount(1);
+    }
+
+    const setDataCites = () => {
+        setCount(0);
     }
 
 return (
@@ -151,7 +159,7 @@ return (
                     <div className="column">
                         <center>
                             <button
-                            onClick={() => window.location.reload(true)}
+                            onClick={setDataCites}
                             className="button is-normal head__admin__cites btn__admin__cites">
                                 Actualizar tabla
                             </button>
