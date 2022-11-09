@@ -4,6 +4,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+  const verified = (props) => {
+    if(props === true){
+      return(" Sí ");
+    }else{
+      return(" No ");
+    }
+  }
+
   // console.log(JSON.stringify(user))
 
   if (isLoading) {
@@ -22,6 +30,7 @@ const Profile = () => {
                 </figure>
                 <h3 className="title is-3">{user.name}</h3>
                 <h4 className="subtitle is-4">{user.email}</h4>
+                <h4 className="subtitle is-4">Correo verificado: {verified(user.email_verified)}</h4>
               </center>
             </div>
           </div>
