@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Slide from '@mui/material/Slide';
+import AlertFail from '../alerts/alertFail'
 
 import Good from "../../Icons/Good.png"
 import Bad from "../../Icons/Bad.png"
@@ -10,6 +11,7 @@ import {useSelector} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
 import ValidadorFormAgendar from '../validadorForm.js/validadorformAgendar';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -55,6 +57,9 @@ export default function DataAgendarToServer(props) {
 
     const handleSubmit = async () => {
         
+        // Loading Activate
+        dispatch(modifierSpinner(["value", {display: "block"}]));
+        
         if(InfoAgendar.validadorFormAgendar.flag === true){
 
             let res = {};
@@ -94,7 +99,7 @@ export default function DataAgendarToServer(props) {
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
-                    alert("No se envió la solicitud de agenda, error en el servidor");
+                    AlertFail({text:"No se envió la solicitud de agenda, error en el servidor"});
                 }else{
                     handleClickOpen();
                 }
@@ -103,6 +108,9 @@ export default function DataAgendarToServer(props) {
         }else{
             dispatch(modifier(['validadorFormAgendar', ValidadorFormAgendar(InfoAgendar)]));
         }
+        
+        // Loading deactivate
+        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
 
@@ -114,7 +122,6 @@ export default function DataAgendarToServer(props) {
             </button>
             <button className="button" type='button' onClick={clickBack}>Atrás</button>
         </center>
-
         <Dialog
             open={open}
             TransitionComponent={Transition}

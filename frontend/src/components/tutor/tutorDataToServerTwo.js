@@ -11,6 +11,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import ValidadorFormIni from '../validadorForm.js/validadorformIni';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
+import AlertFail from '../alerts/alertFail'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -76,7 +77,7 @@ export default function TutorDataToServerTwo(props) {
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
-                    alert("No se guardaron los datos, error en el servidor");
+                    AlertFail({text:"No se guardaron los datos, error en el servidor"});
                 }else{
                     handleClickOpen();
                 }

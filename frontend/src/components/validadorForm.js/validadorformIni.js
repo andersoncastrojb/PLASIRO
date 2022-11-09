@@ -1,3 +1,5 @@
+import AlertSuccess from '../alerts/alertSuccess';
+import AlertFail from '../alerts/alertFail'
 
 const ValidadorFormIni = (props) => {
 
@@ -78,12 +80,13 @@ const ValidadorFormIni = (props) => {
     for (const propiedad in out){
         if(out[propiedad][0] === false){
             out.flag = false;
+            AlertFail({text:"¡Le falta cumplir con algunas indicaciones, sobre los campos del formulario!"});
             // Retornar objeto de validación del formulario inicial de para los monitores
             return(out);
         }
     }
-    
-    alert("¡El formulario se ha llenado con éxito! Ahora presione enviar, para almacenar la información en la base de datos.");
+
+    AlertSuccess({text:"¡El formulario se ha llenado con éxito! Ahora presione enviar, para almacenar la información en la base de datos."});
     // Retornar objeto de validación del formulario inicial de para los monitores
     return(out);
 }

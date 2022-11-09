@@ -4,6 +4,7 @@ import HorarioSelect from "./horarioSelect"
 import { modifierDay} from '../../features/daysTutor/daysTutorSlice';
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { useDispatch} from 'react-redux'
+import AlertWarning from '../alerts/alertWarning';
 
 // Componente que contiene todas las funcionalidades del calendario de agenda
 const Calendar = () => {
@@ -43,10 +44,10 @@ const Calendar = () => {
             countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10) - 1;
         }
         if(countDays > 39){
-            alert("¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!");
+            AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!"});
         }
         if(countDays < 0){
-            alert("¡No puede agendar en días pasados!");
+            AlertWarning({text:"¡No puede agendar en días pasados!"});
         }
         // Está dentro de ese rango. Entonces almacena ese número en Redux.
         if(countDays >= 0 && countDays <= 39){
@@ -128,13 +129,13 @@ const Calendar = () => {
     
             setNewDate();
         }else{
-            alert("¡No se puede agendar en meses pasados!");
+            AlertWarning({text:"¡No se puede agendar en meses pasados!"});
         }
     }
     
     // Se mueve a un mes posterior siempre y cuando este no sea mayor que en 3 mes más a la derecha de los permitidos, si no manda una alerta
     const nextMonth = () => {
-        if(monthNumber < todayDate.getMonth()+2){
+        if(monthNumber < todayDate.getMonth()+2 && monthNumber < 11 ){
             if(monthNumber !== 11){
                 setmonthNumber(monthNumber+1);
             }else{
@@ -144,7 +145,7 @@ const Calendar = () => {
     
             setNewDate();
         }else{
-            alert("¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!");
+            AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores! ¡Tampoco para un año posterior!"});
         }
     }
     

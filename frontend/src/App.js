@@ -13,6 +13,7 @@ import GetUsers from '../src/components/getData/getUsers'
 import { useAuth0 } from "@auth0/auth0-react";
 import { modifier} from './features/users/userSlice'
 import { useEffect } from 'react';
+import Spinner from './components/spinner/spinner'
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
   return (
     <>
       <div className="App">
+        <Spinner />
         <Routes>
           <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
