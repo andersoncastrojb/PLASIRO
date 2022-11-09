@@ -86,7 +86,8 @@ export default function DataAgendarToServer(props) {
                     nameTutor: TutorInfo.name,
                     emailTutor: TutorInfo.mail,
                     priceTutor: TutorInfo.price,
-                    valorP: InfoAgendar.valorP
+                    valorP: InfoAgendar.valorP,
+                    location: InfoAgendar.location
                     })
             })
             .then(response => {res = response})

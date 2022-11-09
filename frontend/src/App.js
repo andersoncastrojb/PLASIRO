@@ -57,11 +57,11 @@ function App() {
           <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
            
-            <Route element={<ProtectedRoute user={Users.loginUser} permissions="admin" />}>
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions={["admin"]} />}>
               <Route path='/admin-cites' element={<AdminCites />} />
             </Route>
 
-            <Route element={<ProtectedRoute user={Users.loginUser} permissions="tutor" />}>
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions={["tutor","admin"]} />}>
               <Route path='/form-tutor' element={<FormTutorIni />} />
             </Route>
             

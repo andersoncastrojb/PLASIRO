@@ -11,6 +11,7 @@ const FormCalendar = () =>{
 
     const dispatch = useDispatch();
     const InfoAgendar = useSelector((state) => state.InfoAgendar);
+    const tutorShow = useSelector((state) => state.DaysTutor.tutorShow[0]);
 
     // Se encarga de modificar el estado en redux del objeto InfoAgendarSlice
     const handleChange = e => {
@@ -119,15 +120,48 @@ const FormCalendar = () =>{
             <div className="field">
                 <label className="label">Modalidad</label>
                 <div className="control">
-                    <label className="radio">
-                    <input type="radio" id="modeV__agendar" name="mode" onChange={handleChange} defaultValue={InfoAgendar.modeV}/>
-                    {"  Virtual"}  
-                    </label>
-                    <label className="radio">
-                    <input type="radio" id="modeP__agendar" name="mode" onChange={handleChange} defaultValue={InfoAgendar.modeP}/>
-                    {" Presencial"}
-                    </label>
+                    {
+                        tutorShow.modeV === "on"
+                        ? 
+                        <label className="radio">
+                        <input type="radio" id="modeV__agendar" name="mode" onChange={handleChange} defaultValue={InfoAgendar.modeV}/>
+                        {"  Virtual"}  
+                        </label>
+                        :<></>
+
+                    }
+                    {
+                        tutorShow.modeP === "on"
+                        ?
+                        <label className="radio">
+                        <input type="radio" id="modeP__agendar" name="mode" onChange={handleChange} defaultValue={InfoAgendar.modeP}/>
+                        {" Presencial"}
+                        </label>
+                        :<></>
+                    }
                 </div>
+                {
+                    InfoAgendar.mode === "modeP"
+                    ?
+                    <div className="field">
+                        <label className="label">Dirección de residencia o lugar de encuentro</label>
+                        <div className="control">
+                            <input
+                            name='location'
+                            className="input"
+                            type="text"
+                            placeholder="Av Libertador …"
+                            onChange={handleChange}
+                            />
+                        </div>
+                        {
+                            InfoAgendar.validadorFormAgendar.location[0]
+                            ? <p className="help is-success">Todo ok!</p>
+                            : <p className="help is-danger">{InfoAgendar.validadorFormAgendar.location[1]}</p>
+                        }
+                    </div>
+                    :<></>
+                }
                 {
                     InfoAgendar.validadorFormAgendar.mode[0]
                     ? <p className="help is-success">Todo ok!</p>

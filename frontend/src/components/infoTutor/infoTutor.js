@@ -80,7 +80,23 @@ const InfoTutor = () => {
                     <Rating name="half-rating-read" value={parseFloat(tutorShow.punctuation,10)} precision={0.5} readOnly />
                   </h2>
                   <h2 className="subtitle is-6">
-                    <strong>Modalidad: </strong> <p>virtual y presencial</p>
+                    
+                    <Stack 
+                      direction={{ xs: 'column', sm: 'row' }}
+                      spacing={{ xs: 1, sm: 2, md: 4 }}>
+                        <strong>Modalidad: </strong>
+                        {
+                        tutorShow.modeV === "on"
+                        &&
+                        <Chip label="Virtual" size="small" />
+                        }
+                        {
+                        tutorShow.modeP === "on"
+                        &&
+                        <Chip label="Presencial" size="small" />
+                        }
+                    </Stack>
+                    
                   </h2>
                   <h2 className="subtitle is-6">
                     <strong>Valor hora: </strong> <p>{tutorShow.price} COP</p>

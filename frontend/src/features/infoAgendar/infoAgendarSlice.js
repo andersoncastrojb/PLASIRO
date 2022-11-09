@@ -15,6 +15,7 @@ const initialState = {
     phone: "",
     email: "",
     mode: "",
+    location: "",
     description: "",
     conditions: "off",
     validadorFormAgendar: {
@@ -25,7 +26,8 @@ const initialState = {
         hours: [false,""],
         description: [false,""],
         mode: [false, ""],
-        conditions: [false, ""]
+        conditions: [false, ""],
+        location: ""
     }
 }
   

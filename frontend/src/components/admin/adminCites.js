@@ -103,6 +103,7 @@ function Row(props) {
                             <TableCell align="right">Descripción</TableCell>
                             <TableCell align="right">Nombre Tutor</TableCell>
                             <TableCell align="right">Correo Tutor</TableCell>
+                            <TableCell align="right">Dirección</TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -113,6 +114,7 @@ function Row(props) {
                             <TableCell align="right">{row.description}</TableCell>
                             <TableCell align="right">{row.nameTutor}</TableCell>
                             <TableCell align="right">{row.emailTutor}</TableCell>
+                            <TableCell align="right">{row.location}</TableCell>
                         </TableRow>
                     </TableBody>
 

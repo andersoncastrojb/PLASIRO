@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../../css/tutor/formTutorIni.css";
 import HorasDia from "./horasDia";
 import SelectSubjets from './selectSubjects';
@@ -6,16 +6,27 @@ import SelectThemes from './selectThemes';
 import {useDispatch, useSelector} from 'react-redux';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 import TutorDataToServerTwo from './tutorDataToServerTwo';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 // Formulario para que los monitores registren su información personal, académica, experiencia y además su disponibilidad semanal.
 const FormTutorIni = () =>{
+
+    const { user, isAuthenticated } = useAuth0();
+
+    const [userCount, setUserCount] = useState(0);
     
     // Estado redux
     const InfoTutorState = useSelector(state => state.InfoTutor);
     
     // Instanciar dispatch
     const dispatch = useDispatch();
+
+    if( isAuthenticated === true && userCount < 1){
+        dispatch(modifier(["name", user.name]));
+        dispatch(modifier(["mail", user.email]));
+        setUserCount(1);
+    }
     
     // Se encarga de modificar el estado en redux del objeto InfoTutorSlice
     const handleChange = e => {
@@ -54,7 +65,10 @@ const FormTutorIni = () =>{
                     className="input"
                     type="text"
                     placeholder="Juan Pablo González"
-                    onChange={handleChange}/>
+                    value={user.name}
+                    onChange={handleChange}
+                    disabled
+                    />
                 </div>
                 {
                     InfoTutorState.validadorFormIni.name[0]
@@ -71,7 +85,11 @@ const FormTutorIni = () =>{
                     className="input"
                     type="text"
                     placeholder="juanito@gmail.com"
-                    onChange={handleChange}/>
+                    value={user.email}
+                    onChange={handleChange}
+                    disabled
+                    />
+                    
                 </div>
                 {
                     InfoTutorState.validadorFormIni.mail[0]

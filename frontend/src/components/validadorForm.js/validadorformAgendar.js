@@ -11,13 +11,20 @@ const ValidadorFormAgendar = (props) => {
         hours: [true,""],
         description: [true,""],
         mode: [true, ""],
-        conditions: [true, ""]
+        conditions: [true, ""],
+        location: [true, ""]
     }
 
     // Validar nombre 
     if(props.name.length < 1){
         out.name[0] = false;
         out.name[1] = "Debe llenar este campo!.";
+    }
+
+    // Validar dirección  
+    if(props.location.length < 1 && props.mode === "modeP"){
+        out.location[0] = false;
+        out.location[1] = "Debe llenar este campo!.";
     }
     
     // Validar correo
