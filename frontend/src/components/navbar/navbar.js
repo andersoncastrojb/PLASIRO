@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Avatar from '@mui/material/Avatar';
 import avatar from "../../Icons/avatar.png";
 import Burger from "./burger";
+import { useSelector } from 'react-redux'
 
 
 /* Component: Navbar
@@ -17,6 +18,8 @@ import Burger from "./burger";
 export default function Navbar() {
 
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
+    const loginUser = useSelector((state) => state.Users.loginUser);
 
     return (
         <div>
@@ -34,8 +37,22 @@ export default function Navbar() {
                         <div className="navbar-item has-dropdown is-hoverable">
                             <Link className="navbar-link">Más</Link>
                         <div className="navbar-dropdown">
-                            <Link className="navbar-item" to="/admin-cites">Administrar citas</Link>
-                            <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
+
+                            {
+                            loginUser.permissions.includes("admin")
+                                ?
+                                <>
+                                    <Link className="navbar-item" to="/admin-cites">Administrar citas</Link>
+                                    <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
+                                </>
+                                : <></>
+                            }
+
+                            {
+                            loginUser.permissions.includes("tutor")
+                                ? <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
+                                : <></>
+                            }
                             <Link className="navbar-item" to="/basic-info">Quienes somos</Link>
                             <hr className="navbar-divider" />
                             <Link className="navbar-item" to="/guide">Guía rápida</Link>

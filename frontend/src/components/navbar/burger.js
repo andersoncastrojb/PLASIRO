@@ -6,8 +6,12 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Avatar from '@mui/material/Avatar';
 import avatar from "../../Icons/avatar.png";
+import { useSelector } from 'react-redux'
 
 function SimpleDialog(props) {
+
+  const loginUser = useSelector((state) => state.Users.loginUser);
+
   const { onClose, open } = props;
 
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
@@ -39,12 +43,27 @@ function SimpleDialog(props) {
         <div className="column">
             <Link className="button is-link is-light" onClick={handleClose} to="/">Inicio</Link>
         </div>
-        <div className="column">
-            <Link className="button is-link is-light" onClick={handleClose} to="/admin-cites">Administrar citas</Link>
-        </div>
-        <div className="column">
+        {
+          loginUser.permissions.includes("tutor")
+          ?
+          <div className="column">
             <Link className="button is-link is-light" onClick={handleClose} to="/form-tutor">Formulario Monitor</Link>
-        </div>
+          </div>
+          : <></>
+        }
+        {
+          loginUser.permissions.includes("admin")
+          ?
+          <>
+            <div className="column">
+              <Link className="button is-link is-light" onClick={handleClose} to="/admin-cites">Administrar citas</Link>
+            </div>
+            <div className="column">
+              <Link className="button is-link is-light" onClick={handleClose} to="/form-tutor">Formulario Monitor</Link>
+            </div>
+          </>
+          : <></>
+        }
         <div className="column">
             <Link className="button is-link is-light" onClick={handleClose} to="/list-tutor">Todos los monitores</Link>
         </div>
