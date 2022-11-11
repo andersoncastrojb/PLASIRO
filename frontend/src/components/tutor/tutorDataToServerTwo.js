@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import ValidadorFormIni from '../validadorForm.js/validadorformIni';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 import AlertFail from '../alerts/alertFail'
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -59,7 +60,18 @@ export default function TutorDataToServerTwo(props) {
 
     const handleSubmit = async () => {
 
-        if(InfoTutorState.validadorFormIni.flag === true){
+        // Loading Activate
+        dispatch(modifierSpinner(["value", {display: "block"}]));
+
+        const validadorFormIni = ValidadorFormIni(InfoTutorState);
+
+        if(validadorFormIni.flag === false){
+            dispatch(modifier(['validadorFormIni', validadorFormIni]));
+        }
+
+        if(validadorFormIni.flag === true){
+
+            dispatch(modifier(['validadorFormIni', validadorFormIni]));
             
             let res = {};
             await fetch('http://localhost:5000/tutors',
@@ -83,9 +95,10 @@ export default function TutorDataToServerTwo(props) {
                     handleClickOpen();
                 }
             }
-        }else{
-            dispatch(modifier(['validadorFormIni', ValidadorFormIni(InfoTutorState)]));
         }
+
+        // Loading deactivate
+        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
 

@@ -60,8 +60,18 @@ export default function DataAgendarToServer(props) {
         
         // Loading Activate
         dispatch(modifierSpinner(["value", {display: "block"}]));
+
+        const validadorFormAgendar = ValidadorFormAgendar(InfoAgendar);
         
-        if(InfoAgendar.validadorFormAgendar.flag === true){
+        if(validadorFormAgendar.flag === false){
+
+            dispatch(modifier(['validadorFormAgendar', validadorFormAgendar]));
+
+        }
+
+        if(validadorFormAgendar.flag === true){
+
+            dispatch(modifier(['validadorFormAgendar', validadorFormAgendar]));
 
             let res = {};
             let date = new Date().toISOString();
@@ -106,9 +116,6 @@ export default function DataAgendarToServer(props) {
                     handleClickOpen();
                 }
             }
-            
-        }else{
-            dispatch(modifier(['validadorFormAgendar', ValidadorFormAgendar(InfoAgendar)]));
         }
         
         // Loading deactivate

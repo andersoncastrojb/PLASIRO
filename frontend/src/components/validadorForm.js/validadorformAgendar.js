@@ -1,4 +1,4 @@
-import AlertSuccess from '../alerts/alertSuccess';
+// import AlertSuccess from '../alerts/alertSuccess';
 import AlertFail from '../alerts/alertFail'
 
 const ValidadorFormAgendar = (props) => {
@@ -83,7 +83,7 @@ const ValidadorFormAgendar = (props) => {
         }
     }
 
-    AlertSuccess({text:"¡El formulario se ha llenado con éxito! Ahora presione enviar, para almacenar la información en la base de datos."});
+    // AlertSuccess({text:"¡El formulario se ha llenado con éxito! Ahora presione enviar, para almacenar la información en la base de datos."});
     // Retornar objeto de validación del formulario inicial de para los monitores
     return(out);
 }
