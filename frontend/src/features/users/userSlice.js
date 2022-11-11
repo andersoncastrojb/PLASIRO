@@ -7,6 +7,21 @@ const initialState = {
             name: "",
             email: "",
             permissions: ['student'],
+        },
+        newUser:{
+            name: "",
+            email: "",
+            phone: "",
+            rol: "Estudiante",
+            location: "",
+            age: ""
+        },
+        validadorFormNewUser:{
+            flag: false,
+            name: [false,""],
+            phone: [false,""],
+            location: [false,""],
+            age: [false, ""]
         }
 }
 
@@ -18,9 +33,13 @@ export const UserSlice = createSlice({
         modifier: (state,action) =>{
             const data = action.payload;
             state[data[0]] = data[1];
+        },
+        modifierNewUser: (state,action) =>{
+            const data = action.payload;
+            state.newUser[data[0]] = data[1];
         }
     },
 });
 
-export const {modifier} = UserSlice.actions;
+export const {modifier, modifierNewUser} = UserSlice.actions;
 export default UserSlice.reducer;

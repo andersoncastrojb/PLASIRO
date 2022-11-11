@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import NewUserForm from "../newUser/newUserForm";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -26,11 +27,12 @@ const Profile = () => {
           <div className="box">
               <center>
                 <figure className="image is-96x96">
-                    <img className="is-rounded" alt={user.name} src={user.picture} />
+                    <img className="is-rounded" alt={user.nickname} src={user.picture} />
                 </figure>
-                <h3 className="title is-3">{user.name}</h3>
+                <h3 className="title is-3">{user.nickname}</h3>
                 <h4 className="subtitle is-4">{user.email}</h4>
                 <h4 className="subtitle is-4">Correo verificado: {verified(user.email_verified)}</h4>
+                { user.email_verified && <NewUserForm /> }
               </center>
             </div>
           </div>
