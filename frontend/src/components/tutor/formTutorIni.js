@@ -186,6 +186,29 @@ const FormTutorIni = () =>{
                 }
             </div>
             <div className="field">
+                <div className="file has-name is-fullwidth">
+                    <label className="file-label">
+                        <input
+                        className="file-input"
+                        type="file"
+                        name="img"
+                        onChange={e => {console.log(e.target.value)}}
+                        />
+                        <span className="file-cta">
+                        <span className="file-icon">
+                            <i className="fas fa-upload"></i>
+                        </span>
+                        <span className="file-label">
+                            Escoger imagen …
+                        </span>
+                        </span>
+                        <span className="file-name">
+                            Screen Shot 2017-07-29 at 15.54.25.png
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div className="field">
                 <HorasDia />
             </div>
             <TutorDataToServerTwo buttomName=" Enviar" />

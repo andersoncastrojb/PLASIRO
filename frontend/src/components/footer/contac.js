@@ -14,19 +14,19 @@ export default function Contac() {
   return (
     <center> 
         <h4 style={{color: "white"}} className="subtitle is-4">Siguenos en redes sociales</h4>
-        <center>
-            <Stack style={{width: "40%", marginBottom: "1rem"}} direction="row" spacing={2}>
-            <Avatar style={Style} sx={{ bgcolor: blue[500] }}>
-                <FacebookIcon/>
-            </Avatar>
-            <Avatar style={Style} sx={{ bgcolor: red[500] }}>
-                <YouTubeIcon/>
-            </Avatar>
-            <Avatar style={Style} sx={{ bgcolor: deepOrange[500] }}>
-                <InstagramIcon/>
-            </Avatar>
+        
+            <Stack style={{width: "10rem" , marginBottom: "1rem"}} direction="row" spacing={2}>
+                <Avatar style={Style} sx={{ bgcolor: blue[500] }}>
+                    <FacebookIcon/>
+                </Avatar>
+                <Avatar style={Style} sx={{ bgcolor: red[500] }}>
+                    <YouTubeIcon/>
+                </Avatar>
+                <Avatar style={Style} sx={{ bgcolor: deepOrange[500] }}>
+                    <InstagramIcon/>
+                </Avatar>
             </Stack>
-        </center>
+        
         <h4 style={{color: "white"}} className="subtitle is-4">Números telefónicos</h4>
         <h5 style={{color: "white"}} className="subtitle is-5">(57+) 315 6858570</h5>
     </center>

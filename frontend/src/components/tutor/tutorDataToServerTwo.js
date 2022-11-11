@@ -38,6 +38,7 @@ export default function TutorDataToServerTwo(props) {
     const handleClose = () => {
         setOpen(false);
         navigate("../");
+        window.location.reload(true);
     };
 
     const handleClickOpen2 = () => {
@@ -119,7 +120,7 @@ export default function TutorDataToServerTwo(props) {
             </div>
             </DialogContent>
             <DialogActions>
-                <button style={{width:"100%"}} className="button is-success" onClick={() => {navigate("../")}}>
+                <button style={{width:"100%"}} className="button is-success" onClick={handleClose}>
                     Continuar
                 </button>
             </DialogActions>

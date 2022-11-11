@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Subjects from "./subjects";
-import "../../css/tutor/horasDia.css"
+import "../../css/home/threeSubjects.css"
 import img1 from "../img/subjects/spanish.jpg"
 import img2 from "../img/subjects/math.jpg"
 import img3 from "../img/subjects/phisic.jpg"
@@ -57,9 +57,13 @@ const ThreeSubjects = () => {
         <>  
             <div className="container is-max-desktop">
                 <center>
-                    <div className="columns">
+                    <h2 className="title is-3">Filtrar Por Área</h2>
+                    <div style={{ position:"relative", marginBottom: "1.5rem", marginTop: "1.5rem" }} className="columns">
+                        <div className="column">
+                            <button className="button center__tag" onClick={() => moveLeft()}>&#9664;</button>
+                        </div>
                         { [0,1,2].map( (position) =>
-                            <div key={position.toString()} className="column is-one-third">
+                            <div key={position.toString()} className="column is-3">
                                 <Subjects
                                 img={baseObj[position].img}
                                 title={baseObj[position].title}
@@ -67,11 +71,10 @@ const ThreeSubjects = () => {
                                 />
                             </div>
                         )}
+                        <div className="column">
+                            <button style={{ marginRight:"1.5rem"}}  className="button center__tag" onClick={() => moveRight()}>&#9654;</button>
+                        </div>
                     </div>
-                </center>
-                <center className="center__tag">
-                    <button style={{marginRight:"1.5rem"}} className="button" onClick={() => moveLeft()}>&#9664;</button>
-                    <button className="button" onClick={() => moveRight()}>&#9654;</button>
                 </center>
             </div>
         </>
