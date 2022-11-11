@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 
 const AlertSuccess = (props) => {
     Swal.fire({
-        icon: 'warning',
+        icon: 'success',
         title: '¡MUY BIEN!',
         text: props.text,
     })

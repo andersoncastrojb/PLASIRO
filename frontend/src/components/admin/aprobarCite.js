@@ -6,8 +6,33 @@ import Slide from '@mui/material/Slide';
 
 import Good from "../../Icons/Good.png"
 import Bad from "../../Icons/Bad.png"
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import AlertFail from '../alerts/alertFail'
+import { modifier } from '../../features/admin/adminSlice';
+
+// Para obtener los datos de todas las citas almacenadas en el servidor
+const GetCites = async () =>{
+
+    let data = [];
+    let res = {};
+    
+    await fetch('http://localhost:5000/cites',
+    {
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {res = response})
+    .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+    // console.log(res.message);
+    if (res.message === "Failed to fetch"){
+        AlertFail({text:"No se obtuvieron los datos de las solicitudes de agenda. Error: "+res.message+"."});
+    }else{
+        data = await res.json();
+        // console.log(data);
+        return(data);
+    }
+    return(data);
+}
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,8 +41,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 //Este componente retorna un botón, el cual al ser presionado aprueba la solicitud de agenda del estudiante y procede a hacer las modificaciones sobre el día específico del tutor en la base de datos, mediante el método PUT
 export default function AprobarCite(props) {
 
+    const dispatch = useDispatch();
+
     // Estado redux
     const Admin = useSelector(state => state.Admin);
+
+    const setDataCites = async() => {
+        const data = await GetCites()
+        dispatch(modifier(['cites', data]));
+    }
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
@@ -29,7 +61,7 @@ export default function AprobarCite(props) {
 
     const handleClose = () => {
         setOpen(false);
-        window.location.reload(true);
+        setDataCites();
     };
 
     const handleClickOpen2 = () => {
@@ -125,7 +157,7 @@ export default function AprobarCite(props) {
                 </div>
                 </DialogContent>
                 <DialogActions>
-                    <button style={{width:"100%"}} className="button is-success" onClick={() => {window.location.reload(true)}}>
+                    <button style={{width:"100%"}} className="button is-success" onClick={handleClose}>
                         Continuar
                     </button>
                 </DialogActions>

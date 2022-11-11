@@ -7,7 +7,33 @@ import Delete from "../../Icons/delete.png";
 import AlertFail from '../alerts/alertFail'
 import AlertSuccess from '../alerts/alertSuccess'
 
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { modifier } from '../../features/admin/adminSlice';
+
+
+// Para obtener los datos de todas las citas almacenadas en el servidor
+const GetCites = async () =>{
+
+    let data = [];
+    let res = {};
+    
+    await fetch('http://localhost:5000/cites',
+    {
+        method: "GET",
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {res = response})
+    .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+    // console.log(res.message);
+    if (res.message === "Failed to fetch"){
+        AlertFail({text:"No se obtuvieron los datos de las solicitudes de agenda. Error: "+res.message+"."});
+    }else{
+        data = await res.json();
+        // console.log(data);
+        return(data);
+    }
+    return(data);
+}
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -16,14 +42,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function RechazarCite() {
 
+    const dispatch = useDispatch();
+
+    const [open, setOpen] = React.useState(false);
+
     // Estado redux
     const Admin = useSelector(state => state.Admin);
     
-    const [open, setOpen] = React.useState(false);
+    const setDataCites = async() => {
+        const data = await GetCites()
+        dispatch(modifier(['cites', data]));
+    }
 
-    
-
-    const handleDelete = async () => {
+    const handleDelete = async() => {
         let res = {};
 
         if(Admin.cites.length > 0){
@@ -46,8 +77,8 @@ export default function RechazarCite() {
                     AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
                     handleClose();
-                    AlertSuccess({text:"¡Se eliminó la solicitud con éxito!"});
-                    window.location.reload(true);
+                    setDataCites();
+                    AlertSuccess({text:"¡Se eliminó la solicitud con éxito!"}); 
                 }
             }
         }
