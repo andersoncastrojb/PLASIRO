@@ -14,14 +14,17 @@ const initialState = {
             phone: "",
             rol: "Estudiante",
             location: "",
-            age: ""
+            age: "",
+            tipeId: "Tarjeta de identidad",
+            numberId: ""
         },
         validadorFormNewUser:{
             flag: false,
             name: [false,""],
             phone: [false,""],
             location: [false,""],
-            age: [false, ""]
+            age: [false, ""],
+            numberId: [false, ""]
         }
 }
 

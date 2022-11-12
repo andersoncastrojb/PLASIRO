@@ -24,7 +24,8 @@ export default function UserDataToServer(props) {
     const navigate = useNavigate();
 
     // Estado redux
-    const Users = useSelector(state => state.Users.newUser);
+    const Users = useSelector(state => state.Users);
+    const newUser = Users.newUser;
     const dispatch = useDispatch();
 
     const [open, setOpen] = React.useState(false);
@@ -63,7 +64,7 @@ export default function UserDataToServer(props) {
         // Loading Activate
         dispatch(modifierSpinner(["value", {display: "block"}]));
 
-        const validadorFormNewUser = ValidadorFormNewUser(Users);
+        const validadorFormNewUser = ValidadorFormNewUser(newUser);
 
         if(validadorFormNewUser.flag === false){
             dispatch(modifier(['validadorFormNewUser', validadorFormNewUser]));
@@ -72,30 +73,58 @@ export default function UserDataToServer(props) {
         if(validadorFormNewUser.flag === true){
 
             dispatch(modifier(['validadorFormNewUser', validadorFormNewUser]));
-            console.log("Well!!")
-            /*
-            let res = {};
-            await fetch('http://localhost:5000/tutors',
-            {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(InfoTutorState)
-            })
-            .then(response => {res = response})
-            .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-            // console.log(res.message);
-            if (res.message === "Failed to fetch"){
-                setError(res.message);
-                handleClickOpen2();
-            }else{
-                const data = await res.json();
-                console.log(data);
-                if(data.message === 'Error'){
-                    AlertFail({text:"No se guardaron los datos, error en el servidor"});
+
+            if(newUser.rol === "Estudiante"){
+
+                let res = {};
+                await fetch('http://localhost:5000/users',
+                {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(newUser)
+                })
+                .then(response => {res = response})
+                .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+                // console.log(res.message);
+                if (res.message === "Failed to fetch"){
+                    setError(res.message);
+                    handleClickOpen2();
                 }else{
-                    handleClickOpen();
+                    const data = await res.json();
+                    console.log(data);
+                    if(data.message === 'Error'){
+                        AlertFail({text:"No se guardaron los datos, error en el servidor"});
+                    }else{
+                        handleClickOpen();
+                    }
                 }
-            }*/
+
+            }else{
+                
+                let res = {};
+                await fetch('http://localhost:5000/new_tutor',
+                {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(newUser)
+                })
+                .then(response => {res = response})
+                .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
+                // console.log(res.message);
+                if (res.message === "Failed to fetch"){
+                    setError(res.message);
+                    handleClickOpen2();
+                }else{
+                    const data = await res.json();
+                    console.log(data);
+                    if(data.message === 'Error'){
+                        AlertFail({text:"No se guardaron los datos, error en el servidor"});
+                    }else{
+                        handleClickOpen();
+                    }
+                }
+
+            }
         }
 
         // Loading deactivate

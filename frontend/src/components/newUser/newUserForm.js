@@ -15,21 +15,22 @@ const NewUserForm = () =>{
     
     // Instanciar dispatch
     const dispatch = useDispatch();
-
-    if( isAuthenticated === true && userCount < 1){
-        dispatch(modifierNewUser(["mail", user.email]));
-        setUserCount(1);
-    }
     
     // Se encarga de modificar el estado en redux del objeto
     const handleChange = e => {
 
         //console.log(e.target.name, e.target.value)
-       const setName = e.target.name;
-       const set = e.target.value;
+        const setName = e.target.name;
+        const set = e.target.value;
 
-       // Modificar estado en redux
-       dispatch(modifierNewUser([setName, set]));
+        // Modificar estado en redux
+        dispatch(modifierNewUser([setName, set]));
+
+        if( isAuthenticated === true && userCount < 1){
+            // Modificar estado en redux
+            dispatch(modifierNewUser(["email", user.email]));
+            setUserCount(1);
+        }
     }
 
     return(
@@ -53,6 +54,34 @@ const NewUserForm = () =>{
                     Users.validadorFormNewUser.name[0]
                     ? <p className="help is-success">Todo ok!</p>
                     : <p className="help is-danger">{Users.validadorFormNewUser.name[1]}</p>
+                }
+            </div>
+
+            <div className="field">
+                <label className="label">Tipo de documento de identidad</label>
+                <div className="select">
+                    <select name='tipeId' onChange={handleChange}>
+                        <option>Tarjeta de identidad</option>
+                        <option>Cédula de ciudadanía</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="field">
+                <label className="label">Número de identificación</label>
+                <div className="control">
+                    <input
+                    name='numberId' 
+                    className="input"
+                    type="text"
+                    placeholder=""
+                    onChange={handleChange}
+                    />
+                </div>
+                {
+                    Users.validadorFormNewUser.numberId[0]
+                    ? <p className="help is-success">Todo ok!</p>
+                    : <p className="help is-danger">{Users.validadorFormNewUser.numberId[1]}</p>
                 }
             </div>
 

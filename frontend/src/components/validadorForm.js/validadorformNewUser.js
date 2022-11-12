@@ -8,7 +8,8 @@ const ValidadorFormNewUser = (props) => {
         name: [true,""],
         phone: [true,""],
         location: [true,""],
-        age: [true, ""]
+        age: [true, ""],
+        numberId: [true, ""]
     }
 
     // Validar nombre 
@@ -16,6 +17,15 @@ const ValidadorFormNewUser = (props) => {
         out.name[0] = false;
         out.name[1] = "Debe llenar este campo!.";
     }
+
+    // Validar número de identificación
+    const validarNumberId = (props2) => {
+        if (!(/^[0-9]*$/.test(props2)) || (props.numberId.length < 1)){
+            out.numberId[0] = false;
+            out.numberId[1] = "Este número de identificación -> "+ props2  + " <- no es válido!.";
+        }
+    }
+    validarNumberId(props.numberId);
 
     // Validar número
     const validarPhone = (props2) => {
@@ -33,10 +43,13 @@ const ValidadorFormNewUser = (props) => {
     }
 
     // Validar edad
-    if(props.age.length < 1){
-        out.age[0] = false;
-        out.age[1] = "Debe llenar este campo!.";
+    const validarAge = (props2) => {
+        if (!(/^[0-9]*$/.test(props2)) || (props.age.length < 1)){
+            out.age[0] = false;
+            out.age[1] = "la edad -> "+ props2  + " <- no es válida!.";
+        }
     }
+    validarAge(props.age);
 
     for (const propiedad in out){
         if(out[propiedad][0] === false){

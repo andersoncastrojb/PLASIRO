@@ -224,7 +224,7 @@ def deleteCite(id):
         return jsonify({'message': 'Error'})
     
 
-# Database cites
+# Database users
 db3 = mongo.db.users
 
 # Para obtener la información de todos los usuarios registrados en el sistema 
@@ -244,6 +244,54 @@ def getUsers():
     except:
         return jsonify({'message': 'Error'})
 
+
+# Para almacenar los datos de un usuario, mediante un POST en el aplicativo web
+@app.route('/users', methods=['POST'])
+def createUser():
+    data = request.json
+    try:
+        # Para almacenar los datos en la tabla “users” 
+        id = db3.insert_one({
+            'name': data['name'],
+            'email': data['email'],
+            'phone': data['phone'],
+            'rol': data['rol'],
+            'location': data['location'],
+            'age': data['age'],
+            'tipeId': data['tipeId'],
+            'numberId': data['numberId']
+        })
+        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+    except:
+
+        return jsonify({'message': 'Error'})
+
+
+# Database new_tutor
+db4 = mongo.db.new_tutor
+
+    
+# Para almacenar los datos de un aspirante a tutor, mediante un POST en el aplicativo web
+@app.route('/new_tutor', methods=['POST'])
+def createNewTutor():
+    data = request.json
+    try:
+        # Para almacenar los datos en la tabla “new_tutor” 
+        id = db4.insert_one({
+            'name': data['name'],
+            'email': data['email'],
+            'phone': data['phone'],
+            'rol': data['rol'],
+            'location': data['location'],
+            'age': data['age'],
+            'tipeId': data['tipeId'],
+            'numberId': data['numberId']
+        })
+        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+    except:
+
+        return jsonify({'message': 'Error'})
+    
 
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
