@@ -1,9 +1,15 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import NewUserForm from "../newUser/newUserForm";
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
+import {useSelector, useDispatch} from 'react-redux';
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  // Estado redux
+  const Users = useSelector(state => state.Users);
+  const dispatch = useDispatch();
 
   const verified = (props) => {
     if(props === true){
@@ -16,8 +22,12 @@ const Profile = () => {
   // console.log(JSON.stringify(user))
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    // Loading Activate
+    dispatch(modifierSpinner(["value", {display: "block"}]));
   }
+
+  // Loading deactivate
+  dispatch(modifierSpinner(["value", {display: "none"}]));
 
   return (
     isAuthenticated && (
@@ -31,6 +41,17 @@ const Profile = () => {
                 </figure>
                 <h3 className="title is-3">{user.email}</h3>
                 <h4 className="subtitle is-4">Correo verificado: {verified(user.email_verified)}</h4>
+                {
+                  Users.loginUser.id !== ""
+                  ? 
+                    <h4 className="subtitle is-4">Usuario registrado:
+                      <span style={{marginLeft: "0.3rem"}} className="tag is-success"> SÍ </span>
+                    </h4>
+                  :
+                    <h4 className="subtitle is-4">Usuario registrado: 
+                      <span style={{marginLeft: "0.3rem"}} className="tag is-danger"> NO </span>
+                    </h4>
+                }
                 { user.email_verified && <NewUserForm /> }
               </center>
             </div>
