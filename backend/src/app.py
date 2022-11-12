@@ -236,9 +236,15 @@ def getUsers():
         for doc in db3.find():
             users.append({
                 '_id': str(ObjectId(doc['_id'])),
+                'date': doc['date'],
                 'name': doc['name'],
                 'email': doc['email'],
-                'permissions': doc['permissions']
+                'phone': doc['phone'],
+                'permissions': doc['permissions'],
+                'location': doc['location'],
+                'age': doc['age'],
+                'tipeId': doc['tipeId'],
+                'numberId': doc['numberId']
             })
         return jsonify(users)
     except:
@@ -249,22 +255,32 @@ def getUsers():
 @app.route('/users', methods=['POST'])
 def createUser():
     data = request.json
-    try:
-        # Para almacenar los datos en la tabla “users” 
-        id = db3.insert_one({
-            'name': data['name'],
-            'email': data['email'],
-            'phone': data['phone'],
-            'rol': data['rol'],
-            'location': data['location'],
-            'age': data['age'],
-            'tipeId': data['tipeId'],
-            'numberId': data['numberId']
-        })
-        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
-    except:
+    # La bandera se activa en caso de haber usuarios con los mismo correos 
+    sameUser = 0
+    for doc in db3.find():
+        if doc['email'] == data['email']:
+            sameUser = 1
+            
+    if sameUser == 0:
+        try:
+            # Para almacenar los datos en la tabla “users” 
+            id = db3.insert_one({
+                'date': data['date'],
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'permissions': [data['rol']],
+                'location': data['location'],
+                'age': data['age'],
+                'tipeId': data['tipeId'],
+                'numberId': data['numberId']
+            })
+            return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+        except:
 
-        return jsonify({'message': 'Error'})
+            return jsonify({'message': 'Error', 'text': 'No se guardaron los datos, error en el servidor'})
+    else:
+        return jsonify({'message': 'Error', 'text': 'Este correo ya existe, debe registrarse con uno diferente'})
 
 
 # Database new_tutor
@@ -275,23 +291,59 @@ db4 = mongo.db.new_tutor
 @app.route('/new_tutor', methods=['POST'])
 def createNewTutor():
     data = request.json
+    # La bandera se activa en caso de haber usuarios con los mismo correos 
+    sameUser = 0
+    
+    for doc in db3.find():
+        if doc['email'] == data['email']:
+            sameUser = 1
+    for doc in db4.find():
+        if doc['email'] == data['email']:
+            sameUser = 1
+    if sameUser == 0:
+        try:
+            # Para almacenar los datos en la tabla “new_tutor” 
+            id = db4.insert_one({
+                'date': data['date'],
+                'name': data['name'],
+                'email': data['email'],
+                'phone': data['phone'],
+                'permissions': data['rol'],
+                'location': data['location'],
+                'age': data['age'],
+                'tipeId': data['tipeId'],
+                'numberId': data['numberId']
+            })
+            return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+        except:
+
+            return jsonify({'message': 'Error', 'text': 'No se guardaron los datos, error en el servidor'})
+    else:
+        return jsonify({'message': 'Error', 'text': 'Este correo ya existe, debe registrarse con uno diferente'})
+
+
+# Para modificar la información de un usuario específico
+@app.route('/users/<id>', methods=['PUT'])
+def updateDataUser(id):
     try:
-        # Para almacenar los datos en la tabla “new_tutor” 
-        id = db4.insert_one({
+        data = request.json
+        print(ObjectId(id))
+        db3.update_one( {'_id': ObjectId(id)} , { "$set": {
+            'date': data['date'],
             'name': data['name'],
             'email': data['email'],
             'phone': data['phone'],
-            'rol': data['rol'],
+            'permissions': [data['rol']],
             'location': data['location'],
             'age': data['age'],
             'tipeId': data['tipeId'],
             'numberId': data['numberId']
-        })
-        return jsonify({'message': 'Received', "id": str(id.inserted_id)})
+            } } )
+        
+        return jsonify({ 'message': 'Updated User' })
     except:
+        return jsonify({'message': 'Error', 'text': 'No se pudo actualizar el usuario'})
 
-        return jsonify({'message': 'Error'})
-    
 
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":

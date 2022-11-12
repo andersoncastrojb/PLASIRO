@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
@@ -19,6 +20,8 @@ function App() {
 
   const { user } = useAuth0();
 
+  const [count, setCount] = useState(0);
+
   const dispatch = useDispatch();
 
   // Para leer los datos de los tutores cargados de la base de datos
@@ -36,7 +39,12 @@ function App() {
           id: result._id,
           name: result.name,
           email: result.email,
-          permissions: result.permissions
+          permissions: result.permissions[0],
+          age : result.age,
+          location: result.location,
+          numberId: result.numberId,
+          tipeId: result.tipeId,
+          phone: result.phone
         }]))
       }
     }
@@ -44,7 +52,8 @@ function App() {
   
 
   // Se verifica que el vector que contiene los datos de los usuarios no este vacia
-  if(users.length === 0){
+  if(count < 1){
+    setCount(1);
     // Para obtener los datos de todos los usuarios almacenados en el servidor
     GetUsers();
   }

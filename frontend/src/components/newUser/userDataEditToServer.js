@@ -4,8 +4,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Slide from '@mui/material/Slide';
 
-import Good from "../../Icons/Good.png" 
-import Alert from "../../Icons/Alert.png"
+import Good from "../../Icons/Good.png"
 import Bad from "../../Icons/Bad.png"
 import {useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -13,14 +12,13 @@ import ValidadorFormNewUser from '../validadorForm.js/validadorformNewUser';
 import {modifier} from '../../features/users/userSlice';
 import AlertFail from '../alerts/alertFail'
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
-import UserDataEditToServer from './userDataEditToServer';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 //Este componente retorna un botón, el cual al ser presionado envía los datos de la información del formulario del tutor al servidor, mediante el método POST
-export default function UserDataToServer(props) {
+export default function UserDataEditToServer(props) {
 
     const navigate = useNavigate();
 
@@ -31,7 +29,6 @@ export default function UserDataToServer(props) {
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
-    const [open3, setOpen3] = React.useState(false);
     const [error, setError] = React.useState("");
 
     const handleClickOpen = () => {
@@ -50,14 +47,6 @@ export default function UserDataToServer(props) {
 
     const handleClose2 = () => {
         setOpen2(false);
-    };
-
-    const handleClickOpen3 = () => {
-        setOpen3(true);
-    };
-
-    const handleClose3 = () => {
-        setOpen3(false);
     };
 
     const handleSubmit = async () => {
@@ -79,9 +68,9 @@ export default function UserDataToServer(props) {
 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch('http://localhost:5000/users',
+                await fetch(`http://localhost:5000/users/${Users.loginUser.id}`,
                 {
-                    method: "POST",
+                    method: "PUT",
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         date: date,
@@ -115,9 +104,9 @@ export default function UserDataToServer(props) {
                 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch('http://localhost:5000/new_tutor',
+                await fetch(`http://localhost:5000/new_tutor/${Users.loginUser.id}`,
                 {
-                    method: "POST",
+                    method: "PUT",
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         date: date,
@@ -157,18 +146,9 @@ export default function UserDataToServer(props) {
 
   return (
     <>  
-        <center>
-            {
-                Users.loginUser.id !== ""
-                ?
-                <UserDataEditToServer buttomName={props.buttomName} />
-                :
-                <button style={{marginRight: "1rem"}} className="button is-success" onClick={handleSubmit}>
-                    {props.buttomName}
-                </button>
-            }
-            <button className="button" type='button' onClick={handleClickOpen3}>Cancelar</button>
-        </center>
+        <button style={{marginRight: "1rem"}} className="button is-success" onClick={handleSubmit}>
+            {props.buttomName}
+        </button>
 
         <Dialog
             open={open}
@@ -187,7 +167,7 @@ export default function UserDataToServer(props) {
             </div>
             <div style={{textAlign: "center"}} className="column is-full">
                 <h3 className="title is-3">MUY BIEN!</h3>
-                <h4 className="subtitle is-4">¡Su usuario a sido creado satisfactoriamente!</h4>
+                <h4 className="subtitle is-4">¡Su usuario a sido editado satisfactoriamente!</h4>
                 <h4 className="subtitle is-4">{props.email}</h4>
             </div>
             </DialogContent>
@@ -216,7 +196,7 @@ export default function UserDataToServer(props) {
             </div>
             <div style={{textAlign: "center"}} className="column is-full">
                 <h3 className="title is-3">UPS!</h3>
-                <h4 className="subtitle is-4">La información no se pudo registrar.</h4>
+                <h4 className="subtitle is-4">La información no se pudo editar.</h4>
                 <h4 className="subtitle is-4">Error: {error}</h4>
             </div>
             <center>
@@ -226,37 +206,6 @@ export default function UserDataToServer(props) {
             </center>
             </DialogContent>
                     
-        </Dialog>
-
-
-        <Dialog
-            open={open3}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose3}
-            aria-describedby="Cancelar creation"
-        >
-        <DialogContent>  
-            <div className="column is-full">
-                <center>
-                    <figure className="image is-96x96">
-                        <img alt ="" src={Alert} />
-                    </figure>
-                </center>
-            </div>
-            <div style={{textAlign: "center"}} className="column is-full">
-                <h3 className="title is-3">¿Estás seguro de cancelar la creación del usuario?</h3>
-                <h4 className="subtitle is-4">La información diligenciada se perderá. Esta acción es irreversible</h4>
-            </div>
-            </DialogContent>
-            <DialogActions>
-                <button style={{width:"100%"}} className="button is-success" onClick={() => {navigate("../")}}>
-                    Continuar
-                </button>
-                <button style={{width:"100%"}} className="button" onClick={handleClose3}>
-                    Cancelar
-                </button>
-            </DialogActions>
         </Dialog>
     </>
   );

@@ -7,9 +7,9 @@ const Profile = () => {
 
   const verified = (props) => {
     if(props === true){
-      return(" Sí ");
+      return(<span className="tag is-success"> SÍ </span>);
     }else{
-      return(" No ");
+      return(<span className="tag is-danger"> NO </span>);
     }
   }
 
@@ -29,8 +29,7 @@ const Profile = () => {
                 <figure className="image is-96x96">
                     <img className="is-rounded" alt={user.nickname} src={user.picture} />
                 </figure>
-                <h3 className="title is-3">{user.nickname}</h3>
-                <h4 className="subtitle is-4">{user.email}</h4>
+                <h3 className="title is-3">{user.email}</h3>
                 <h4 className="subtitle is-4">Correo verificado: {verified(user.email_verified)}</h4>
                 { user.email_verified && <NewUserForm /> }
               </center>

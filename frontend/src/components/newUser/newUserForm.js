@@ -30,6 +30,15 @@ const NewUserForm = () =>{
             // Modificar estado en redux
             dispatch(modifierNewUser(["email", user.email]));
             setUserCount(1);
+            if (Users.loginUser.id !== ""){
+                dispatch(modifierNewUser(["name", Users.loginUser.name]));
+                dispatch(modifierNewUser(["numberId", Users.loginUser.numberId]));
+                dispatch(modifierNewUser(["phone", Users.loginUser.phone]));
+                dispatch(modifierNewUser(["location", Users.loginUser.location]));
+                dispatch(modifierNewUser(["age", Users.loginUser.age]));
+                dispatch(modifierNewUser(["rol", Users.loginUser.permissions]));
+                dispatch(modifierNewUser(["tipeId", Users.loginUser.tipeId]));
+            }
         }
     }
 
@@ -46,6 +55,7 @@ const NewUserForm = () =>{
                     name='name' 
                     className="input"
                     type="text"
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.name : ""}
                     placeholder="Juan Pablo González"
                     onChange={handleChange}
                     />
@@ -60,10 +70,18 @@ const NewUserForm = () =>{
             <div className="field">
                 <label className="label">Tipo de documento de identidad</label>
                 <div className="select">
+                {
+                    Users.loginUser.id !== ""
+                    ?
+                    <select name='tipeId' disabled onChange={handleChange}>
+                        <option>{Users.loginUser.tipeId}</option>
+                    </select>
+                    :
                     <select name='tipeId' onChange={handleChange}>
                         <option>Tarjeta de identidad</option>
                         <option>Cédula de ciudadanía</option>
                     </select>
+                }
                 </div>
             </div>
 
@@ -75,6 +93,7 @@ const NewUserForm = () =>{
                     className="input"
                     type="text"
                     placeholder=""
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.numberId : ""}
                     onChange={handleChange}
                     />
                 </div>
@@ -109,6 +128,7 @@ const NewUserForm = () =>{
                     className="input"
                     type="text"
                     placeholder="3406789545"
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.phone : ""}
                     onChange={handleChange}
                     maxLength="10"
                     />
@@ -123,10 +143,18 @@ const NewUserForm = () =>{
             <div className="field">
                 <label className="label">Tipo de perfil</label>
                 <div className="select">
+                    {
+                    Users.loginUser.id !== ""
+                    ?
+                    <select name='rol' disabled>
+                        <option>{Users.loginUser.permissions}</option>
+                    </select>
+                    :
                     <select name='rol' onChange={handleChange}>
                         <option>Estudiante</option>
                         <option>Monitor</option>
                     </select>
+                    }
                 </div>
             </div>
             
@@ -138,6 +166,7 @@ const NewUserForm = () =>{
                     className="input"
                     type="text"
                     placeholder=""
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.location : ""}
                     onChange={handleChange}
                     />
                 </div>
@@ -156,6 +185,7 @@ const NewUserForm = () =>{
                     className="input"
                     type="text"
                     placeholder="20"
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.age : ""}
                     onChange={handleChange}
                     maxLength="2"
                     />
@@ -166,7 +196,7 @@ const NewUserForm = () =>{
                     : <p className="help is-danger">{Users.validadorFormNewUser.age[1]}</p>
                 }
             </div>
-            <UserDataToServer buttomName="Enviar" />
+            <UserDataToServer buttomName={Users.loginUser.id !== "" ? "Editar" : "Enviar"} />
         </div>
         </>
     );
