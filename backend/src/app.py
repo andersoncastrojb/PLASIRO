@@ -260,6 +260,9 @@ def createUser():
     for doc in db3.find():
         if doc['email'] == data['email']:
             sameUser = 1
+    for doc in db4.find():
+        if doc['email'] == data['email']:
+            sameUser = 1
             
     if sameUser == 0:
         try:
