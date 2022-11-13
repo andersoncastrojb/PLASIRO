@@ -15,6 +15,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { modifier} from './features/users/userSlice'
 import { useEffect } from 'react';
 import Spinner from './components/spinner/spinner'
+import AdminTutor from "./components/adminTutor/adminTutor";
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
            
             <Route element={<ProtectedRoute user={Users.loginUser} permissions={["admin"]} />}>
               <Route path='/admin-cites' element={<AdminCites />} />
+              <Route path='/admin-new-tutors' element={<AdminTutor />} />
             </Route>
 
             <Route element={<ProtectedRoute user={Users.loginUser} permissions={["tutor","admin"]} />}>

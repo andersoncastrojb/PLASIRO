@@ -1,15 +1,13 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import NewUserForm from "../newUser/newUserForm";
-import { modifierSpinner } from "../../features/tools/spinnerSlice";
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   // Estado redux
   const Users = useSelector(state => state.Users);
-  const dispatch = useDispatch();
 
   const verified = (props) => {
     if(props === true){
@@ -22,12 +20,8 @@ const Profile = () => {
   // console.log(JSON.stringify(user))
 
   if (isLoading) {
-    // Loading Activate
-    dispatch(modifierSpinner(["value", {display: "block"}]));
+    return(<h1>Loading ...</h1>)
   }
-
-  // Loading deactivate
-  dispatch(modifierSpinner(["value", {display: "none"}]));
 
   return (
     isAuthenticated && (

@@ -43,6 +43,7 @@ export default function Navbar() {
                                 ?
                                 <>
                                     <Link className="navbar-item" to="/admin-cites">Administrar citas</Link>
+                                    <Link className="navbar-item" to="/admin-new-tutors">Administrar monitores nuevos</Link>
                                     <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
                                 </>
                                 : <></>

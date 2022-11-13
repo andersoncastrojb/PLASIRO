@@ -260,9 +260,11 @@ def createUser():
     for doc in db3.find():
         if doc['email'] == data['email']:
             sameUser = 1
+    """
     for doc in db4.find():
         if doc['email'] == data['email']:
             sameUser = 1
+    """
             
     if sameUser == 0:
         try:
@@ -347,6 +349,40 @@ def updateDataUser(id):
     except:
         return jsonify({'message': 'Error', 'text': 'No se pudo actualizar el usuario'})
 
+
+# Para obtener la información de todos los usuarios registrados en el sistema 
+@app.route('/new_tutor', methods=['GET'])
+def getNewTutors():
+    
+    try:
+        users = []
+        for doc in db4.find():
+            users.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'date': doc['date'],
+                'name': doc['name'],
+                'email': doc['email'],
+                'phone': doc['phone'],
+                'permissions': doc['permissions'],
+                'location': doc['location'],
+                'age': doc['age'],
+                'tipeId': doc['tipeId'],
+                'numberId': doc['numberId']
+            })
+        return jsonify(users)
+    except:
+        return jsonify({'message': 'Error'})
+
+
+# Para eliminar la información de de una aspirante a monitor específico 
+@app.route('/new_tutor/<id>', methods=['DELETE'])
+def deleteNewTutor(id):
+    try:
+        db4.delete_one({'_id': ObjectId(id)})
+        return jsonify({'message': 'New tutor Deleted'})
+    except:
+        return jsonify({'message': 'Error'})
+    
 
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":

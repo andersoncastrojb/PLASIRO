@@ -6,7 +6,7 @@ export const ProtectedRoute = ({
   redirectTo = "/",
   children,
 }) => {
-  if (!permissions.includes(user.permissions[0])) {
+  if (!permissions.includes(user.permissions)) {
     return <Navigate to={redirectTo} replace />;
   }
 
