@@ -5,6 +5,8 @@ from flask_cors import CORS
 from bson import ObjectId
 from storeDaysTutor import storeDaysTutor
 from emailNewCite import emailNewCiteFuntion
+from emailApproveCite import EmailApproveCiteFuntion
+from emailDeleteCite import EmailDeleteCiteFuntion
 
 app = Flask(__name__)
 # app.config['MONGO_URI'] = "mongodb://localhost:27017/pythonreactdb"
@@ -138,12 +140,21 @@ def deleteUser(id):
 def updateUser(id):
     try:
         data = request.json
+        print(data)
         tutor = db.find_one({'_id': ObjectId(id)})
         
         out = tutor['stateDays']
         out[data['dayChange']] = data['hourChange']
         
         db.update_one( {'_id': ObjectId(id)} , { "$set": { 'stateDays': out } } )
+        
+        EmailApproveCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
+                            data['name'], data['email'], data['phone'], data['mode'],
+                            data['description'], data['nameTutor'], data['valorP'], data['location'])
+        EmailApproveCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
+                            data['name'], data['emailTutor'], data['phone'], data['mode'],
+                            data['description'], data['nameTutor'], data['valorP'], data['location'])
+        
         return jsonify({'message': 'Updated User', 'id': str(ObjectId(tutor['_id'])), 'out': out })
     except:
         return jsonify({'message': 'Error'})
@@ -231,11 +242,26 @@ def getCites():
 @app.route('/cites/<id>', methods=['DELETE'])
 def deleteCite(id):
     try:
+        data = request.json
         db2.delete_one({'_id': ObjectId(id)})
+        
+        EmailDeleteCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
+                            data['name'], data['email'], data['phone'], data['mode'],
+                            data['description'], data['nameTutor'], data['valorP'], data['location'])
+        
         return jsonify({'message': 'Cite Deleted'})
     except:
         return jsonify({'message': 'Error'})
     
+# Para eliminar la información de de una cita específica sin enviar email de confirmación
+@app.route('/cites-without-email/<id>', methods=['DELETE'])
+def deleteCiteWithOutEmail(id):
+    try:
+        db2.delete_one({'_id': ObjectId(id)})
+        
+        return jsonify({'message': 'Cite Deleted'})
+    except:
+        return jsonify({'message': 'Error'})    
 
 # Database users
 db3 = mongo.db.users

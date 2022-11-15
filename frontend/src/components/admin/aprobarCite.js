@@ -89,7 +89,20 @@ export default function AprobarCite(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     hourChange: result[0].hourSelect,
-                    dayChange: result[0].daySelect
+                    dayChange: result[0].daySelect,
+                    day: result[0].day,
+                    month: result[0].month,
+                    year: result[0].year,
+                    name: result[0].name,
+                    phone: result[0].phone,
+                    email: result[0].email,
+                    mode: result[0].mode,
+                    description: result[0].description,
+                    nameTutor: result[0].nameTutor,
+                    emailTutor: result[0].emailTutor,
+                    valorP: result[0].valorP,
+                    location: result[0].location,
+                    hours: result[0].hours
                 })
             })
             .then(response => {res = response})
@@ -130,7 +143,7 @@ export default function AprobarCite(props) {
         if(Admin.cites.length > 0){
             const result = Admin.cites.filter( cite => cite._id.toString() === Admin.idCite );
             // console.log(result[0]); 
-            await fetch(`http://localhost:5000/cites/${result[0]._id}`,
+            await fetch(`http://localhost:5000/cites-without-email/${result[0]._id}`,
             {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json'},

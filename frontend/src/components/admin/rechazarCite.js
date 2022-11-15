@@ -69,6 +69,21 @@ export default function RechazarCite() {
             {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    day: result[0].day,
+                    month: result[0].month,
+                    year: result[0].year,
+                    name: result[0].name,
+                    phone: result[0].phone,
+                    email: result[0].email,
+                    mode: result[0].mode,
+                    description: result[0].description,
+                    nameTutor: result[0].nameTutor,
+                    emailTutor: result[0].emailTutor,
+                    valorP: result[0].valorP,
+                    location: result[0].location,
+                    hours: result[0].hours
+                })
             })
             .then(response => {res = response})
             .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
@@ -83,6 +98,8 @@ export default function RechazarCite() {
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
+
+                    handleClose();
 
                     // Loading deactivate
                     dispatch(modifierSpinner(["value", {display: "none"}]));

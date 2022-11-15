@@ -73,7 +73,7 @@ const FormCalendar = () =>{
                     type="text"
                     placeholder="Juan Pérez Mujica"
                     onChange={handleChange}
-                    value={Users.loginUser.id !== "" ? Users.loginUser.name : ""}
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.name : ""}
                     disabled
                     />
                 </div>
@@ -91,10 +91,9 @@ const FormCalendar = () =>{
                     className="input"
                     type="text"
                     placeholder="3055075754"
-                    defaultValue=""
                     onChange={handleChange}
                     maxLength="10"
-                    value={Users.loginUser.id !== "" ? Users.loginUser.phone : ""}
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.phone : ""}
                     disabled
                     />
                     <span className="icon is-small is-left">
@@ -118,9 +117,8 @@ const FormCalendar = () =>{
                     className="input"
                     type="email"
                     placeholder="juanperez@gmail.com"
-                    defaultValue=""
                     onChange={handleChange}
-                    value={Users.loginUser.id !== "" ? Users.loginUser.email : ""}
+                    defaultValue={Users.loginUser.id !== "" ? Users.loginUser.email : ""}
                     disabled
                     />
                     <span className="icon is-small is-left">
@@ -171,7 +169,7 @@ const FormCalendar = () =>{
                             type="text"
                             placeholder="Av Libertador …"
                             onChange={handleChange}
-                            value={Users.loginUser.id !== "" ? Users.loginUser.location : ""}
+                            defaultValue={Users.loginUser.id !== "" ? Users.loginUser.location : ""}
                             disabled
                             />
                         </div>
