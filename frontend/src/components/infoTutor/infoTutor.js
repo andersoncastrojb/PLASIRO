@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react';
 // Importar los estilos del componente InfoTutor
 import "../../css/infoTutor/infoTutor.css";
-import tutorPicture from "../img/yo.png";
 import Modal from "./modal";
 import Calendar from "./calendar";
 import FormCalendar from "./formCalendar"
@@ -72,7 +71,7 @@ const InfoTutor = () => {
 
               <section className="section box">
                 <figure className="image is-128x128">
-                  <img className="is-rounded" alt="" src={tutorPicture} />
+                  <img className="is-rounded" alt="" src={tutorShow.image} />
                 </figure>
                 <div className="info__basic block">
                   <h1 className="title is-3">{tutorShow.name}</h1>

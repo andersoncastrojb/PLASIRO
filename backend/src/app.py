@@ -45,7 +45,8 @@ def createTutor():
             'masteryOfTopics': data['masteryOfTopics'],
             'titles': data['titles'],
             'stateDays': stateDays,
-            'comments': data['comments']
+            'comments': data['comments'],
+            'image': data['image']
         })
         return jsonify({'message': 'Received', "id": str(id.inserted_id)})
     except:
@@ -72,7 +73,8 @@ def getTutors():
                 'masteryOfTopics': doc['masteryOfTopics'],
                 'titles': doc['titles'],
                 'stateDays': doc['stateDays'],
-                'comments': doc['comments']
+                'comments': doc['comments'],
+                'image': doc['image']
             })
         return jsonify(tutors)
     except:
@@ -113,7 +115,8 @@ def index(id):
             'masteryOfTopics': tutor['masteryOfTopics'],
             'titles': tutor['titles'],
             'stateDays': tutor['stateDays'],
-            'comments': tutor['comments']
+            'comments': tutor['comments'],
+            'image': doc['image']
         })
     except:
         return jsonify({'message': 'Error'})

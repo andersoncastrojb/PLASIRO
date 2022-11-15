@@ -22,14 +22,13 @@
 
 .image.is-128x128{
   width: 25%;
-  height: 240px;
+  height: 100%;
   display: inline-block;
 }
 
 .image.is-128x128 img{
-  width: 180px;
-  height: 240px;
-  margin: 0 15px 0 15px;
+  width: auto;
+  height: 250px;
 }
 
 .info__basic.block{
@@ -49,6 +48,9 @@
     display: block;
     width: 80%;
     margin: 0 0 0 10%;
+  }
+  .image.is-128x128 img{
+    height: 200px;
   }
   .info__basic.block{
     display: block;

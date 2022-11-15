@@ -6,27 +6,53 @@ import SelectThemes from './selectThemes';
 import {useDispatch, useSelector} from 'react-redux';
 import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 import TutorDataToServerTwo from './tutorDataToServerTwo';
-import { useAuth0 } from "@auth0/auth0-react";
 
 
 // Formulario para que los monitores registren su información personal, académica, experiencia y además su disponibilidad semanal.
 const FormTutorIni = () =>{
 
-    const { user, isAuthenticated } = useAuth0();
-
     const [userCount, setUserCount] = useState(0);
     
     // Estado redux
     const InfoTutorState = useSelector(state => state.InfoTutor);
+
+    // Estado redux
+    const Users = useSelector(state => state.Users);
     
     // Instanciar dispatch
     const dispatch = useDispatch();
 
-    if( isAuthenticated === true && userCount < 1){
-        dispatch(modifier(["name", user.name]));
-        dispatch(modifier(["mail", user.email]));
+    if( Users.loginUser.id !== "" && userCount < 1){
+        dispatch(modifier(["name", Users.loginUser.name]));
+        dispatch(modifier(["mail", Users.loginUser.email]));
+        dispatch(modifier(["phone", Users.loginUser.phone]));
         setUserCount(1);
     }
+    
+    // Convertir imagen en archivo base64 para almacenar en base de datos
+    const uploadImage = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertBase64(file);
+        // console.log(base64);
+        // Modificar estado en redux
+        dispatch(modifier(['image', base64]));
+    };
+
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+    
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+    
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+    };
+    // Termina! Convertir imagen en archivo base64 para almacenar en base de datos
     
     // Se encarga de modificar el estado en redux del objeto InfoTutorSlice
     const handleChange = e => {
@@ -65,7 +91,7 @@ const FormTutorIni = () =>{
                     className="input"
                     type="text"
                     placeholder="Juan Pablo González"
-                    value={user.name}
+                    value={Users.loginUser.name}
                     onChange={handleChange}
                     disabled
                     />
@@ -85,7 +111,7 @@ const FormTutorIni = () =>{
                     className="input"
                     type="text"
                     placeholder="juanito@gmail.com"
-                    value={user.email}
+                    value={Users.loginUser.email}
                     onChange={handleChange}
                     disabled
                     />
@@ -106,8 +132,10 @@ const FormTutorIni = () =>{
                     className="input"
                     type="text"
                     placeholder="3406789545"
+                    value={Users.loginUser.phone}
                     onChange={handleChange}
                     maxLength="10"
+                    disabled
                     />
                 </div>
                 {
@@ -192,7 +220,7 @@ const FormTutorIni = () =>{
                         className="file-input"
                         type="file"
                         name="img"
-                        onChange={e => {console.log(e.target.value)}}
+                        onChange={e => uploadImage(e)}
                         />
                         <span className="file-cta">
                         <span className="file-icon">
