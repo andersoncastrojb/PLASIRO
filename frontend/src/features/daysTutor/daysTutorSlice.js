@@ -49,7 +49,8 @@ const initialState = {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ],
     tutors: [],
-    tutorShow: [[]]
+    tutorShow: [[]],
+    tutorFiltered: []
 }
 
 // Almacena información referente a un tutor específico del cual se quiere obtener información
@@ -68,9 +69,12 @@ export const DaysTutorSlice = createSlice({
         },
         modifierAvailability: (state,action) =>{
             state.availability = action.payload;
+        },
+        modifierTutorFiltered: (state,action) =>{
+            state.tutorFiltered = action.payload;
         }
     },
 });
 
-export const {modifierDay, modifierTutors, modifierTutorShow, modifierAvailability} = DaysTutorSlice.actions;
+export const {modifierDay, modifierTutors, modifierTutorShow, modifierAvailability, modifierTutorFiltered} = DaysTutorSlice.actions;
 export default DaysTutorSlice.reducer;

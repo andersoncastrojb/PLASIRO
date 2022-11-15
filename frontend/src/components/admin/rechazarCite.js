@@ -56,6 +56,9 @@ export default function RechazarCite() {
     }
 
     const handleDelete = async() => {
+
+        handleClose();
+
         let res = {};
 
         if(Admin.cites.length > 0){
@@ -99,14 +102,11 @@ export default function RechazarCite() {
                 console.log(data);
                 if(data.message === 'Error'){
 
-                    handleClose();
-
                     // Loading deactivate
                     dispatch(modifierSpinner(["value", {display: "none"}]));
 
                     AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
-                    handleClose();
                     setDataCites();
                     
                     // Loading deactivate

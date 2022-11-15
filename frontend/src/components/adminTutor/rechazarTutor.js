@@ -54,6 +54,9 @@ export default function RechazarTutor() {
     }
 
     const handleDelete = async() => {
+        
+        handleClose();
+
         let res = {};
 
         if(Admin.newTutors.length > 0){
@@ -87,7 +90,6 @@ export default function RechazarTutor() {
 
                     AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
-                    handleClose();
                     setDataCites();
 
                     // Loading deactivate

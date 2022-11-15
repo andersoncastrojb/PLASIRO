@@ -8,6 +8,7 @@ import GetTutors from "../getData/getTutors";
 import { modifierTutorShow, modifierAvailability } from '../../features/daysTutor/daysTutorSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import Filters from "../filters/filters";
 
 // Muestra una lista de los tutores disponibles después del filtro por área
 const MainList = () => {
@@ -17,7 +18,7 @@ const MainList = () => {
      
     // Para leer los datos de los tutores cargados de la base de datos
     let tutors = [];
-    tutors = useSelector( (state) => state.DaysTutor.tutors );
+    tutors = useSelector( (state) => state.DaysTutor.tutorFiltered );
     // Se inicializa el modificar del estado redux
     const dispatch = useDispatch();
     
@@ -47,6 +48,7 @@ const MainList = () => {
 
     return(
         <>
+        <Filters />
         {tutors.map( (tutor) =>
         <section key={tutor._id.toString()} className="hero is-small is-link">
             <div className="hero-body">
