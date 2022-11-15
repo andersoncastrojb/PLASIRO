@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from bson import ObjectId
 from storeDaysTutor import storeDaysTutor
+from emailNewCite import emailNewCiteFuntion
 
 app = Flask(__name__)
 # app.config['MONGO_URI'] = "mongodb://localhost:27017/pythonreactdb"
@@ -176,8 +177,16 @@ def createCites():
             'emailTutor': data['emailTutor'],
             'priceTutor': data['priceTutor'],
             'valorP': data['valorP'],
-            'location': data['location']
+            'location': data['location'],
+            'hours': data['hours']
         })
+        emailNewCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
+                            data['name'], data['email'], data['phone'], data['mode'],
+                            data['description'], data['nameTutor'], data['valorP'], data['location'])
+        emailNewCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
+                            data['name'], 'ibrackmov@gmail.com', data['phone'], data['mode'],
+                            data['description'], data['nameTutor'], data['valorP'], data['location'])
+        
         return jsonify({'message': 'Received', "id": str(id.inserted_id)})
     except:
 
@@ -210,7 +219,8 @@ def getCites():
                 'emailTutor': doc['emailTutor'],
                 'priceTutor': doc['priceTutor'],
                 'valorP': doc['valorP'],
-                'location': doc['location']
+                'location': doc['location'],
+                'hours': doc['hours']
             })
         return jsonify(cites)
     except:

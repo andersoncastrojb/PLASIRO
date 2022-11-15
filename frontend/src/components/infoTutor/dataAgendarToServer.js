@@ -57,9 +57,6 @@ export default function DataAgendarToServer(props) {
     };
 
     const handleSubmit = async () => {
-        
-        // Loading Activate
-        dispatch(modifierSpinner(["value", {display: "block"}]));
 
         const validadorFormAgendar = ValidadorFormAgendar(InfoAgendar);
         
@@ -70,6 +67,9 @@ export default function DataAgendarToServer(props) {
         }
 
         if(validadorFormAgendar.flag === true){
+
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
 
             dispatch(modifier(['validadorFormAgendar', validadorFormAgendar]));
 
@@ -98,7 +98,8 @@ export default function DataAgendarToServer(props) {
                     emailTutor: TutorInfo.mail,
                     priceTutor: TutorInfo.price,
                     valorP: InfoAgendar.valorP,
-                    location: InfoAgendar.location
+                    location: InfoAgendar.location,
+                    hours: InfoAgendar.hours
                     })
             })
             .then(response => {res = response})
@@ -106,10 +107,18 @@ export default function DataAgendarToServer(props) {
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
                 setError(res.message);
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 handleClickOpen2();
             }else{
                 const data = await res.json();
                 console.log(data);
+                
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 if(data.message === 'Error'){
                     AlertFail({text:"No se envió la solicitud de agenda, error en el servidor"});
                 }else{
@@ -117,9 +126,6 @@ export default function DataAgendarToServer(props) {
                 }
             }
         }
-        
-        // Loading deactivate
-        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
 

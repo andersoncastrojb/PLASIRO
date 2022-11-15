@@ -9,7 +9,7 @@ import AlertSuccess from '../alerts/alertSuccess'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { modifier } from '../../features/admin/adminSlice';
-
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 const GetNewTutors = async () =>{
 
@@ -57,6 +57,10 @@ export default function RechazarTutor() {
         let res = {};
 
         if(Admin.newTutors.length > 0){
+
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
+
             const result = Admin.newTutors.filter( newTutor => newTutor._id.toString() === Admin.idNewTutor );
             // console.log(result[0]); 
             await fetch(`http://localhost:5000/new_tutor/${result[0]._id}`,
@@ -68,15 +72,27 @@ export default function RechazarTutor() {
             .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 AlertFail({text:"No se eliminó la solicitud, Error: " + res.message+"."});
             }else{
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
                     handleClose();
                     setDataCites();
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+                    
                     AlertSuccess({text:"¡Se eliminó la solicitud con éxito!"}); 
                 }
             }

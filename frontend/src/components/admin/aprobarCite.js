@@ -9,6 +9,7 @@ import Bad from "../../Icons/Bad.png"
 import {useSelector, useDispatch} from 'react-redux';
 import AlertFail from '../alerts/alertFail'
 import { modifier } from '../../features/admin/adminSlice';
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 // Para obtener los datos de todas las citas almacenadas en el servidor
 const GetCites = async () =>{
@@ -76,6 +77,10 @@ export default function AprobarCite(props) {
         let res = {};
         
         if(Admin.cites.length > 0){
+            
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
+
             const result = Admin.cites.filter( cite => cite._id.toString() === Admin.idCite );
             // console.log(result[0]); 
             await fetch(`http://localhost:5000/tutors/${result[0].idTutor}`,
@@ -92,14 +97,26 @@ export default function AprobarCite(props) {
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
                 setError(res.message);
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 handleClickOpen2();
             }else{
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     AlertFail({text:"No se pudo aprobar la solicitud, error en el servidor."});
                 }else{
                     handleDelete();
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     handleClickOpen();
                 }
             }

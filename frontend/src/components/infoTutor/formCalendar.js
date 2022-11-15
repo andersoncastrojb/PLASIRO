@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import "../../css/infoTutor/FormCalendar.css"
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
@@ -12,6 +12,19 @@ const FormCalendar = () =>{
     const dispatch = useDispatch();
     const InfoAgendar = useSelector((state) => state.InfoAgendar);
     const tutorShow = useSelector((state) => state.DaysTutor.tutorShow[0]);
+
+    // Estado redux
+    const Users = useSelector(state => state.Users);
+
+    const [userCount, setUserCount] = useState(0);
+
+    if( Users.loginUser.id !== "" && userCount < 1){
+        dispatch(modifier(["name", Users.loginUser.name]));
+        dispatch(modifier(["email", Users.loginUser.email]));
+        dispatch(modifier(["phone", Users.loginUser.phone]));
+        dispatch(modifier(["location", Users.loginUser.location]));
+        setUserCount(1);
+    }
 
     // Se encarga de modificar el estado en redux del objeto InfoAgendarSlice
     const handleChange = e => {
@@ -60,6 +73,8 @@ const FormCalendar = () =>{
                     type="text"
                     placeholder="Juan Pérez Mujica"
                     onChange={handleChange}
+                    value={Users.loginUser.id !== "" ? Users.loginUser.name : ""}
+                    disabled
                     />
                 </div>
                 {
@@ -79,6 +94,8 @@ const FormCalendar = () =>{
                     defaultValue=""
                     onChange={handleChange}
                     maxLength="10"
+                    value={Users.loginUser.id !== "" ? Users.loginUser.phone : ""}
+                    disabled
                     />
                     <span className="icon is-small is-left">
                     <i className="fas fa-user" />
@@ -103,6 +120,8 @@ const FormCalendar = () =>{
                     placeholder="juanperez@gmail.com"
                     defaultValue=""
                     onChange={handleChange}
+                    value={Users.loginUser.id !== "" ? Users.loginUser.email : ""}
+                    disabled
                     />
                     <span className="icon is-small is-left">
                     <i className="fas fa-envelope" />
@@ -152,6 +171,8 @@ const FormCalendar = () =>{
                             type="text"
                             placeholder="Av Libertador …"
                             onChange={handleChange}
+                            value={Users.loginUser.id !== "" ? Users.loginUser.location : ""}
+                            disabled
                             />
                         </div>
                         {

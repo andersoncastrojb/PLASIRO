@@ -60,9 +60,6 @@ export default function TutorDataToServerTwo(props) {
 
     const handleSubmit = async () => {
 
-        // Loading Activate
-        dispatch(modifierSpinner(["value", {display: "block"}]));
-
         const validadorFormIni = ValidadorFormIni(InfoTutorState);
 
         if(validadorFormIni.flag === false){
@@ -70,6 +67,10 @@ export default function TutorDataToServerTwo(props) {
         }
 
         if(validadorFormIni.flag === true){
+
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
+
 
             dispatch(modifier(['validadorFormIni', validadorFormIni]));
             
@@ -85,10 +86,18 @@ export default function TutorDataToServerTwo(props) {
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
                 setError(res.message);
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 handleClickOpen2();
             }else{
                 const data = await res.json();
                 console.log(data);
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 if(data.message === 'Error'){
                     AlertFail({text:"No se guardaron los datos, error en el servidor"});
                 }else{
@@ -96,9 +105,6 @@ export default function TutorDataToServerTwo(props) {
                 }
             }
         }
-
-        // Loading deactivate
-        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
 

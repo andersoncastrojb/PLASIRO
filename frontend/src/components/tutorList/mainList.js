@@ -56,7 +56,7 @@ const MainList = () => {
                     <div id={tutor._id} className="media">
                         <div className="media-left">
                             <figure className="image is-48x48">
-                                <img id={tutor._id} src="https://bulma.io/images/placeholders/96x96.png" alt="" />
+                                <img id={tutor._id} src={tutor.image} alt="" />
                             </figure>
                         </div>
                         <div id={tutor._id} className="media-content">

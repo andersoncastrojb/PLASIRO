@@ -62,9 +62,6 @@ export default function UserDataToServer(props) {
 
     const handleSubmit = async () => {
 
-        // Loading Activate
-        dispatch(modifierSpinner(["value", {display: "block"}]));
-
         const validadorFormNewUser = ValidadorFormNewUser(newUser);
 
         if(validadorFormNewUser.flag === false){
@@ -72,6 +69,9 @@ export default function UserDataToServer(props) {
         }
 
         if(validadorFormNewUser.flag === true){
+
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
 
             dispatch(modifier(['validadorFormNewUser', validadorFormNewUser]));
 
@@ -100,13 +100,25 @@ export default function UserDataToServer(props) {
                 // console.log(res.message);
                 if (res.message === "Failed to fetch"){
                     setError(res.message);
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     handleClickOpen2();
                 }else{
                     const data = await res.json();
                     console.log(data);
                     if(data.message === 'Error'){
+
+                        // Loading deactivate
+                        dispatch(modifierSpinner(["value", {display: "none"}]));
+
                         AlertFail({text: data.text});
                     }else{
+
+                        // Loading deactivate
+                        dispatch(modifierSpinner(["value", {display: "none"}]));
+
                         handleClickOpen();
                     }
                 }
@@ -136,22 +148,31 @@ export default function UserDataToServer(props) {
                 // console.log(res.message);
                 if (res.message === "Failed to fetch"){
                     setError(res.message);
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     handleClickOpen2();
                 }else{
                     const data = await res.json();
                     console.log(data);
                     if(data.message === 'Error'){
+
+                        // Loading deactivate
+                        dispatch(modifierSpinner(["value", {display: "none"}]));
+
                         AlertFail({text: data.text});
                     }else{
+
+                        // Loading deactivate
+                        dispatch(modifierSpinner(["value", {display: "none"}]));
+
                         handleClickOpen();
                     }
                 }
 
             }
         }
-
-        // Loading deactivate
-        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
 

@@ -9,6 +9,7 @@ import Bad from "../../Icons/Bad.png"
 import {useSelector, useDispatch} from 'react-redux';
 import AlertFail from '../alerts/alertFail'
 import { modifier } from '../../features/admin/adminSlice';
+import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 
 const GetNewTutors = async () =>{
@@ -76,6 +77,9 @@ export default function AprobarTutor(props) {
         
         if(Admin.newTutors.length > 0){
 
+            // Loading Activate
+            dispatch(modifierSpinner(["value", {display: "block"}]));
+
             const result = Admin.newTutors.filter( newTutor => newTutor._id.toString() === Admin.idNewTutor );
             console.log(result[0]); 
             let res = {};
@@ -101,14 +105,26 @@ export default function AprobarTutor(props) {
             console.log(res.message);
             if (res.message === "Failed to fetch"){
                 setError(res.message);
+
+                // Loading deactivate
+                dispatch(modifierSpinner(["value", {display: "none"}]));
+
                 handleClickOpen2();
             }else{
                 const data = await res.json();
                 console.log(data);
                 if(data.message === 'Error'){
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     AlertFail({text: data.text});
                 }else{
                     handleDelete();
+
+                    // Loading deactivate
+                    dispatch(modifierSpinner(["value", {display: "none"}]));
+
                     handleClickOpen();
                 }
             }
