@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { modifierTutorFiltered } from '../../features/daysTutor/daysTutorSlice'
 
-const Filters = () => {
+const FiltersInitialValue = () => {
 
     const [flagName, setFlagName] = useState("");
     const [flagSubject, setFlagSubject] = useState("");
@@ -67,7 +67,9 @@ const Filters = () => {
                 change = change.filter( (dato) => parseFloat(dato.punctuation, 10) >= parseFloat(flagQ, 10))
             }
 
-            dispatch(modifierTutorFiltered(change));
+            if(flagName !== "" || flagSubject !== "" || flagTopic !== "" || flagQ !== ""){
+                dispatch(modifierTutorFiltered(change));
+            }
         }
         searcher()
     }, [dispatch, tutors, flagName, flagSubject, flagTopic, flagQ]);
@@ -145,4 +147,4 @@ const Filters = () => {
     );
 };
 
-export default Filters;
+export default FiltersInitialValue;

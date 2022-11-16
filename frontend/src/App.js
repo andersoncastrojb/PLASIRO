@@ -16,6 +16,7 @@ import { modifier} from './features/users/userSlice'
 import { useEffect } from 'react';
 import Spinner from './components/spinner/spinner'
 import AdminTutor from "./components/adminTutor/adminTutor";
+import MainListInitialValue from './components/tutorList/mainListInitialValue'
 
 function App() {
 
@@ -77,6 +78,7 @@ function App() {
             </Route>
             
             <Route path='/list-tutor' element={<MainList />} />
+            <Route path='/list-tutor-initial-value' element={<MainListInitialValue />} />
             <Route path='/user-profile' element={<Profile />} />
             <Route path='/info-tutor' element={<InfoTutor />} />
           </Route>
