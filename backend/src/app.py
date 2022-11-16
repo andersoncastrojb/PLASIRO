@@ -20,6 +20,10 @@ CORS(app)
 
 # Database tutors
 db = mongo.db.tutors
+# Database tutorsRom
+db5 = mongo.db.tutorsRom
+# Database comments
+db6 = mongo.db.comments
 
 # Para almacenar los datos de un tutor, mediantes un POST en el aplicativo web
 @app.route('/tutors', methods=['POST'])
@@ -39,17 +43,35 @@ def createTutor():
         id = db.insert_one({
             'name': data['name'],
             'mail': data['mail'],
-            'punctuation': data['punctuation'],
             'modeV': data['modeV'],
             'modeP': data['modeP'],
             'price': data['price'],
             'subjects': data['subjects'],
             'description': data['description'],
             'masteryOfTopics': data['masteryOfTopics'],
-            'titles': data['titles'],
             'stateDays': stateDays,
-            'comments': data['comments'],
             'image': data['image']
+        })
+        # Para almacenar los datos en la tabla “tutorsRom” 
+        db5.insert_one({
+            'name': data['name'],
+            'mail': data['mail'],
+            'modeV': data['modeV'],
+            'modeP': data['modeP'],
+            'price': data['price'],
+            'subjects': data['subjects'],
+            'description': data['description'],
+            'masteryOfTopics': data['masteryOfTopics'],
+            'stateDays': stateDays,
+            'image': data['image']
+        })
+        # Para almacenar los datos en la tabla “commnets" 
+        db6.insert_one({
+            "idTutor": str(id.inserted_id),
+            "names": [],
+            "comments": [],
+            "qualifications": data["punctuation"]
+            
         })
         return jsonify({'message': 'Received', "id": str(id.inserted_id)})
     except:
@@ -62,22 +84,27 @@ def getTutors():
     
     try:
         tutors = []
+        objComment ={}
         for doc in db.find():
+            
+            objComment = db6.find_one({'idTutor': str(ObjectId(doc['_id']))})
+            # print(objComment['comments'])
+            
             tutors.append({
                 '_id': str(ObjectId(doc['_id'])),
                 'name': doc['name'],
                 'mail': doc['mail'],
-                'punctuation': doc['punctuation'],
                 'modeV': doc['modeV'],
                 'modeP': doc['modeP'],
                 'price': doc['price'],
                 'subjects': doc['subjects'],
                 'description': doc['description'],
                 'masteryOfTopics': doc['masteryOfTopics'],
-                'titles': doc['titles'],
                 'stateDays': doc['stateDays'],
-                'comments': doc['comments'],
-                'image': doc['image']
+                'image': doc['image'],
+                'comments': objComment['comments'],
+                'punctuation': objComment['qualifications'],
+                'namesQ': objComment['names']
             })
         return jsonify(tutors)
     except:
@@ -105,21 +132,24 @@ def getTutorsIds():
 def index(id):
     try:
         tutor = db.find_one({'_id': ObjectId(id)})
+        objComment ={}
+        objComment = db6.find_one({'idTutor': str(ObjectId(id))})
+        # print(objComment['comments'])
         return jsonify({
             '_id': str(ObjectId(tutor['_id'])),
             'name': tutor['name'],
             'mail': tutor['mail'],
-            'punctuation': tutor['punctuation'],
             'modeV': tutor['modeV'],
             'modeP': tutor['modeP'],
             'price': tutor['price'],
             'subjects': tutor['subjects'],
             'description': tutor['description'],
             'masteryOfTopics': tutor['masteryOfTopics'],
-            'titles': tutor['titles'],
             'stateDays': tutor['stateDays'],
-            'comments': tutor['comments'],
-            'image': doc['image']
+            'image': doc['image'],
+            'comments': objComment['comments'],
+            'punctuation': objComment['qualifications'],
+            'namesQ': objComment['names']
         })
     except:
         return jsonify({'message': 'Error'})
@@ -421,7 +451,32 @@ def deleteNewTutor(id):
         return jsonify({'message': 'New tutor Deleted'})
     except:
         return jsonify({'message': 'Error'})
-    
+
+
+# Para almacenar comentarios de un tutor específico 
+@app.route('/comments/<id>', methods=['PUT'])
+def updateComments(id):
+    try:
+        data = request.json
+        # print(data)
+        objComment = {}
+        objComment = db6.find_one({'idTutor': str(ObjectId(id))})
+        names = objComment['names']
+        names.append(data['name'])
+        comments = objComment['comments']
+        comments.append(data['comment'])
+        quantitation = ( float(objComment['qualifications']) + float(data['quantitation']) ) / 2
+        
+        db6.update_one( {'idTutor': str(ObjectId(id))} , { "$set": {
+            'names': names,
+            'comments': comments,
+            'qualifications': str(quantitation)
+            } } )
+        
+        return jsonify({ 'message': 'Add comment' })
+    except:
+        return jsonify({'message': 'Error', 'text': 'No se pudo agregar el comentario'})
+
 
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":

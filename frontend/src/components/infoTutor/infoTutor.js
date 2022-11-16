@@ -10,6 +10,7 @@ import Rating from '@mui/material/Rating';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from "react-router-dom";
+import FormCommnets from '../comments/formComments';
 
 
 /* Component: InfoTutor
@@ -27,7 +28,7 @@ const InfoTutor = () => {
     const [flagTwo, setFlagTwo] = useState({top: "0"});
 
     const tutorShow = useSelector((state) => state.DaysTutor.tutorShow[0]);
-
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -140,6 +141,8 @@ const InfoTutor = () => {
                     </Stack>
                   }
                 </section>
+
+
                 
               </div>
 
@@ -149,11 +152,41 @@ const InfoTutor = () => {
                   <h2 className="subtitle is-5">
                     <strong>Comentarios</strong>
                   </h2>
-                  <p>Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.
-                  </p>
+                  {
+                    tutorShow.namesQ !== undefined
+                    ?
+                    tutorShow.namesQ.map( (name, index) =>
+                    <div className="box" key={index.toString()}>
+                        <article className="media">
+                          <div className="media-left">
+                            <figure className="image is-64x64">
+                              <img src="https://bulma.io/images/placeholders/128x128.png" alt="" />
+                            </figure>
+                          </div>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>{name}</strong> <small>dd/mm/yy</small>
+                                <br/>
+                                {tutorShow.comments[index]}
+                              </p>
+                            </div>
+                          </div>
+                        </article>
+                    </div>
+                    )
+                    :
+                    <></>
+                  }
                 </section>
 
               </div>
+              
+              <section className="section">
+                <div className="box">
+                  <FormCommnets />
+                </div>
+              </section>
 
             </div>
       </div>
