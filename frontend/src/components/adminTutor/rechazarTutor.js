@@ -11,12 +11,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { modifier } from '../../features/admin/adminSlice';
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
+
 const GetNewTutors = async () =>{
 
     let data = [];
     let res = {};
     
-    await fetch('http://localhost:5000/new_tutor',
+    await fetch(`${server}new_tutor`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}
@@ -66,7 +68,7 @@ export default function RechazarTutor() {
 
             const result = Admin.newTutors.filter( newTutor => newTutor._id.toString() === Admin.idNewTutor );
             // console.log(result[0]); 
-            await fetch(`http://localhost:5000/new_tutor/${result[0]._id}`,
+            await fetch(`${server}new_tutor/${result[0]._id}`,
             {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json'},

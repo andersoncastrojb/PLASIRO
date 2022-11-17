@@ -2,6 +2,8 @@ import { modifier } from '../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
 import AlertWarning from '../alerts/alertWarning'
 
+const server = process.env.REACT_APP_SERVER;
+
 // Para obtener los datos de todos los usuarios almacenados en el servidor
 const GetUsers = async () =>{
 
@@ -9,7 +11,7 @@ const GetUsers = async () =>{
 
     let res = {};
     
-    await fetch('http://localhost:5000/users',
+    await fetch(`${server}users`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}

@@ -14,6 +14,8 @@ import {modifier} from '../../features/infoTutorIni/infoTutorIniSlice';
 import AlertFail from '../alerts/alertFail'
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -75,7 +77,7 @@ export default function TutorDataToServerTwo(props) {
             dispatch(modifier(['validadorFormIni', validadorFormIni]));
             
             let res = {};
-            await fetch('http://localhost:5000/tutors',
+            await fetch(`${server}tutors`,
             {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},

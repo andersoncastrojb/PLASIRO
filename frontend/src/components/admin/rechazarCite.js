@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { modifier } from '../../features/admin/adminSlice';
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
 
 // Para obtener los datos de todas las citas almacenadas en el servidor
 const GetCites = async () =>{
@@ -18,7 +19,7 @@ const GetCites = async () =>{
     let data = [];
     let res = {};
     
-    await fetch('http://localhost:5000/cites',
+    await fetch(`${server}cites`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}
@@ -68,7 +69,7 @@ export default function RechazarCite() {
 
             const result = Admin.cites.filter( cite => cite._id.toString() === Admin.idCite );
             // console.log(result[0]); 
-            await fetch(`http://localhost:5000/cites/${result[0]._id}`,
+            await fetch(`${server}cites/${result[0]._id}`,
             {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json'},

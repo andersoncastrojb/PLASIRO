@@ -13,6 +13,8 @@ import {modifier} from '../../features/users/userSlice';
 import AlertFail from '../alerts/alertFail'
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -68,7 +70,7 @@ export default function UserDataEditToServer(props) {
 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch(`http://localhost:5000/users/${Users.loginUser.id}`,
+                await fetch(`${server}users/${Users.loginUser.id}`,
                 {
                     method: "PUT",
                     headers: {'Content-Type': 'application/json'},
@@ -116,7 +118,7 @@ export default function UserDataEditToServer(props) {
                 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch(`http://localhost:5000/new_tutor/${Users.loginUser.id}`,
+                await fetch(`${server}new_tutor/${Users.loginUser.id}`,
                 {
                     method: "PUT",
                     headers: {'Content-Type': 'application/json'},

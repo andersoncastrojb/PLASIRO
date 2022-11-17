@@ -18,6 +18,7 @@ import ActionMenu from './actionMenu';
 import '../../css/Admin/adminCites.css'
 import AlertFail from '../alerts/alertFail'
 
+const server = process.env.REACT_APP_SERVER;
 
 const GetNewTutors = async () =>{
 
@@ -25,7 +26,7 @@ const GetNewTutors = async () =>{
 
     let res = {};
     
-    await fetch('http://localhost:5000/new_tutor',
+    await fetch(`${server}new_tutor`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}

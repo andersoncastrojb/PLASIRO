@@ -14,6 +14,8 @@ import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 import ValidadorFormAgendar from '../validadorForm.js/validadorformAgendar';
 
+const server = process.env.REACT_APP_SERVER;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -76,7 +78,7 @@ export default function DataAgendarToServer(props) {
             let res = {};
             let date = new Date().toISOString();
             
-            await fetch('http://localhost:5000/cites',
+            await fetch(`${server}cites`,
             {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},

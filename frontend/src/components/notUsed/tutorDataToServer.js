@@ -1,5 +1,7 @@
 import {useSelector} from 'react-redux';
 
+const server = process.env.REACT_APP_SERVER;
+
 //Este componente retorna un botón, el cual al ser presionado envía los datos de la información del formulario del tutor al servidor, mediante el método POST
 const TutorDataToServer = () => {
 
@@ -10,7 +12,7 @@ const TutorDataToServer = () => {
 
         let res = {};
     
-        await fetch('http://localhost:5000/users',
+        await fetch(`${server}users`,
         {
             method: "POST",
             headers: {'Content-Type': 'application/json'},

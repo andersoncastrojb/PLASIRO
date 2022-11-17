@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import AlertFail from '../alerts/alertFail'
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -54,7 +56,7 @@ export default function SendComment(props) {
 
         let res = {};
         let date = new Date().toISOString();
-        await fetch(`http://localhost:5000/comments/${tutorShow._id}`,
+        await fetch(`${server}comments/${tutorShow._id}`,
         {
             method: "PUT",
             headers: {'Content-Type': 'application/json'},

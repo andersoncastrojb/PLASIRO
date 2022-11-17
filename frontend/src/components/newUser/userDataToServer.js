@@ -15,6 +15,8 @@ import AlertFail from '../alerts/alertFail'
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 import UserDataEditToServer from './userDataEditToServer';
 
+const server = process.env.REACT_APP_SERVER;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -79,7 +81,7 @@ export default function UserDataToServer(props) {
 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch('http://localhost:5000/users',
+                await fetch(`${server}users`,
                 {
                     method: "POST",
                     headers: {'Content-Type': 'application/json'},
@@ -127,7 +129,7 @@ export default function UserDataToServer(props) {
                 
                 let res = {};
                 let date = new Date().toISOString();
-                await fetch('http://localhost:5000/new_tutor',
+                await fetch(`${server}new_tutor`,
                 {
                     method: "POST",
                     headers: {'Content-Type': 'application/json'},

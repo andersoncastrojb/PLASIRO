@@ -11,13 +11,15 @@ import AlertFail from '../alerts/alertFail'
 import { modifier } from '../../features/admin/adminSlice';
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
+const server = process.env.REACT_APP_SERVER;
+
 // Para obtener los datos de todas las citas almacenadas en el servidor
 const GetCites = async () =>{
 
     let data = [];
     let res = {};
     
-    await fetch('http://localhost:5000/cites',
+    await fetch(`${server}cites`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}
@@ -83,7 +85,7 @@ export default function AprobarCite(props) {
 
             const result = Admin.cites.filter( cite => cite._id.toString() === Admin.idCite );
             // console.log(result[0]); 
-            await fetch(`http://localhost:5000/tutors/${result[0].idTutor}`,
+            await fetch(`${server}tutors/${result[0].idTutor}`,
             {
                 method: "PUT",
                 headers: {'Content-Type': 'application/json'},
@@ -143,7 +145,7 @@ export default function AprobarCite(props) {
         if(Admin.cites.length > 0){
             const result = Admin.cites.filter( cite => cite._id.toString() === Admin.idCite );
             // console.log(result[0]); 
-            await fetch(`http://localhost:5000/cites-without-email/${result[0]._id}`,
+            await fetch(`${server}cites-without-email/${result[0]._id}`,
             {
                 method: "DELETE",
                 headers: {'Content-Type': 'application/json'},

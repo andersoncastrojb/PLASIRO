@@ -18,6 +18,8 @@ import ActionMenu from './actionMenu';
 import '../../css/Admin/adminCites.css'
 import AlertFail from '../alerts/alertFail'
 
+const server = process.env.REACT_APP_SERVER;
+
 
 // Para obtener los datos de todas las citas almacenadas en el servidor
 const GetCites = async () =>{
@@ -26,7 +28,7 @@ const GetCites = async () =>{
 
     let res = {};
     
-    await fetch('http://localhost:5000/cites',
+    await fetch(`${server}cites`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}
