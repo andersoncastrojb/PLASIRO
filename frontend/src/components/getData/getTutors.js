@@ -2,6 +2,8 @@ import { modifierTutors} from '../../features/daysTutor/daysTutorSlice'
 import { useDispatch } from 'react-redux'
 import AlertFail from '../alerts/alertFail';
 
+const server = process.env.REACT_APP_SERVER;
+
 // Para obtener los datos de todos los monitores almacenados en el servidor
 const GetTutors = async () =>{
 
@@ -9,7 +11,7 @@ const GetTutors = async () =>{
 
     let res = {};
     
-    await fetch('http://localhost:5000/tutors',
+    await fetch(`${server}tutors`,
     {
         method: "GET",
         headers: {'Content-Type': 'application/json'}
