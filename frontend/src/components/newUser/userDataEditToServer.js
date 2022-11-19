@@ -66,7 +66,7 @@ export default function UserDataEditToServer(props) {
 
             dispatch(modifier(['validadorFormNewUser', validadorFormNewUser]));
 
-            if(newUser.rol === "Estudiante"){
+            if(newUser.rol === "Estudiante" || Users.loginUser.id !== ""){
 
                 let res = {};
                 let date = new Date().toISOString();

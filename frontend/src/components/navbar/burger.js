@@ -59,7 +59,7 @@ function SimpleDialog(props) {
               <Link className="button is-link is-light" onClick={handleClose} to="/admin-cites">Administrar citas</Link>
             </div>
             <div className="column">
-              <Link className="navbar-item" to="/admin-new-tutors">Administrar monitores nuevos</Link>
+              <Link className="button is-link is-light" onClick={handleClose} to="/admin-new-tutors">Administrar monitores nuevos</Link>
             </div>
             <div className="column">
               <Link className="button is-link is-light" onClick={handleClose} to="/form-tutor">Formulario Monitor</Link>
