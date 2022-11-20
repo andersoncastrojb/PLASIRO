@@ -24,4 +24,4 @@ def EmailDeleteCiteFuntion(day, month, year, hours, name, email, phone, mode, de
     subject = "¡Su solicitud de  monitoria ha sido RECHAZADA!"
     EmailSend(email, subject, msg)
     
-EmailDeleteCiteFuntion("15", "11", "2022", ["7:00", "8:00"], "pepito", "pepito@gmail.com", "3425678909", "modeV", "description", "nameTutor", "valorP", "location")
+# EmailDeleteCiteFuntion("15", "11", "2022", ["7:00", "8:00"], "pepito", "pepito@gmail.com", "3425678909", "modeV", "description", "nameTutor", "valorP", "location")

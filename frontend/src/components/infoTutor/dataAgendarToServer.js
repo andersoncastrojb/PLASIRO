@@ -8,11 +8,11 @@ import AlertFail from '../alerts/alertFail'
 import Good from "../../Icons/Good.png"
 import Bad from "../../Icons/Bad.png"
 import {useSelector} from 'react-redux';
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { modifier } from '../../features/infoAgendar/infoAgendarSlice';
 import { modifierSpinner } from "../../features/tools/spinnerSlice";
 import ValidadorFormAgendar from '../validadorForm.js/validadorformAgendar';
+import PaysTemplate from "../pays/paysTemplate"
 
 const server = process.env.REACT_APP_SERVER;
 
@@ -23,7 +23,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 //Este componente retorna un botón, el cual al ser presionado envía los datos de la información del formulario del tutor al servidor, mediante el método POST
 export default function DataAgendarToServer(props) {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const clickBack = () => {
@@ -38,6 +37,7 @@ export default function DataAgendarToServer(props) {
 
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const [openPay, setOpenPay] = React.useState(false);
     const [error, setError] = React.useState("");
 
     const handleClickOpen = () => {
@@ -45,9 +45,8 @@ export default function DataAgendarToServer(props) {
     };
 
     const handleClose = () => {
+        setOpenPay(true);
         setOpen(false);
-        navigate("../");
-        window.location.reload(true);
     };
 
     const handleClickOpen2 = () => {
@@ -196,6 +195,7 @@ export default function DataAgendarToServer(props) {
             </DialogContent>
                     
         </Dialog>
+        <PaysTemplate open={openPay}/>
     </>
   );
 }

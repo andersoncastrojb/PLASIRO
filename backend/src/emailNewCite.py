@@ -20,6 +20,7 @@ def emailNewCiteFuntion(day, month, year, hours, name, email, phone, mode, descr
     + "\nInformación de la monitoria:" + "\nModalidad: " + modeOut
     + "\nDescripción: " + description + "\nNombre del monitor: " + nameTutor
     + "\nValor a pagar: " + valorP + "\nDirección de residencia: " + location
+    + "\nNúmero de cuenta Nequi: 3156858570"
     )
     subject = "¡Nueva solicitud de monitoria!"
     EmailSend(email, subject, msg)
