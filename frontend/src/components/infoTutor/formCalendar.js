@@ -209,8 +209,8 @@ const FormCalendar = () =>{
             <div className="field">
                 <div className="control">
                     <label className="checkbox">
-                    <input type="checkbox" name="conditions" onChange={handleChange}/>
-                    I agree to the <Link to="#">terms and conditions</Link>
+                    <input type="checkbox" style={{marginRight: "0.5rem"}} name="conditions" onChange={handleChange}/>
+                        Yo acepto los <Link to="/terms-and-conditions">Términos y condiciones</Link>
                     </label>
                 </div>
                 {

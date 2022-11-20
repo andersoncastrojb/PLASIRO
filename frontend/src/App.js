@@ -17,6 +17,8 @@ import { useEffect } from 'react';
 import Spinner from './components/spinner/spinner'
 import AdminTutor from "./components/adminTutor/adminTutor";
 import MainListInitialValue from './components/tutorList/mainListInitialValue'
+import TermsAndConditions from "./components/regulations/terms-and-conditions";
+import PrivacyPolicy from "./components/regulations/privacy-policy";
 
 function App() {
 
@@ -78,6 +80,8 @@ function App() {
             </Route>
             
             <Route path='/list-tutor' element={<MainList />} />
+            <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
+            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
             <Route path='/list-tutor-initial-value' element={<MainListInitialValue />} />
             <Route path='/user-profile' element={<Profile />} />
             <Route path='/info-tutor' element={<InfoTutor />} />

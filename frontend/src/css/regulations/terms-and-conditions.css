@@ -1,0 +1,15 @@
+
+.terms-and-conditions{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 0 10%;
+    text-align: justify;
+}
+
+.terms-and-conditions p{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.terms-and-conditions ul{
+    margin-bottom: 0.5rem;
+}
