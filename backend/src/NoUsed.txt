@@ -1,0 +1,50 @@
+# Para obtener los Ids (identificadores) de los objetos que contienen la información de cada monitor en la base de datos
+@app.route('/tutorsIds', methods=['GET'])
+def getTutorsIds():
+    
+    try:
+        tutors = []
+        for doc in db.find():
+            tutors.append({
+                '_id': str(ObjectId(doc['_id'])),
+                'name': doc['name']
+            })
+        return jsonify(tutors)
+    except:
+        return jsonify({'message': 'Error'})
+
+# Para obtener la información de un tutor específico, enviando su Id
+@app.route('/tutor/<id>', methods=['GET'])
+def index(id):
+    try:
+        tutor = db.find_one({'_id': ObjectId(id)})
+        objComment ={}
+        objComment = db6.find_one({'idTutor': str(ObjectId(id))})
+        # print(objComment['comments'])
+        return jsonify({
+            '_id': str(ObjectId(tutor['_id'])),
+            'name': tutor['name'],
+            'mail': tutor['mail'],
+            'modeV': tutor['modeV'],
+            'modeP': tutor['modeP'],
+            'price': tutor['price'],
+            'subjects': tutor['subjects'],
+            'description': tutor['description'],
+            'masteryOfTopics': tutor['masteryOfTopics'],
+            'stateDays': tutor['stateDays'],
+            'image': doc['image'],
+            'comments': objComment['comments'],
+            'punctuation': objComment['qualifications'],
+            'namesQ': objComment['names']
+        })
+    except:
+        return jsonify({'message': 'Error'})
+
+# Para eliminar la información de un tutor específico, enviando su Id
+@app.route('/tutors/<id>', methods=['DELETE'])
+def deleteUser(id):
+    try:
+        db.delete_one({'_id': ObjectId(id)})
+        return jsonify({'message': 'User Deleted'})
+    except:
+        return jsonify({'message': 'Error'})

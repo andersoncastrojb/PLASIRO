@@ -87,7 +87,7 @@ export default function AprobarCite(props) {
             // console.log(result[0]); 
             await fetch(`${server}tutors/${result[0].idTutor}`,
             {
-                method: "PUT",
+                method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     hourChange: result[0].hourSelect,
