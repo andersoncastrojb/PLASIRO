@@ -1,6 +1,6 @@
 // Importar estilos del componente Footer
 import "../../css/footer/footer.css"
-import pencil_img from "../img/pencil.svg"
+import PLASIRO from "../img/PLASIRO_ICO.png"
 import MenuTwo from "./menuTwo";
 import Contac from "./contac";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ export default function Footer() {
                         <article className="media">
                             <div className="media-left">
                                 <figure className="image is-64x64">
-                                <img src={pencil_img} alt="" />
+                                    <img className="is-rounded" src={PLASIRO} alt="" />
                                 </figure>
                             </div>
                             <div className="media-content">
