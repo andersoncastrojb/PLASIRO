@@ -18,6 +18,8 @@ from updateDataUserF import UpdateDataUserF
 from getNewTutorsF import GetNewTutorsF
 from updateCommentsF import UpdateCommentsF
 from deleteCiteF import DeleteCiteF
+from updateDailyF import UpdateDailyF
+from getDailyF import GetDailyF
 
 
 app = Flask(__name__)
@@ -40,6 +42,8 @@ db3 = mongo.db.users
 db4 = mongo.db.new_tutor
 # Database comments
 db5 = mongo.db.comments
+# Database daily
+db6 = mongo.db.daily
 
 
 # Para almacenar los datos de un tutor, mediantes un POST en el aplicativo web
@@ -179,12 +183,34 @@ def deleteNewTutor(id):
 def updateComments(id):
     try:
         data = request.json
-        UpdateCommentsF(id, data, db6)
+        UpdateCommentsF(id, data, db5)
         return jsonify({ 'message': 'Add comment' })
     except:
         return jsonify({'message': 'Error', 'text': 'No se pudo agregar el comentario'})
 
 
+# Para almacenar los datos de un aspirante a tutor, mediante un POST en el aplicativo web
+@app.route('/daily', methods=['PUT'])
+def updateDaily():
+    try:
+        data = request.json
+        UpdateDailyF(data, db, db6)
+        return jsonify({ 'message': 'Update Daily' })
+    except:
+        return jsonify({'message': 'Error'})
+
+
+# Para obtener la información de todos los usuarios registrados en el sistema 
+@app.route('/daily', methods=['GET'])
+def getDaily():
+    
+    try:
+        daily = GetDailyF(db6)
+        return jsonify(daily)
+    except:
+        return jsonify({'message': 'Error'})
+    
+    
 # Para ejecutar la aplicación en el Back End
 if __name__ == "__main__":
     app.run(debug=True)

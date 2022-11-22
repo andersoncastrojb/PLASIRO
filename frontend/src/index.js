@@ -14,15 +14,13 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Auth0Provider domain={domain} clientId={clienId} redirectUri={window.location.origin}>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </Auth0Provider>
-  </React.StrictMode>
+  <Auth0Provider domain={domain} clientId={clienId} redirectUri={window.location.origin}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

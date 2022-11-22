@@ -24,44 +24,66 @@ const Calendar = () => {
     const [currentDay, setcurrentDay] = useState(currentDate.getDate());
     const [monthNumber, setmonthNumber] = useState(currentDate.getMonth());
     const [currentYear, setcurrentYear] = useState(currentDate.getFullYear());
-    
-    // Existen cuarenta días en los cuales se acepta un click, iniciando en el día actual y terminando en el 39 después de este, dependiendo a cual de esos le de click, esta función se encarga de analizar y validar si está dentro de ese rango. Si la respuesta es afirmativa almacena ese número en Redux.
-    const whatDaySelect = (props) => {
-        // Para validar cuál de entre los 3 meses, el actual y los dos siguientes, fue elegido. 
-        const deltaMonth = monthNumber - todayDate.getMonth();
-        let countDays = 0;
-        // Para contar los días dependiendo del mes escogido de los 3
-        // Mes 1
-        if(deltaMonth === 0){
-            countDays = parseInt(props, 10) - todayDate.getDate();
-        }
-        // Mes 2
-        if(deltaMonth === 1){
-            countDays = getTotalDays(todayDate.getMonth()) - todayDate.getDate() + parseInt(props, 10) + 1;
-        }
-        // Mes 3
-        if(deltaMonth === 2){
-            countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10) - 1;
-        }
-        if(countDays > 39){
-            AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!"});
-        }
-        if(countDays < 0){
-            AlertWarning({text:"¡No puede agendar en días pasados!"});
-        }
-        // Está dentro de ese rango. Entonces almacena ese número en Redux.
-        if(countDays >= 0 && countDays <= 39){
-            setcurrentDay(props);
-            dispatch(modifierDay(countDays));
-            dispatch(modifier(['day', props.toString()]));
-            dispatch(modifier(['month', monthNumber.toString()]));
-            dispatch(modifier(['year', currentYear.toString()]));
-            dispatch(modifier(['hours', []]));
-        }
-    }
-
+    const [DayBegin, setDayBegin] = useState(0);
     
     useEffect(() => {
+        
+        let todayDate = new Date();
+
+        // Identificar si el año es bisiesto o no
+        const isLeap = () => {
+            return ( ( (currentYear % 100 !==0) && (currentYear % 4 === 0) ) || (currentYear % 400 === 0) );
+        }
+
+        // Para obtener todos los días para un mes específico
+        const getTotalDays = () => {
+
+            if (monthNumber === 0 || monthNumber === 2 || monthNumber === 4 || monthNumber === 6 || monthNumber === 7 || monthNumber === 9 || monthNumber === 11) {
+                return  31;
+
+            } else if (monthNumber === 3 || monthNumber === 5 || monthNumber === 8 || monthNumber === 10) {
+                return 30;
+
+            } else {
+
+                return isLeap() ? 29:28;
+            }
+        }
+
+        // Existen cuarenta días en los cuales se acepta un click, iniciando en el día actual y terminando en el 39 después de este, dependiendo a cual de esos le de click, esta función se encarga de analizar y validar si está dentro de ese rango. Si la respuesta es afirmativa almacena ese número en Redux.
+        const whatDaySelect = (props) => {
+            // Para validar cuál de entre los 3 meses, el actual y los dos siguientes, fue elegido. 
+            const deltaMonth = monthNumber - todayDate.getMonth();
+            let countDays = 0;
+            // Para contar los días dependiendo del mes escogido de los 3
+            // Mes 1
+            if(deltaMonth === 0){
+                countDays = parseInt(props, 10) - todayDate.getDate();
+            }
+            // Mes 2
+            if(deltaMonth === 1){
+                countDays = getTotalDays(todayDate.getMonth()) - todayDate.getDate() + parseInt(props, 10) + 1;
+            }
+            // Mes 3
+            if(deltaMonth === 2){
+                countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10) - 1;
+            }
+            if(countDays > 39){
+                AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!"});
+            }
+            if(countDays < 0){
+                AlertWarning({text:"¡No puede agendar en días pasados!"});
+            }
+            // Está dentro de ese rango. Entonces almacena ese número en Redux.
+            if(countDays >= 0 && countDays <= 39){
+                setcurrentDay(props);
+                dispatch(modifierDay(countDays));
+                dispatch(modifier(['day', props.toString()]));
+                dispatch(modifier(['month', monthNumber.toString()]));
+                dispatch(modifier(['year', currentYear.toString()]));
+                dispatch(modifier(['hours', []]));
+            }
+        }
 
         // Sí se da un click sobre uno de los días del calendario se ejecuta
         const dayClick = (event) => {
@@ -71,23 +93,34 @@ const Calendar = () => {
             }
         };
 
+        const dayBegin = new Date(currentYear, monthNumber, 1)
+        console.log(dayBegin.getDay())
+        setDayBegin(dayBegin.getDay())
+
         window.addEventListener('mousedown', dayClick);
         return () => {
             window.removeEventListener('mousedown', dayClick);
         };
-    });
+    }, [monthNumber, currentYear, dispatch]);
     
     // De esta función se obtiene un element Jsx con todos los días para un mes específico
     const writeMonth = () => {
 
         let days = [];
 
+        if(DayBegin === 2){ days = [''] }
+        if(DayBegin === 3){ days = ['',''] }
+        if(DayBegin === 4){ days = ['','',''] }
+        if(DayBegin === 5){ days = ['','','',''] }
+        if(DayBegin === 6){ days = ['','','','',''] }
+        if(DayBegin === 0){ days = ['','','','','',''] }
+
         for(let i=1; i<=getTotalDays(monthNumber); i++){
             days.push(i);
         }
 
         const listItems = days.map(
-            (days) => <div key={days.toString()} className="calendar__item calendar__item__botton">{days}</div>
+            (days, index) => <div key={index.toString()} className="calendar__item calendar__item__botton">{days}</div>
         );
 
         return(
@@ -171,16 +204,16 @@ const Calendar = () => {
                 </div>
 
                 <div className="calendar__week">
-                    <div className="calendar__day calendar__item"><strong>Sun</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Mon</strong></div>
                     <div className="calendar__day calendar__item"><strong>Tue</strong></div>
                     <div className="calendar__day calendar__item"><strong>Wed</strong></div>
                     <div className="calendar__day calendar__item"><strong>Thu</strong></div>
                     <div className="calendar__day calendar__item"><strong>Fri</strong></div>
                     <div className="calendar__day calendar__item"><strong>Sat</strong></div>
-                    <div className="calendar__day calendar__item"><strong>Mon</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Sun</strong></div>
                 </div>
 
-                <div className="calendar__dates" id="dates">{writeMonth(monthNumber)}</div>
+                <div className="calendar__dates" id="dates">{writeMonth(monthNumber, currentDate)}</div>
 
             </div>
             <HorarioSelect 

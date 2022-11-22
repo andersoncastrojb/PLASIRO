@@ -1,6 +1,6 @@
 from storeDaysTutor import storeDaysTutor
 
-def CreateTutorF(data, db, db6):
+def CreateTutorF(data, db, db5):
     
     # Para crear un vector con los 40 días a partir del actual, con sus respectivas disponibilidades. 
     stateDays = storeDaysTutor([data['monday'],
@@ -33,7 +33,7 @@ def CreateTutorF(data, db, db6):
     })
     
     # Para almacenar los datos en la tabla “comments" 
-    db6.insert_one({
+    db5.insert_one({
         "idTutor": str(id.inserted_id),
         "names": [],
         "comments": [],

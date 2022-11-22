@@ -19,6 +19,7 @@ import AdminTutor from "./components/adminTutor/adminTutor";
 import MainListInitialValue from './components/tutorList/mainListInitialValue'
 import TermsAndConditions from "./components/regulations/terms-and-conditions";
 import PrivacyPolicy from "./components/regulations/privacy-policy";
+import GetDaily from "./components/getData/getDaily";
 
 function App() {
 
@@ -60,10 +61,11 @@ function App() {
     setCount(1);
     // Para obtener los datos de todos los usuarios almacenados en el servidor
     GetUsers();
+    GetDaily();
   }
 
   return (
-    <>
+    <React.StrictMode>
       <div className="App">
         <Spinner />
         <Routes>
@@ -89,7 +91,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
-    </>
+    </React.StrictMode>
   );
 }
 
