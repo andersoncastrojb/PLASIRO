@@ -42,8 +42,8 @@ const GetDaily = async () => {
             const date = new Date(data)
             const today = new Date()
             
-            // const aux = today;
-            const aux = 23
+            const aux = today;
+            // const aux = 23
 
             if(date.getDate() !== aux){
                 let diff = aux-date.getDate()
