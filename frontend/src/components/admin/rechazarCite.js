@@ -87,7 +87,9 @@ export default function RechazarCite() {
                     valorP: result[0].valorP,
                     location: result[0].location,
                     hours: result[0].hours,
-                    idTutor: result[0].idTutor
+                    idTutor: result[0].idTutor,
+                    hourSelect: result[0].hourSelect,
+                    daySelect: result[0].daySelect
                 })
             })
             .then(response => {res = response})

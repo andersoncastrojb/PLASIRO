@@ -3,7 +3,9 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from bson import ObjectId
-from emailDeleteCite import EmailDeleteCiteFuntion
+from recoveryStateDays import RecoveryStateDays
+
+# Funciones Https
 from createTutorF import CreateTutorF
 from getTutorsF import GetTutorsF
 from approveChangeTutorInfoF import ApproveChangeTutorInfoF
@@ -15,6 +17,7 @@ from createNewTutorF import CreateNewTutorF
 from updateDataUserF import UpdateDataUserF
 from getNewTutorsF import GetNewTutorsF
 from updateCommentsF import UpdateCommentsF
+from deleteCiteF import DeleteCiteF
 
 
 app = Flask(__name__)
@@ -98,19 +101,7 @@ def getCites():
 def deleteCite(id):
     try:
         data = request.json
-        
-        # Modificar permanentemente los horarios seleccionados en las tablas “tutors”  y "tutorsRom"
-        tutorRom = db5.find_one({'mail': data['emailTutor']})
-        out = tutorRom['stateDays']
-        db.update_one( {'_id': ObjectId( data['idTutor'] )} , { "$set": { 'stateDays': out } } )
-        
-        
-        db2.delete_one({'_id': ObjectId(id)})
-        
-        EmailDeleteCiteFuntion(data['day'], data['month'], data['year'], data['hours'],
-                            data['name'], data['email'], data['phone'], data['mode'],
-                            data['description'], data['nameTutor'], data['valorP'], data['location'])
-        
+        DeleteCiteF(id, data, db, db2)                    
         return jsonify({'message': 'Cite Deleted'})
     except:
         return jsonify({'message': 'Error'})

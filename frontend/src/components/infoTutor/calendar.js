@@ -171,13 +171,13 @@ const Calendar = () => {
                 </div>
 
                 <div className="calendar__week">
-                    <div className="calendar__day calendar__item"><strong>Mon</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Sun</strong></div>
                     <div className="calendar__day calendar__item"><strong>Tue</strong></div>
                     <div className="calendar__day calendar__item"><strong>Wed</strong></div>
                     <div className="calendar__day calendar__item"><strong>Thu</strong></div>
                     <div className="calendar__day calendar__item"><strong>Fri</strong></div>
                     <div className="calendar__day calendar__item"><strong>Sat</strong></div>
-                    <div className="calendar__day calendar__item"><strong>Sun</strong></div>
+                    <div className="calendar__day calendar__item"><strong>Mon</strong></div>
                 </div>
 
                 <div className="calendar__dates" id="dates">{writeMonth(monthNumber)}</div>
