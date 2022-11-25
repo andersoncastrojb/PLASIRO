@@ -77,7 +77,7 @@ function App() {
               <Route path='/admin-new-tutors' element={<AdminTutor />} />
             </Route>
 
-            <Route element={<ProtectedRoute user={Users.loginUser} permissions={["tutor","admin"]} />}>
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions={["Monitor","admin"]} />}>
               <Route path='/form-tutor' element={<FormTutorIni />} />
             </Route>
             
