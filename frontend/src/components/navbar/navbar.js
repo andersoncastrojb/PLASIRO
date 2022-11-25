@@ -50,7 +50,7 @@ export default function Navbar() {
                             }
 
                             {
-                            loginUser.permissions.includes("tutor")
+                            loginUser.permissions.includes("Monitor")
                                 ? <Link className="navbar-item" to="/form-tutor">Formulario Monitor</Link>
                                 : <></>
                             }

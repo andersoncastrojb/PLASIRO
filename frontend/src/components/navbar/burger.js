@@ -44,7 +44,7 @@ function SimpleDialog(props) {
             <Link className="button is-link is-light" onClick={handleClose} to="/">Inicio</Link>
         </div>
         {
-          loginUser.permissions.includes("tutor")
+          loginUser.permissions.includes("Monitor")
           ?
           <div className="column">
             <Link className="button is-link is-light" onClick={handleClose} to="/form-tutor">Formulario Monitor</Link>
