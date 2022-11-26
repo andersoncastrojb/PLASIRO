@@ -20,6 +20,7 @@ import MainListInitialValue from './components/tutorList/mainListInitialValue'
 import TermsAndConditions from "./components/regulations/terms-and-conditions";
 import PrivacyPolicy from "./components/regulations/privacy-policy";
 import GetDaily from "./components/getData/getDaily";
+import FastGuide from "./components/fastGuide/fastGuide"
 
 function App() {
 
@@ -87,6 +88,7 @@ function App() {
             <Route path='/list-tutor-initial-value' element={<MainListInitialValue />} />
             <Route path='/user-profile' element={<Profile />} />
             <Route path='/info-tutor' element={<InfoTutor />} />
+            <Route path='/guide' element={<FastGuide />} />
           </Route>
         </Routes>
       </div>
