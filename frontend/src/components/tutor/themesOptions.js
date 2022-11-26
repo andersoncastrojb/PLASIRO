@@ -1,7 +1,6 @@
 
 // Temas específicos dispuestos
 export const themesOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
     { value: 'Cálculo diferencial', label: 'Cálculo diferencial' },
     { value: 'Cálculo Integral', label: 'Cálculo Integral' },
     { value: 'Cálculo vectorial', label: 'Cálculo vectorial' },
