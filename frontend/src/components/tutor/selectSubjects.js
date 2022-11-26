@@ -13,9 +13,6 @@ const options = [
     { value: 'Biología', label: 'Biología' },
     { value: 'Castellano', label: 'Castellano' },
     { value: 'Ingeniería', label: 'Ingeniería' },
-    { value: 'Humanidades', label: 'Humanidades' },
-    { value: 'Derecho', label: 'Derecho' },
-    { value: 'Contaduría', label: 'Contaduría' },
     { value: 'Programación', label: 'Programación' }
 ];
 
