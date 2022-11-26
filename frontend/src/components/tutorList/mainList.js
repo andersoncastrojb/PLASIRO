@@ -9,7 +9,6 @@ import { modifierTutorShow, modifierAvailability } from '../../features/daysTuto
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import Filters from "../filters/filters";
-import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 // Muestra una lista de los tutores disponibles después del filtro por área
 const MainList = () => {
@@ -25,15 +24,8 @@ const MainList = () => {
     
     // Se verifica que el vector que contiene los datos de los monitores no este vacia
     if(tutors.length === 0){
-        
-        // Loading Activate
-        dispatch(modifierSpinner(["value", {display: "block"}]));
-
         // Para obtener los datos de todos los monitores almacenados en el servidor
         GetTutors();
-
-        // Loading deactivate
-        dispatch(modifierSpinner(["value", {display: "none"}]));
     }
     
     // Se da click sobre un monitor específico, para mirar su información

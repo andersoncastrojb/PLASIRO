@@ -9,7 +9,6 @@ import { modifierTutorShow, modifierAvailability } from '../../features/daysTuto
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import FiltersInitialValue from "../filters/filtersInitialValue";
-import { modifierSpinner } from "../../features/tools/spinnerSlice";
 
 // Muestra una lista de los tutores disponibles después del filtro por área
 const MainListInitialValue = () => {
