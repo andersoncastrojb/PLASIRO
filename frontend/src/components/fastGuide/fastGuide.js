@@ -17,7 +17,7 @@ export default function FastGuide() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Registro de estudiantes en PLASIRO</Typography>
+            <Typography> Registro de estudiantes en PLASIRO </Typography>
           </AccordionSummary>
           <div style={{width:"70%", height:"auto"}}>
             <video controls>
@@ -31,7 +31,7 @@ export default function FastGuide() {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Proceso de registro de monitores académicos nuevos en PLASIRO</Typography>
+            <Typography> Proceso de registro de monitores académicos nuevos en PLASIRO </Typography>
           </AccordionSummary>
           <div style={{width:"70%", height:"webm"}}>
             <video style={{width:"320", height:"240"}} controls>
@@ -45,7 +45,7 @@ export default function FastGuide() {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Agendar una monitoria académica en PLASIRO</Typography>
+            <Typography> Agendar una monitoria académica en PLASIRO </Typography>
           </AccordionSummary>
           <div style={{width:"70%", height:"webm"}}>
             <video style={{width:"320", height:"240"}} controls>
