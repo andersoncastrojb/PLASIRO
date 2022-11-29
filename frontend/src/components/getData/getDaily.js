@@ -43,7 +43,6 @@ const GetDaily = async () => {
             const today = new Date()
             
             const aux = today.getDate();
-            // const aux = 23
 
             if(date.getDate() !== aux){
                 let diff = aux-date.getDate()
@@ -55,7 +54,7 @@ const GetDaily = async () => {
                 // Normalizar today.getDay() al día siguiente del día 40 
                 let dayWeek = today.getDay()
                 // console.log(dayWeek)
-                for(let k = 1; k < 40; k++){
+                for(let k = 1; k <= 40; k++){
                     if(dayWeek === 6){
                         dayWeek = 0;
                     }else{
