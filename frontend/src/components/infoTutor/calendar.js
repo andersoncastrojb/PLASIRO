@@ -36,12 +36,12 @@ const Calendar = () => {
         }
 
         // Para obtener todos los días para un mes específico
-        const getTotalDays = () => {
+        const getTotalDays = (props) => {
 
-            if (monthNumber === 0 || monthNumber === 2 || monthNumber === 4 || monthNumber === 6 || monthNumber === 7 || monthNumber === 9 || monthNumber === 11) {
+            if (props === 0 || props === 2 || props === 4 || props === 6 || props === 7 || props === 9 || props === 11) {
                 return  31;
 
-            } else if (monthNumber === 3 || monthNumber === 5 || monthNumber === 8 || monthNumber === 10) {
+            } else if (props === 3 || props === 5 || props === 8 || props === 10) {
                 return 30;
 
             } else {
@@ -54,6 +54,7 @@ const Calendar = () => {
         const whatDaySelect = (props) => {
             // Para validar cuál de entre los 3 meses, el actual y los dos siguientes, fue elegido. 
             const deltaMonth = monthNumber - todayDate.getMonth();
+
             let countDays = 0;
             // Para contar los días dependiendo del mes escogido de los 3
             // Mes 1
@@ -61,12 +62,12 @@ const Calendar = () => {
                 countDays = parseInt(props, 10) - todayDate.getDate();
             }
             // Mes 2
-            if(deltaMonth === 1){
-                countDays = getTotalDays(todayDate.getMonth()) - todayDate.getDate() + parseInt(props, 10) + 1;
+            if(deltaMonth === 1 || (deltaMonth === -11 && todayDate.getDate() === 11)){
+                countDays = getTotalDays(todayDate.getMonth()) - todayDate.getDate() + parseInt(props, 10);
             }
             // Mes 3
-            if(deltaMonth === 2){
-                countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10) - 1;
+            if( deltaMonth === 2 || (deltaMonth === -10 && todayDate.getMonth() === 10) || (deltaMonth === -10 && todayDate.getDate() === 11) ){
+                countDays = getTotalDays(todayDate.getMonth()) + getTotalDays(todayDate.getMonth()+1) - todayDate.getDate() + parseInt(props, 10);
             }
             if(countDays > 39){
                 AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!"});
@@ -76,6 +77,7 @@ const Calendar = () => {
             }
             // Está dentro de ese rango. Entonces almacena ese número en Redux.
             if(countDays >= 0 && countDays <= 39){
+                // console.log(countDays)
                 setcurrentDay(props);
                 dispatch(modifierDay(countDays));
                 dispatch(modifier(['day', props.toString()]));
@@ -94,7 +96,7 @@ const Calendar = () => {
         };
 
         const dayBegin = new Date(currentYear, monthNumber, 1)
-        console.log(dayBegin.getDay())
+        // console.log(dayBegin.getDay())
         setDayBegin(dayBegin.getDay())
 
         window.addEventListener('mousedown', dayClick);
@@ -131,12 +133,12 @@ const Calendar = () => {
     };
     
     // Para obtener todos los días para un mes específico
-    const getTotalDays = () => {
+    const getTotalDays = (props) => {
 
-        if (monthNumber === 0 || monthNumber === 2 || monthNumber === 4 || monthNumber === 6 || monthNumber === 7 || monthNumber === 9 || monthNumber === 11) {
+        if (props === 0 || props === 2 || props === 4 || props === 6 || props === 7 || props === 9 || props === 11) {
             return  31;
 
-        } else if (monthNumber === 3 || monthNumber === 5 || monthNumber === 8 || monthNumber === 10) {
+        } else if (props === 3 || props === 5 || props === 8 || props === 10) {
             return 30;
 
         } else {
@@ -168,7 +170,28 @@ const Calendar = () => {
     
     // Se mueve a un mes posterior siempre y cuando este no sea mayor que en 3 mes más a la derecha de los permitidos, si no manda una alerta
     const nextMonth = () => {
-        if(monthNumber < todayDate.getMonth()+2 && monthNumber < 11 ){
+
+        // Para contar el número de días máximo, y limitar así los meses que no se les debe permitir el “next”  
+        let daysCount = -1*todayDate.getDate();
+        let monthNumberAux = todayDate.getMonth();
+
+        for(let i = 0; i<=2; i++){
+
+            if(monthNumberAux === monthNumber){
+                daysCount = daysCount + getTotalDays(monthNumberAux);
+                break;   
+            }
+
+            daysCount = daysCount + getTotalDays(monthNumberAux);
+            if(monthNumberAux === 11){
+                monthNumberAux=0;
+            }else{
+                monthNumberAux++;
+            }
+        }
+        // Para contar el número de días máximo, y limitar así los meses que no se les debe permitir el “next”, TERMINA
+
+        if(daysCount < 39){
             if(monthNumber !== 11){
                 setmonthNumber(monthNumber+1);
             }else{
@@ -178,8 +201,9 @@ const Calendar = () => {
     
             setNewDate();
         }else{
-            AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores! ¡Tampoco para un año posterior!"});
+            AlertWarning({text:"¡Solo puede agendar días que van desde hoy hasta 39 días posteriores!"});
         }
+    
     }
     
     // Actualiza la fecha de acuerdo a las modificaciones hechas

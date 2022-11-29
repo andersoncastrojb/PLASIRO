@@ -42,7 +42,7 @@ const GetDaily = async () => {
             const date = new Date(data)
             const today = new Date()
             
-            const aux = today;
+            const aux = today.getDate();
             // const aux = 23
 
             if(date.getDate() !== aux){
@@ -51,11 +51,10 @@ const GetDaily = async () => {
                     diff = getTotalDays({monthNumber: today.getMonth(), currentYear: today.getFullYear()})
                     diff = diff - date.getDate() + aux
                 }
-                // console.log(diff)
-                // console.log(today.getDay())
 
                 // Normalizar today.getDay() al día siguiente del día 40 
                 let dayWeek = today.getDay()
+                // console.log(dayWeek)
                 for(let k = 1; k < 40; k++){
                     if(dayWeek === 6){
                         dayWeek = 0;
@@ -64,6 +63,8 @@ const GetDaily = async () => {
                     }
                     // console.log(dayWeek)
                 }
+                
+                console.log(diff, dayWeek)
 
                 UpdateDaily({diff: diff, dayWeek: dayWeek });
             }
