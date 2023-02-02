@@ -50,7 +50,7 @@ const MainList = () => {
         <>
         <Filters />
         {tutors.map( (tutor) =>
-        <section key={tutor._id.toString()} className="hero is-small is-link">
+        <section key={tutor._id.toString()} className="hero is-small is-light" style={{marginBottom: "2.5vh"}}>
             <div className="hero-body">
 
             <div className="card">
