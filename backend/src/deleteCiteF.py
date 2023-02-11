@@ -1,5 +1,6 @@
 from bson import ObjectId
 from emailDeleteCite import EmailDeleteCiteFuntion
+from recoveryStateDays import RecoveryStateDays
 
 def DeleteCiteF(id, data, db, db2):
     # Modificar permanentemente los horarios seleccionados en las tablas “tutors”  y "tutorsRom"

@@ -85,7 +85,7 @@ const FormCalendar = () =>{
             </div>
             <div className="field">
                 <label className="label">Número telefónico</label>
-                <div className="control has-icons-left has-icons-right">
+                <div className="control">
                     <input
                     name='phone'
                     className="input"
@@ -111,7 +111,7 @@ const FormCalendar = () =>{
             </div>
             <div className="field">
                 <label className="label">Email</label>
-                <div className="control has-icons-left has-icons-right">
+                <div className="control">
                     <input
                     name='email'
                     className="input"

@@ -60,7 +60,7 @@ const HorarioSelect = (props) => {
             <div className="block">
                 <div className="block__inicio__horario__select">
                     {<Horario
-                        titulo="Inicio"
+                        titulo="Horas disponibles"
                     />}
                 </div>
             </div>
