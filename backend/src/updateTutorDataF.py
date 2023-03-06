@@ -1,6 +1,7 @@
+from bson import ObjectId
 from storeDaysTutor import storeDaysTutor
 
-def CreateTutorF(data, db, db5):
+def UpdateTutorDataF(id, data, db):
     
     # Para crear un vector con los 40 días a partir del actual, con sus respectivas disponibilidades. 
     stateDays = storeDaysTutor([data['monday'],
@@ -11,8 +12,8 @@ def CreateTutorF(data, db, db5):
                     data['saturday'],
                     data['sunday']])
     
-    # Para almacenar los datos en la tabla “tutors” 
-    id = db.insert_one({
+    # Para actualizar los datos en la tabla “tutors” de un tutor especifico 
+    db.update_one( {'_id': ObjectId(id)} , { "$set": {
         'name': data['name'],
         'mail': data['mail'],
         'modeV': data['modeV'],
@@ -30,14 +31,4 @@ def CreateTutorF(data, db, db5):
                     data['friday'],
                     data['saturday'],
                     data['sunday']]
-    })
-    
-    # Para almacenar los datos en la tabla “comments" 
-    db5.insert_one({
-        "idTutor": str(id.inserted_id),
-        "date": [],
-        "names": [],
-        "comments": [],
-        "qualifications": data["punctuation"]
-        
-    })
+    } } )

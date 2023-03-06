@@ -22,7 +22,8 @@ def GetTutorsF(db, db5):
             'image': doc['image'],
             'comments': objComment['comments'],
             'punctuation': objComment['qualifications'],
-            'namesQ': objComment['names']
+            'namesQ': objComment['names'],
+            'dateQ': objComment['date']
         })
         
     return(tutors)

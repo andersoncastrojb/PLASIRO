@@ -20,6 +20,7 @@ from updateCommentsF import UpdateCommentsF
 from deleteCiteF import DeleteCiteF
 from updateDailyF import UpdateDailyF
 from getDailyF import GetDailyF
+from updateTutorDataF import UpdateTutorDataF
 
 
 app = Flask(__name__)
@@ -65,6 +66,17 @@ def getTutors():
         return jsonify(tutors)
     except:
         return jsonify({'message': 'Error'})
+    
+    
+# Para modificar la información de un tutor específico
+@app.route('/tutors/<id>', methods=['PUT'])
+def updateTutorData(id):
+    try:
+        data = request.json
+        UpdateTutorDataF(id, data, db)
+        return jsonify({ 'message': 'Updated Tutor' })
+    except:
+        return jsonify({'message': 'Error', 'text': 'No se pudo actualizar el usuario'})
 
 
 # Para aceptar la modificación de la información de un tutor específico

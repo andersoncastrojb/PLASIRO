@@ -57,6 +57,21 @@ const InfoTutor = () => {
     }, [flag,flagTwo, tutorShow.name, navigate]);
 
 
+    const IsoToDate = (props) => {
+      let date = new Date(props);
+      let year = date.getFullYear();
+      let month = date.getMonth()+1;
+      let dt = date.getDate();
+  
+      if (dt < 10) {
+      dt = '0' + dt;
+      }
+      if (month < 10) {
+      month = '0' + month;
+      }
+      return(' '+ dt +'-' + month + '-'+ year);
+    }
+
   
     return (
       <div id="infoTutorBox">
@@ -166,7 +181,10 @@ const InfoTutor = () => {
                           <div className="media-content">
                             <div className="content">
                               <p>
-                                <strong>{name}</strong> <small>dd/mm/yy</small>
+                                <strong>{name}</strong>
+                                  <small>
+                                    { IsoToDate(tutorShow.dateQ[index]) }
+                                  </small>
                                 <br/>
                                 {tutorShow.comments[index]}
                               </p>

@@ -21,19 +21,26 @@ import TermsAndConditions from "./components/regulations/terms-and-conditions";
 import PrivacyPolicy from "./components/regulations/privacy-policy";
 import GetDaily from "./components/getData/getDaily";
 import FastGuide from "./components/fastGuide/fastGuide"
+import GetTutors from "./components/getData/getTutors";
+import FormTutorEdit from "./components/tutor/formTutorEdit";
 
 function App() {
 
   const { user } = useAuth0();
 
   const [count, setCount] = useState(0);
+  
+  // tutor is registered
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const dispatch = useDispatch();
 
   // Para leer los datos de los tutores cargados de la base de datos
-  // let users = [];
   const Users = useSelector( (state) => state.Users );
   let users = Users.users;
+
+  // Lectura de todos los monitores registrados
+  const tutors = useSelector( (state) => state.DaysTutor.tutors);
 
   useEffect(() => {
     if(users.length > 0 && user !== undefined && Users.loginUser.id === ""){
@@ -57,13 +64,32 @@ function App() {
   }, [Users.loginUser.id, dispatch, user, users]);
   
 
-  // Se verifica que el vector que contiene los datos de los usuarios no este vacia
+  // Se verifica que el vector que contiene los datos de los usuarios no este vacía
   if(count < 1){
     setCount(1);
     // Para obtener los datos de todos los usuarios almacenados en el servidor
     GetUsers();
+    // Para obtener la ultima actualización de la fecha desde el servidor
     GetDaily();
+    // Para obtener los datos de los monitores del servidor
+    GetTutors();
   }
+
+  const registeredTutor = async () => {
+
+    if(count > 0){
+      if(tutors.length > 0){
+        const tutorWithSameEmail = await tutors.filter( (tutor) => tutor.mail === Users.loginUser.email);
+        if( tutorWithSameEmail.length > 0 ){
+          setIsRegistered(true);
+        }
+      }
+    }
+
+  }
+
+  // Los datos del tutor están registrados? 
+  registeredTutor();
 
   return (
     <React.StrictMode>
@@ -79,7 +105,12 @@ function App() {
             </Route>
 
             <Route element={<ProtectedRoute user={Users.loginUser} permissions={["Monitor","admin"]} />}>
-              <Route path='/form-tutor' element={<FormTutorIni />} />
+              { isRegistered
+                ?
+                <Route path='/form-tutor' element={<FormTutorEdit />} />
+                :
+                <Route path='/form-tutor' element={<FormTutorIni />} />
+              }
             </Route>
             
             <Route path='/list-tutor' element={<MainList />} />
