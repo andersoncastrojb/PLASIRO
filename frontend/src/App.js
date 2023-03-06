@@ -113,12 +113,15 @@ function App() {
               }
             </Route>
             
+            <Route element={<ProtectedRoute user={Users.loginUser} permissions={["admin","Estudiante","Monitor"]} />}>
+              <Route path='/user-profile' element={<Profile />} />
+              <Route path='/info-tutor' element={<InfoTutor />} />
+            </Route>
+            
             <Route path='/list-tutor' element={<MainList />} />
             <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
             <Route path='/privacy-policy' element={<PrivacyPolicy />} />
             <Route path='/list-tutor-initial-value' element={<MainListInitialValue />} />
-            <Route path='/user-profile' element={<Profile />} />
-            <Route path='/info-tutor' element={<InfoTutor />} />
             <Route path='/guide' element={<FastGuide />} />
           </Route>
         </Routes>
