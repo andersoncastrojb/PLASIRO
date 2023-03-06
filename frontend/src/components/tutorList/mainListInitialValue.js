@@ -68,11 +68,13 @@ const MainListInitialValue = () => {
                     </div>
 
                     <div id={tutor._id} className="content">{tutor.description}</div>
-                    <Stack direction="row" spacing={1}>
-                        {tutor.masteryOfTopics.map( (topic, index) =>
-                            <Chip key={index.toString()} label={topic} size="small" />
-                        )}
-                    </Stack>
+                    <div style={{overflow: "auto"}}>
+                        <Stack direction="row" spacing={1}>
+                            {tutor.masteryOfTopics.map( (topic, index) =>
+                                <Chip key={index.toString()} label={topic} size="small" />
+                            )}
+                        </Stack>
+                    </div>
                 </div>
             </div>
 

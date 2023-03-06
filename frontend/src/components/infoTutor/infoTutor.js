@@ -120,14 +120,16 @@ const InfoTutor = () => {
                   {
                     tutorShow.subjects !== undefined
                     &&
-                    <Stack 
-                      direction={{ xs: 'column', sm: 'row' }}
-                      spacing={{ xs: 1, sm: 2, md: 4 }}>
-                        <strong>Áreas: </strong> 
-                        {tutorShow.subjects.map( (topic, index) =>
-                            <Chip key={index.toString()} label={topic} size="small" />
-                        )}
-                    </Stack>
+                    <div style={{overflow: "auto"}}>
+                      <Stack 
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 1, sm: 2, md: 4 }}>
+                          <strong>Áreas: </strong> 
+                          {tutorShow.subjects.map( (topic, index) =>
+                              <Chip key={index.toString()} label={topic} size="small" />
+                          )}
+                      </Stack>
+                    </div>
                   }
                   </h2>
                 </div>
@@ -146,14 +148,16 @@ const InfoTutor = () => {
                   {
                     tutorShow.masteryOfTopics !== undefined
                     &&
-                    <Stack 
-                      direction={{ xs: 'column', sm: 'row' }}
-                      spacing={{ xs: 1, sm: 2, md: 4 }}
-                    >
-                        {tutorShow.masteryOfTopics.map( (topic, index) =>
-                            <Chip key={index.toString()} label={topic} size="small" />
-                        )}
-                    </Stack>
+                    <div style={{overflow: "auto"}}>
+                      <Stack 
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={{ xs: 1, sm: 2, md: 4 }}
+                      >
+                          {tutorShow.masteryOfTopics.map( (topic, index) =>
+                              <Chip key={index.toString()} label={topic} size="small" />
+                          )}
+                      </Stack>
+                    </div>
                   }
                 </section>
 
