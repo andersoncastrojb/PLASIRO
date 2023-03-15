@@ -69,7 +69,7 @@ export default function SendComment(props) {
         })
         .then(response => {res = response})
         .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-        console.log(res.message);
+        // console.log(res.message);
         if (res.message === "Failed to fetch"){
             setError(res.message);
 
