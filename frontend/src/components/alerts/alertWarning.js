@@ -5,6 +5,8 @@ const AlertWarning = (props) => {
         icon: 'warning',
         title: '¡Ups!',
         text: props.text,
+        timer: 2000,
+        timerProgressBar: true,
     })
 }
 

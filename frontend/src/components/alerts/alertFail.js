@@ -5,6 +5,8 @@ const AlertFail = (props) => {
         icon: 'error',
         title: '¡Ups!',
         text: props.text,
+        timer: 2000,
+        timerProgressBar: true,
     })
 }
 

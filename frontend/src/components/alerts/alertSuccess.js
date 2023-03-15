@@ -5,6 +5,8 @@ const AlertSuccess = (props) => {
         icon: 'success',
         title: '¡MUY BIEN!',
         text: props.text,
+        timer: 2000,
+        timerProgressBar: true,
     })
 }
 
