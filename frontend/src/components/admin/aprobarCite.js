@@ -119,7 +119,7 @@ export default function AprobarCite(props) {
                 handleClickOpen2();
             }else{
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 if(data.message === 'Error'){
 
                     // Loading deactivate
@@ -154,10 +154,10 @@ export default function AprobarCite(props) {
             .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
             // console.log(res.message);
             if (res.message === "Failed to fetch"){
-                console.log("No se eliminó la solicitud, Error: " + res.message);
+                // console.log("No se eliminó la solicitud, Error: " + res.message);
             }else{
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
             }
 
         }

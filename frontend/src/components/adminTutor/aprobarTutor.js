@@ -82,7 +82,7 @@ export default function AprobarTutor(props) {
             dispatch(modifierSpinner(["value", {display: "block"}]));
 
             const result = Admin.newTutors.filter( newTutor => newTutor._id.toString() === Admin.idNewTutor );
-            console.log(result[0]); 
+            // console.log(result[0]); 
             let res = {};
             let date = new Date().toISOString();
             await fetch(`${server}users`,
@@ -103,7 +103,7 @@ export default function AprobarTutor(props) {
             })
             .then(response => {res = response})
             .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-            console.log(res.message);
+            // console.log(res.message);
             if (res.message === "Failed to fetch"){
                 setError(res.message);
 
@@ -113,7 +113,7 @@ export default function AprobarTutor(props) {
                 handleClickOpen2();
             }else{
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 if(data.message === 'Error'){
 
                     // Loading deactivate
@@ -151,11 +151,11 @@ export default function AprobarTutor(props) {
                 AlertFail({text:"No se eliminó la solicitud, Error: " + res.message+"."});
             }else{
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 if(data.message === 'Error'){
                     AlertFail({text:"No se eliminó la solicitud, error en el servidor."});
                 }else{
-                    console.log({text:"¡Se eliminó la solicitud con éxito!"}); 
+                    // console.log({text:"¡Se eliminó la solicitud con éxito!"}); 
                 }
             }
         }

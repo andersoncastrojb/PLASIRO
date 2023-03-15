@@ -115,7 +115,7 @@ export default function DataAgendarToServer(props) {
                 handleClickOpen2();
             }else{
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 
                 // Loading deactivate
                 dispatch(modifierSpinner(["value", {display: "none"}]));

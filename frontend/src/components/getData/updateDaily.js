@@ -18,10 +18,10 @@ const UpdateDaily = async (props) => {
     .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
     // console.log(res.message);
     if (res.message === "Failed to fetch"){
-        console.log("Error actualizando UpdateDaily");
+        // console.log("Error actualizando UpdateDaily");
     }else{
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
     }
 }
 

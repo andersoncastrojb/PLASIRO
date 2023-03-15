@@ -20,7 +20,7 @@ const TutorDataToServer = () => {
         })
         .then(response => {res = response})
         .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
-        console.log(res.name);
+        // console.log(res.name);
         //const data = await res.json();
         //console.log(data);
         

@@ -47,7 +47,7 @@ function App() {
       const result = users.find((data) => data.email === user.email );
       // console.log(result)
       if (result !== undefined ){
-        console.log("¡Usuario registrado!", "Nombre: ", user.name, " Correo: ", user.email, " Permiso: ", result.permissions);
+        // console.log("¡Usuario registrado!", "Nombre: ", user.name, " Correo: ", user.email, " Permiso: ", result.permissions);
         dispatch(modifier(["loginUser", {
           id: result._id,
           name: result.name,

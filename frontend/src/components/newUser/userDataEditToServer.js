@@ -146,7 +146,7 @@ export default function UserDataEditToServer(props) {
                     handleClickOpen2();
                 }else{
                     const data = await res.json();
-                    console.log(data);
+                    // console.log(data);
                     if(data.message === 'Error'){
 
                         // Loading deactivate

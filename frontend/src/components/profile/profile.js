@@ -51,7 +51,7 @@ const Profile = () => {
         setFlagWaitTutor(false);
       }
     }
-    console.log(flagWaitTutor)
+    // console.log(flagWaitTutor)
   },[newTutors,flagWaitTutor, user, isLoading]);
 
   if( count < 1){

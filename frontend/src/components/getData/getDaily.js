@@ -34,7 +34,7 @@ const GetDaily = async () => {
     .catch(error => {res = error}) // TypeError: failed to fetch (El texto puede variar, dependiendo del error)
     // console.log(res.message);
     if (res.message === "Failed to fetch"){
-        console.log("Error obteniendo los datos de UpdateDaily");
+        // console.log("Error obteniendo los datos de UpdateDaily");
     }else{
         const data = await res.json();
         if(typeof(data) === 'string' ){
@@ -63,7 +63,7 @@ const GetDaily = async () => {
                     // console.log(dayWeek)
                 }
                 
-                console.log(diff, dayWeek)
+                // console.log(diff, dayWeek)
 
                 UpdateDaily({diff: diff, dayWeek: dayWeek });
             }
