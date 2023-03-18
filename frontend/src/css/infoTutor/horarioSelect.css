@@ -13,8 +13,8 @@
 
 @media screen and (max-width: 768px) {
     .block__inicio__horario__select{
-        width: 90%;
-        margin: 5% 5%;
+        width: 100%;
+        margin: 0 0;
         display: block;
     }
     .block__final__horario__select{

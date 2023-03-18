@@ -13,3 +13,9 @@
 .terms-and-conditions ul{
     margin-bottom: 0.5rem;
 }
+
+@media screen and (max-width: 768px) {
+    .terms-and-conditions{
+        padding: 0 6%;
+    }
+}

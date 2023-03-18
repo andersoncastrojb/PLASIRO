@@ -79,6 +79,7 @@ border-color: black;
     }
     .calendar{
         overflow: auto;
+        width: 100%;
     }
 }
 

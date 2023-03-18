@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {modifierNewUser} from '../../features/users/userSlice';
 import { useAuth0 } from "@auth0/auth0-react";
 import UserDataToServer from './userDataToServer';
+import { modifierTutors } from '../../features/daysTutor/daysTutorSlice';
 
 const NewUserForm = () =>{
 
@@ -23,10 +24,11 @@ const NewUserForm = () =>{
         const setName = e.target.name;
         const set = e.target.value;
 
-        // Modificar estado en redux
-        dispatch(modifierNewUser([setName, set]));
-
         if( isAuthenticated === true && userCount < 1){
+            
+            // Reset Tutors 
+            dispatch(modifierTutors([]));
+
             // Modificar estado en redux
             dispatch(modifierNewUser(["email", user.email]));
             setUserCount(1);
@@ -40,6 +42,8 @@ const NewUserForm = () =>{
                 dispatch(modifierNewUser(["tipeId", Users.loginUser.tipeId]));
             }
         }
+        // Modificar estado en redux
+        dispatch(modifierNewUser([setName, set]));
     }
 
     return(

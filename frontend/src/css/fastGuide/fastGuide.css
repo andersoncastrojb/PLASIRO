@@ -1,0 +1,9 @@
+.fastGuide{
+    width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+    .fastGuide {
+        width: 100%;
+    }
+}

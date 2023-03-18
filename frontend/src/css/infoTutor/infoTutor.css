@@ -42,12 +42,16 @@
   display: inline-block;
 }
 
+#comments__infoTutor{
+  padding: 3rem 1.5rem;
+}
+
 
 @media screen and (max-width: 1150px) {
   .image.is-128x128{
     display: block;
     width: 80%;
-    margin: 0 0 0 10%;
+    margin: 0 0 1rem 20%;
   }
   .image.is-128x128 img{
     height: 200px;
@@ -55,6 +59,15 @@
   .info__basic.block{
     display: block;
     width: 100%;
+  }
+  #infoTutorBox{
+    padding: 0 4%;
+  }
+  #reservar {
+    margin-left: 6%;
+  }
+  #comments__infoTutor{
+    padding: 0.8rem 0.2rem;
   }
 }
 

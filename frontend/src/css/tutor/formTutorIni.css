@@ -27,4 +27,8 @@
     label{
         text-align: center;
     }
+    .box__formTutorIni{
+        padding: 2% 2%;
+        margin: 2rem 1% 4rem 1%;
+    }
   }

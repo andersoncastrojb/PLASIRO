@@ -2,3 +2,9 @@
     top: 45%;
 }
 
+@media screen and (max-width: 768px) {
+    .hero.is-small .hero-body {
+        padding: 0.5rem;
+    }
+}
+

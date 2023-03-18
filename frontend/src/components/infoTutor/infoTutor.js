@@ -204,11 +204,11 @@ const InfoTutor = () => {
 
               </div>
               
-              <section className="section">
+              <div id="comments_infoTutor" >
                 <div className="box">
                   <FormCommnets />
                 </div>
-              </section>
+              </div>
 
             </div>
       </div>
