@@ -55,7 +55,7 @@ const MainListInitialValue = () => {
 
             <div className="card">
                 <div id={tutor._id} className="card-content" onClick={agendarCLick} style={{cursor: "pointer"}}>
-                    <div id={tutor._id} className="media">
+                    <div id={tutor._id} className="media media__main__list">
                         <div className="media-left">
                             <figure className="image is-48x48">
                                 <img id={tutor._id} src={tutor.image} alt="" />

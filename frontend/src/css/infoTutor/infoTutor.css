@@ -50,8 +50,9 @@
 @media screen and (max-width: 1150px) {
   .image.is-128x128{
     display: block;
-    width: 80%;
-    margin: 0 0 1rem 20%;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   .image.is-128x128 img{
     height: 200px;

@@ -4,3 +4,7 @@
 .hero .subtitle{
     color: #363636;
 }
+
+.media__main__list{
+    padding-bottom: 1rem;
+}
